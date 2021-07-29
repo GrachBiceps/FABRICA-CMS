@@ -5,7 +5,7 @@
                     <div class="sidebar-brand-text mx-3"><span>ФАБРИКА-КУХНЯ</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
-                <MyNavButton @click="$router.push('/storage')"><span></span></MyNavButton>
+                <MyNavButton @click="$router.push('/storage')"><span>Инфо</span></MyNavButton>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
