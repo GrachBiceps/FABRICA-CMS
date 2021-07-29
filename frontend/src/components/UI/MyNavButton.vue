@@ -1,6 +1,9 @@
 <template>
     <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href=""><i class="fas fa-tachometer-alt"></i><span>{{}}</span></a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary fas fa-tachometer-alt">
+                        </button>
+                    </li>
     </ul>
 </template>
 
