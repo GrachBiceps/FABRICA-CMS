@@ -5,7 +5,9 @@
                     <div class="sidebar-brand-text mx-3"><span>ФАБРИКА-КУХНЯ</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
-                <MyNavButton @click="$router.push('/storage')"></MyNavButton>
+                <MyNavButton v-model='items.title' @click="$router.push('/storage')"></MyNavButton>
+                <MyNavButton v-model='items.title' @click="$router.push('/storage')"></MyNavButton>
+                <MyNavButton v-model='items.title' @click="$router.push('/storage')"></MyNavButton>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
@@ -15,6 +17,12 @@
 import MyNavButton from "@/components/UI/MyNavButton.vue"
 
     export default {
+         data() {
+        return {
+      items: {
+        title: 'Ифвфывфы'
+      }
+    }},
         components: {
             MyNavButton
         }
