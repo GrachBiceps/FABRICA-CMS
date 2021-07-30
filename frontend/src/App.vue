@@ -1,16 +1,20 @@
 <template>
   <div class="app" style="display:flex">
       <Navbar></Navbar>
-      <router-view></router-view>
+      <div style="width:100%">
+        <MyTopBar></MyTopBar>
+        <router-view></router-view>
+      </div>
   </div>
 </template>
 
 <script>
 import Navbar from "@/components/NavBar";
+import MyTopBar from "@/components/MyTopBar";
 
 export default {
     components: {
-      Navbar
+      Navbar, MyTopBar
     }
 }
 </script>
