@@ -1,14 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import StorageP from "@/pages/StoragePage";
-
-
+import Main from "@/pages/Main";
+import MyInfo from '@/pages/MyInfo';
 const routes = [{
         path: '/',
-        name: 'Home',
+        component: Main
     },
     {
-        path: '/storageP',
-        component: 'StorageP',
+        path: '/myinfo',
+        component: MyInfo
     }
 ]
 

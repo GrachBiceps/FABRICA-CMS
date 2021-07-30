@@ -1,6 +1,6 @@
 <template>
     <div>
-        gfxfxxf
+        adadsa
     </div>
 </template>
 
@@ -10,6 +10,6 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>
