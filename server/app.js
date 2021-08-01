@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.post('/api/create',function(req, res){
-    console.log(  req.body) 
+    console.log(req.body) 
 
     res.sendStatus(200)
     // async function run() {

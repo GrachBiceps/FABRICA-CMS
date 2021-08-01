@@ -32,32 +32,28 @@ export default {
      addDataToDb(){ 
         const params = new URLSearchParams();
         params.append('firstName', 'paul');
-        params.append('lastName', 'fred');
-        try {
-         this.axios.post("api/create", JSON.stringify(this.data )
-         
+        params.append('lastName', 'fred'); 
+        this.axios.post("api/create", JSON.stringify(this.data )
             )
-            .then(function(response) {
-               
+            .then(response => {
+                  if(response.status == 200){
+                        this.$notify({
+                        title: "Успех!",
+                        text: "Данные добавлены на сервер",
+                    })
+                  }                              
             })
-            .catch(function (error) {
-                console.log(error);
+            .catch(error => {
+                 this.$notify({
+                        type: "alert",
+                        title: "Ошибка!",
+                        text: "Данные не добавлены на сервер: "+ error,
+                    })
             });
-        
-      }finally {this.$notify({
-                title: "Успех!",
-                text: "Данные добавлены на сервер",
-                });
-}
+         
+      
+    },
 
-
-        
-
-        
-
-        
-    
-    }
    },
    
   
