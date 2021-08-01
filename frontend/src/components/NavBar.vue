@@ -10,8 +10,7 @@
         <ul class="navbar-nav text-light" id="accordionSidebar">
             <li class="nav-item"><button class="nav-link" @click="$router.push('/myinfo')" ><i class="fas fa-tachometer-alt"></i><span>Инфо</span></button></li>
             <li class="nav-item"><button class="nav-link" @click="$router.push('/storage')" ><i class="fas fa-user"></i><span>Склад</span></button></li>
-            <!-- <li class="nav-item"><button class="nav-link" @click="$router.push('/storage')" ><i class="fas fa-table"></i><span>Table</span></button></li> -->
-            <!-- <li class="nav-item"><button class="nav-link" @click="$router.push('/AddItem')" ><i class="fas fa-table"></i><span>Добавить</span></button></li> -->
+            <li class="nav-item"><button class="nav-link" @click="$router.push('/orders')" ><i class="fas fa-table"></i><span>Orders</span></button></li>
         </ul>
       <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
       </div>

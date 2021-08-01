@@ -3,11 +3,11 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Список</h3>
+                    <!-- <h3 class="text-dark mb-4">Список</h3> -->
                     <div class="card shadow">
-                        <div class="card-header py-3">
+                        <!-- <div class="card-header py-3">
                             <p class="text-primary m-0 fw-bold">Employee Info</p>
-                        </div>
+                        </div> -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 text-nowrap">
