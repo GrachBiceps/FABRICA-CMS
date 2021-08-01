@@ -8,7 +8,7 @@ const MongoClient = require("mongodb").MongoClient;
 
 
 
-const uri = "mongodb://admin:nindzya.13@cluster0-shard-00-00.fral0.mongodb.net:27017,cluster0-shard-00-01.fral0.mongodb.net:27017,cluster0-shard-00-02.fral0.mongodb.net:27017/test?authSource=admin&replicaSet=atlas-1zb0kr-shard-0&readPreference=primary";
+const uri = "mongodb://node:nindzya.13@cluster0-shard-00-00.fral0.mongodb.net:27017,cluster0-shard-00-01.fral0.mongodb.net:27017,cluster0-shard-00-02.fral0.mongodb.net:27017/FABRICA-CMS?ssl=true&replicaSet=atlas-1zb0kr-shard-0&authSource=admin&retryWrites=true&w=majority";
 const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 // var bodyParser = require('body-parser');
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -30,11 +30,11 @@ app.post('/api/create',function(req, res){
             ingredients.insertOne(req.body, function(err, results){
               
             console.log(err);
-            
+           
     });
 
         } finally {
-            await mongoClient.close();
+            
             res.sendStatus(200)
         }
     }
