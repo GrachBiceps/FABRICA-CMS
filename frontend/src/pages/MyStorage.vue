@@ -3,7 +3,7 @@
     <div>
     <AddItem></AddItem>
     </div>
-    <button v-on:click="show = !show">
+    <button class="btn btn-primary d-block btn-user w-100" v-on:click="show = !show">
     Переключить
     </button>
      <transition name="fade">
