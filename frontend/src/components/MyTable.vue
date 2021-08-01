@@ -36,7 +36,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar1.jpeg">Airi Satou</td>
+                                            <td><img class="rounded-circle me-2" width="30" height="30" >Airi Satou</td>
                                             <td>{{test}}</td>
                                             <td>Tokyo</td>
                                             <td>33</td>
@@ -44,7 +44,7 @@
                                             <td>$162,700</td>
                                         </tr>
                                         <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar2.jpeg">Angelica Ramos</td>
+                                            <td><img class="rounded-circle me-2" width="30" height="30" >Angelica Ramos</td>
                                             <td>Chief Executive Officer(CEO)</td>
                                             <td>London</td>
                                             <td>47</td>
@@ -52,7 +52,7 @@
                                             <td>$1,200,000</td>
                                         </tr>
                                         <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" src="assets/img/avatars/avatar3.jpeg">Ashton Cox</td>
+                                            <td><img class="rounded-circle me-2" width="30" height="30" >Ashton Cox</td>
                                             <td>Junior Technical Author</td>
                                             <td>San Francisco</td>
                                             <td>66</td>

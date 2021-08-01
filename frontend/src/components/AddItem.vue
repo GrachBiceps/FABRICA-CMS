@@ -5,8 +5,8 @@
             <h4 class="text-dark mb-4">Добавить в склад</h4>
         </div>
         <form >
-            <div class="mb-3"><input v-model="data.name"  class="form-control form-control-user" type="text" id="exampleInputEmail"  placeholder="Введите название" name="email"></div>
-            <div class="mb-3"><input v-model="data.amount" class="form-control form-control-user" type="number" id="exampleInputPassword" placeholder="Количество" name="password"></div>
+            <div class="mb-3"><input v-model="data.name" required class="form-control form-control-user" type="text" id="exampleInputEmail"  placeholder="Введите название" name="email"></div>
+            <div class="mb-3"><input v-model="data.amount" required class="form-control form-control-user" type="number" id="exampleInputPassword" placeholder="Количество" name="password"></div>
             <button v-on:click.prevent="addDataToDb" class="btn btn-primary d-block btn-user w-100" type="submit">Внести данные</button>
             
             
@@ -33,7 +33,14 @@ export default {
          this.data.name = ""
          this.data.amount = ""   
      },
-     addDataToDb(){  
+     addDataToDb(){        
+         if(this.data.name == "" || this.data.amount == "") {
+             this.$notify({
+            type: "alert",
+            title: "Ошибка!",
+            text: "Все поля должны быть заполены ",
+        })
+         }else {
         this.axios.post("api/create", this.data 
             )
             .then(response => {
@@ -52,6 +59,7 @@ export default {
                         text: "Данные не добавлены на сервер: "+ error,
                     })
             });
+         }  
     },
    },
    
