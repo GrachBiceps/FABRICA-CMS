@@ -5,8 +5,8 @@
             <h4 class="text-dark mb-4">Добавить в склад</h4>
         </div>
         <form >
-            <div class="mb-3"><input class="form-control form-control-user" type="text" id="exampleInputEmail"  placeholder="Введите название" name="email"></div>
-            <div class="mb-3"><input  class="form-control form-control-user" type="text" id="exampleInputPassword" placeholder="Количество" name="password"></div>
+            <div class="mb-3"><input v-model="data.name"  class="form-control form-control-user" type="text" id="exampleInputEmail"  placeholder="Введите название" name="email"></div>
+            <div class="mb-3"><input v-model="data.amount" class="form-control form-control-user" type="number" id="exampleInputPassword" placeholder="Количество" name="password"></div>
             <button v-on:click.prevent="addDataToDb" class="btn btn-primary d-block btn-user w-100" type="submit">Внести данные</button>
             
             
@@ -22,18 +22,17 @@ export default {
    data(){
        return {
         data: {
-        name: "f",
-        amount: "2",
-        added: false },
-       }
-
+            name: "",
+            amount: "",
+            
+        },
+     }
    },
+    
    methods:{
-     addDataToDb(){ 
-        const params = new URLSearchParams();
-        params.append('firstName', 'paul');
-        params.append('lastName', 'fred'); 
-        this.axios.post("api/create", JSON.stringify(this.data )
+     
+     addDataToDb(){  
+        this.axios.post("api/create", this.data 
             )
             .then(response => {
                   if(response.status == 200){

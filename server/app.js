@@ -6,13 +6,16 @@ const MongoClient = require("mongodb").MongoClient;
 const url = "mongodb+srv://admin:nindzya.13@cluster0.fral0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/";
 const mongoClient = new MongoClient(url, { useUnifiedTopology: true });
 
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
+// var bodyParser = require('body-parser');
+// app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.urlencoded());
+
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
 
 app.post('/api/create',function(req, res){
     console.log(req.body) 
-
     res.sendStatus(200)
     // async function run() {
     //     try {
