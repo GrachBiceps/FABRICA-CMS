@@ -6,10 +6,12 @@
     <button v-on:click="show = !show">
     Переключить
     </button>
-    
-  <MyTable v-if="show"></MyTable>
-    
- 
+     <transition name="fade">
+  <MyTable v-show="show"></MyTable>
+      </transition>
+
+  
+
    
     
   </div>
@@ -36,5 +38,10 @@ import AddItem from "@/components/AddItem";
 </script>
 
 <style>
-
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
 </style>
