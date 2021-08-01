@@ -3,9 +3,12 @@
     <div>
     <AddItem></AddItem>
     </div>
-    <button class="btn btn-primary d-block btn-user w-100" v-on:click="show = !show">
-    Переключить
+    <button class="btn mybtn d-block btn-user w-100" v-on:click="show = !show">
+    <div class="fas fa-angle-down">
+    </div>
+      Список товаров 
     </button>
+    
      <transition name="fade">
   <MyTable v-show="show"></MyTable>
       </transition>
@@ -38,6 +41,12 @@ import AddItem from "@/components/AddItem";
 </script>
 
 <style>
+.mybtn{
+  background-color: #5779df;
+  text-align:start;
+  border-radius: 0;
+  color: white;
+}
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
