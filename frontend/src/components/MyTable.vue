@@ -3,7 +3,7 @@
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4">Team</h3>
+                    <h3 class="text-dark mb-4">Список</h3>
                     <div class="card shadow">
                         <div class="card-header py-3">
                             <p class="text-primary m-0 fw-bold">Employee Info</p>
@@ -27,47 +27,27 @@
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Count</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td><img class="rounded-circle me-2" width="30" height="30" >Airi Satou</td>
                                             <td>{{test}}</td>
-                                            <td>Tokyo</td>
-                                            <td>33</td>
-                                            <td>2008/11/28</td>
-                                            <td>$162,700</td>
                                         </tr>
                                         <tr>
                                             <td><img class="rounded-circle me-2" width="30" height="30" >Angelica Ramos</td>
                                             <td>Chief Executive Officer(CEO)</td>
-                                            <td>London</td>
-                                            <td>47</td>
-                                            <td>2009/10/09<br></td>
-                                            <td>$1,200,000</td>
                                         </tr>
                                         <tr>
                                             <td><img class="rounded-circle me-2" width="30" height="30" >Ashton Cox</td>
                                             <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12<br></td>
-                                            <td>$86,000</td>
                                         </tr>                                      
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <td><strong>Name</strong></td>
                                             <td><strong>Position</strong></td>
-                                            <td><strong>Office</strong></td>
-                                            <td><strong>Age</strong></td>
-                                            <td><strong>Start date</strong></td>
-                                            <td><strong>Salary</strong></td>
                                         </tr>
                                     </tfoot>
                                 </table>
