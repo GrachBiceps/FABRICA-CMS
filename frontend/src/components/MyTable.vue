@@ -89,8 +89,8 @@ export default {
     mounted() {
     
     this.axios
-        .get('/api/create')
-        .then(response => (this.test = response.data))
+        .get('/api/fetchitems')
+        .then(response => (console.log(response.data[0].name)))
     
     }
 
