@@ -34,22 +34,14 @@
                                         <tr>
                                             <td><img class="rounded-circle me-2" width="30" height="30" >Airi Satou</td>
                                             <td>{{test}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" >Angelica Ramos</td>
-                                            <td>Chief Executive Officer(CEO)</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" >Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                        </tr>                                      
+                                        </tr>                                   
                                     </tbody>
-                                    <tfoot>
+                                    <!-- <tfoot>
                                         <tr>
                                             <td><strong>Name</strong></td>
                                             <td><strong>Position</strong></td>
                                         </tr>
-                                    </tfoot>
+                                    </tfoot> -->
                                 </table>
                             </div>
                             <div class="row">
