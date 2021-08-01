@@ -32,8 +32,8 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" >Airi Satou</td>
-                                            <td>{{test}}</td>
+                                            <td><img class="rounded-circle me-2" width="30" height="30" >{{name}}</td>
+                                            <td>{{count}}</td>
                                         </tr>                                   
                                     </tbody>
                                     <!-- <tfoot>
@@ -74,8 +74,8 @@ export default {
 
     data(){
         return {
-            test:"tesst"
-
+            name: "",
+            count: ""
         }
     },
     mounted() {
