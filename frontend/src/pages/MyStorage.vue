@@ -3,7 +3,15 @@
     <div>
     <AddItem></AddItem>
     </div>
-    <MyTable></MyTable>
+    <button v-on:click="show = !show">
+    Переключить
+    </button>
+    
+  <MyTable v-if="show"></MyTable>
+    
+ 
+   
+    
   </div>
 </template>
 
@@ -13,9 +21,18 @@ import AddItem from "@/components/AddItem";
     export default {
     components: {
       MyTable, AddItem
+    },
+    data(){
+      return{
+      show: true
+      }
     }
+    }
+    
+    
+  
         
-    }
+    
 </script>
 
 <style>

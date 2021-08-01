@@ -4,7 +4,7 @@
       <div style="width:100%">
         <MyTopBar></MyTopBar>
         <router-view></router-view>
-        <notifications position="bottom right"   />
+        <notifications position="bottom right"/>
         
       </div>
   </div>
