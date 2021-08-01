@@ -25,15 +25,15 @@
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                                 <table class="table my-0" id="dataTable">
                                     <thead>
-                                        <tr>
+                                        <tr >
                                             <th>Name</th>
                                             <th>Count</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><img class="rounded-circle me-2" width="30" height="30" >{{name}}</td>
-                                            <td>{{count}}</td>
+                                        <tr v-for="item in data " v-bind:key="item.id">
+                                            <td>{{item.name}}</td>
+                                            <td>{{item.amount}}</td>
                                         </tr>                                   
                                     </tbody>
                                     <!-- <tfoot>
@@ -74,15 +74,14 @@ export default {
 
     data(){
         return {
-            name: "",
-            count: ""
+            data: ""
         }
     },
     mounted() {
     
     this.axios
         .get('/api/fetchitems')
-        .then(response => (console.log(response.data[0].name)))
+        .then(response => (this.data = response.data))
     
     }
 
