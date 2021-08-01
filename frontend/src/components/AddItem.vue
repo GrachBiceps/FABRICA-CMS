@@ -23,19 +23,22 @@ export default {
        return {
         data: {
             name: "",
-            amount: "",
-            
+            amount: "", 
         },
      }
    },
     
    methods:{
-     
+     clearForm(){
+         this.data.name = ""
+         this.data.amount = ""   
+     },
      addDataToDb(){  
         this.axios.post("api/create", this.data 
             )
             .then(response => {
                   if(response.status == 200){
+                        this.clearForm()
                         this.$notify({
                         title: "Успех!",
                         text: "Данные добавлены на сервер",
@@ -49,10 +52,7 @@ export default {
                         text: "Данные не добавлены на сервер: "+ error,
                     })
             });
-         
-      
     },
-
    },
    
   

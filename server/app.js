@@ -3,11 +3,16 @@ const app = express()
 const port = 3001
 
 const MongoClient = require("mongodb").MongoClient;
-const url = "mongodb+srv://admin:nindzya.13@cluster0.fral0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/";
-const mongoClient = new MongoClient(url, { useUnifiedTopology: true });
+// const url = "mongodb+srv://admin:nindzya.13@cluster0.fral0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/";
+// const mongoClient = new MongoClient(url, { useUnifiedTopology: true });
 
+
+
+const uri = "mongodb://admin:nindzya.13@cluster0-shard-00-00.fral0.mongodb.net:27017,cluster0-shard-00-01.fral0.mongodb.net:27017,cluster0-shard-00-02.fral0.mongodb.net:27017/test?authSource=admin&replicaSet=atlas-1zb0kr-shard-0&readPreference=primary";
+const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 // var bodyParser = require('body-parser');
 // app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use(express.urlencoded());
 
@@ -16,23 +21,24 @@ app.use(express.json());
 
 app.post('/api/create',function(req, res){
     console.log(req.body) 
-    res.sendStatus(200)
-    // async function run() {
-    //     try {
-    //         await mongoClient.connect();
-    //         const database = mongoClient.db("FABRICA-CMS");
-    //         const ingredients = database.collection("ingredients");          
-    //         ingredients.insertMany(users, function(err, results){
+    
+    async function run() {
+        try {
+            await mongoClient.connect();
+            const database = mongoClient.db("FABRICA-CMS");
+            const ingredients = database.collection("ingredients");          
+            ingredients.insertOne(req.body, function(err, results){
               
-    //         console.log(results);
+            console.log(err);
             
-    // });
+    });
 
-    //     } finally {
-    //         await mongoClient.close();
-    //     }
-    // }
-    // run().catch(console.dir);
+        } finally {
+            await mongoClient.close();
+            res.sendStatus(200)
+        }
+    }
+    run().catch(console.dir);
 
 
 })
