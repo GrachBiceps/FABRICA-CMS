@@ -3,7 +3,7 @@
     <div>
     <AddItem></AddItem>
     </div>
-    <button class="btn mybtn d-block btn-user w-100" v-on:click="show = !show">
+    <button class="mybtn d-block btn-user w-100" v-on:click="show = !show">
     <div class="fas fa-angle-down">
     </div>
       Список товаров 
@@ -45,6 +45,9 @@ import AddItem from "@/components/AddItem";
   background-color: #5779df;
   text-align:start;
   border-radius: 0;
+  color: rgba(255, 255, 255, 0.76);
+  height: 50px;
+}.mybtn:hover{
   color: white;
 }
 .fade-enter-active, .fade-leave-active {
