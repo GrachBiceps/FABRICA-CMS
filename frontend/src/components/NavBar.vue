@@ -1,5 +1,6 @@
 <template>
-<div class="mynavbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+<div style="display: flex">
+<div v-show="NavHide" class="mynavbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
   <nav class="navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary w100 p-0">
      <div class="container-fluid d-flex flex-column p-0">
        <button class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" @click="$router.push('/')">
@@ -12,19 +13,36 @@
             <li class="nav-item"><button class="nav-link" @click="$router.push('/storage')" ><i class="fas fa-user"></i><span>Склад</span></button></li>
             <li class="nav-item"><button class="nav-link" @click="$router.push('/orders')" ><i class="fas fa-table"></i><span>Бугалтерия</span></button></li>
         </ul>
-      <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+      
       </div>
   </nav>
+</div>
+  <div class="text-center d-none btn-grach d-md-inline"><button v-on:click="HideBar" class="btn btn-grach border-0" id="sidebarToggle" type="button"></button></div>
 </div>
 </template>
 
 <script>
     export default {
-        
+      data () {
+        return {
+          NavHide: true
+        }
+      },
+      methods:  {
+        HideBar () {
+          this.NavHide = !this.NavHide
+        }
+      }
     }
 </script>
 
 <style>
+.btn-grach{
+  width: 50px;
+  height: 50px;
+  margin-top: 10px;
+   background: #5779df;
+}
 button{
   background: none;
     border: none;

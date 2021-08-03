@@ -2,11 +2,9 @@
 <div>
     <div class="flexmy">
        <button class="mybtn d-block btn-user " v-on:click="showdivin">
-        <div class="fas fa-angle-down"></div>
           Заказы 
        </button>
        <button class="mybtn d-block btn-user" v-on:click="showdivout">
-        <div class="fas fa-angle-down"></div>
           Расходы 
        </button>
     </div>
@@ -15,7 +13,7 @@
         <OrderIn></OrderIn>
       </transition>
     </div>
-    <div v-show="OrderoOutShow">
+    <div v-show="OrderOutShow">
       <transition name="fade">
         <OrderOut></OrderOut>
       </transition>
@@ -61,6 +59,8 @@ import OrderOut from "@/components/OrderOut";
   color: rgba(255, 255, 255, 0.76);
   height: 50px;
   width: 50%;
+  text-align: center;
+  margin: 10px;
 }.mybtn:hover{
   color: white; 
 }
