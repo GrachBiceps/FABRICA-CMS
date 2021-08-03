@@ -48,7 +48,7 @@ import AddItem from "@/components/AddItem";
   color: rgba(255, 255, 255, 0.76);
   height: 50px;
 }.mybtn:hover{
-  color: white;
+  color: white; 
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s;
