@@ -9,9 +9,9 @@
       Список товаров 
     </button>
     
-     <transition name="fade">
-  <MyTable v-show="show"></MyTable>
-      </transition>
+    <transition name="fade">
+      <MyTable v-show="show"></MyTable>
+    </transition>
 
   
 
