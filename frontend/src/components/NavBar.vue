@@ -17,7 +17,7 @@
       </div>
   </nav>
 </div>
-  <div class="text-center d-none btn-grach d-md-inline"><button v-on:click="HideBar" class="btn btn-grach border-0" id="sidebarToggle" type="button"></button></div>
+  <!-- <div class="text-center d-none btn-grach d-md-inline"><button v-on:click="HideBar" class="btn btn-grach border-0" id="sidebarToggle" type="button"></button></div> -->
 </div>
 </template>
 
@@ -38,9 +38,8 @@
 
 <style>
 .btn-grach{
-  width: 50px;
-  height: 50px;
-  margin-top: 10px;
+  width: 60px;
+  height: 70px;
    background: #5779df;
 }
 button{
