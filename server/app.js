@@ -44,21 +44,19 @@ app.post('/api/create',function(req, res){
 })
 
 app.get('/api/fetchitems',function(req, res){
-    console.log(req.body) 
-    
+   
     async function run() {
         try {
             await mongoClient.connect();
             const database = mongoClient.db("FABRICA-CMS");
             const ingredients = database.collection("ingredients");          
             ingredients.find().toArray(function(err, results){
-            console.log(results)          
+                 
             res.send(results)
     });
 
         } finally {
             
-            //res.sendStatus(200)
         }
     }
     run().catch(console.dir);
