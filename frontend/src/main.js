@@ -2,11 +2,11 @@ import { createApp } from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Notifications from '@kyvg/vue3-notification'
-//import App from './App.vue'
 // import components from '@/components/UI';
 import App from './App.vue';
 import router from "@/router";
-//import store from '@/store';
+
+ 
 
 const app = createApp(App)
 app.config.globalProperties.axios=axios
@@ -23,4 +23,4 @@ app
     .use(router)
     .use(VueAxios, axios)
     .mount('#app');
-     
+    

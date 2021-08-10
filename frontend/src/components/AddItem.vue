@@ -39,8 +39,14 @@ export default {
             type: "alert",
             title: "Ошибка!",
             text: "Все поля должны быть заполены ",
+        })}
+         else if(this.data.amount <= 0){
+            this.$notify({
+            type: "alert",
+            title: "Ошибка!",
+            text: "Количество не может быть 0 и меньше ",
         })
-         }else {
+         }else{
         this.axios.post("api/create", this.data 
             )
             .then(response => {
