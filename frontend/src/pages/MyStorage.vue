@@ -1,7 +1,8 @@
 <template>
   <div>
     <div>
-    <AddItem></AddItem>
+    <!-- <AddItem></AddItem> -->
+    <StorageIn></StorageIn>
     </div>
     <button class="mybtn d-block btn-user w-100" v-on:click="show = !show">
     <div class="fas fa-angle-down">
@@ -23,9 +24,11 @@
 <script>
 import MyTable from "@/components/MyTable";
 import AddItem from "@/components/AddItem";
+import StorageIn from "@/components/StorageIn";
+
     export default {
     components: {
-      MyTable, AddItem
+      MyTable, AddItem, StorageIn
     },
     data(){
       return{
