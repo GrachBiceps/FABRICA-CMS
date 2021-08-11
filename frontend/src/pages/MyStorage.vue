@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="mb-4">
     <!-- <AddItem></AddItem> -->
     <StorageIn></StorageIn>
     </div>

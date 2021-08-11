@@ -1,9 +1,10 @@
 <template>
-    <div class="container-my">
-        <div v-for="item in data" v-bind:key="item.id" class="allwindow">
-            <div><h1>Приход</h1></div>
-            <div class="buttonmy"><button class="mybutton">ВЫПОЛНИТЬ</button></div>
-        </div>
+    <div class="flex ml-2 mr-2 ">
+        <button v-for="item in data" v-bind:key="item.id" class="transform hover:scale-105 mywindow cursor-pointer shadow-lg flex flex-col h-56 w-64 ml-4 mr-4">
+            <div class="w-full h-10 head_lenta"><div class="h-full p-2 text-white">ПРИХОД</div></div>
+            <div class="w-full my-auto"><h1 class="w-full text-center">ОТКРЫТЬ</h1></div>
+            
+        </button>
     </div>
 </template>
 
@@ -25,36 +26,15 @@
 </script>
 
 <style>
-h1{
-    text-align: center;
-    color: white;
-    margin-top: 20px;
+.head_lenta {
+    background: #4b70df;
+    border-radius: 10px 10px 0px 0px;
 }
-.buttonmy{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    text-align:center;
-    transform: translate(-50%, -50%);
-}
-.mybutton{
+.mywindow{
+    width: 200px;
+    height: 200px;
     background: white;
+    color: Black;
     border-radius: 10px;
-    padding: 15px;
-}
-.allwindow{
-    position: relative;
-    border-radius: 20px;
-    width: 30%;
-    height: 100%;
-    background: #df5757;
-}
-.container-my{
-    justify-content: space-around;
-    align-items: center;
-    display: flex;
-    height: 300px;
-    margin: 10px;
 }
 </style>
