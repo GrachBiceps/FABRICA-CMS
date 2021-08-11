@@ -1,8 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Main from "@/pages/Main";
 import MyInfo from '@/pages/MyInfo';
-import MyStorage from '@/pages/MyStorage';
+import MyStorage from '@/pages/Storage/MyStorage';
 import Orders from '@/pages/Orders';
+import StorageINOUTpage from '@/pages/Storage/StorageIN-OUTpage';
 
 const routes = [{
         path: '/',
@@ -19,6 +20,10 @@ const routes = [{
     {
         path: '/orders',
         component: Orders
+    },
+    {
+        path: '/storage/innout',
+        component: StorageINOUTpage
     }
 ]
 
