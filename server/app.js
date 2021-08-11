@@ -19,22 +19,22 @@ app.use(express.urlencoded());
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 
-app.post('/api/create',function(req, res){
-    console.log(req.body) 
-    
+app.post('/api/create', function(req, res) {
+    console.log(req.body)
+
     async function run() {
         try {
             await mongoClient.connect();
             const database = mongoClient.db("FABRICA-CMS");
-            const ingredients = database.collection("ingredients");          
-            ingredients.insertOne(req.body, function(err, results){
-              
-            console.log(err);
-           
-    });
+            const ingredients = database.collection("ingredients");
+            ingredients.insertOne(req.body, function(err, results) {
+
+                console.log(err);
+
+            });
 
         } finally {
-            
+
             res.sendStatus(200)
         }
     }
@@ -43,23 +43,58 @@ app.post('/api/create',function(req, res){
 
 })
 
-app.get('/api/fetchitems',function(req, res){
-    console.log(req.body) 
-    
+app.get('/api/fetchitems', function(req, res) {
+
     async function run() {
         try {
             await mongoClient.connect();
             const database = mongoClient.db("FABRICA-CMS");
-            const ingredients = database.collection("ingredients");          
-            ingredients.find().toArray(function(err, results){
-            console.log(results)          
-            res.send(results)
-    });
+            const ingredients = database.collection("ingredients");
+            ingredients.find().toArray(function(err, results) {
+
+                res.send(results)
+            });
 
         } finally {
-            
-            //res.sendStatus(200)
+
         }
+    }
+    run().catch(console.dir);
+
+
+})
+
+app.get('/api/fetchrequests', function(req, res) {
+    var data = ["f"];
+    async function run() {
+        try {
+
+            await mongoClient.connect();
+            const database = mongoClient.db("FABRICA-CMS");
+            const request_in = database.collection("request_in");
+            request_in.find().toArray(function(err, results) {
+                data.push(results)
+            });
+
+        } finally {
+
+        }
+        try {
+
+            await mongoClient.connect();
+            const database = mongoClient.db("FABRICA-CMS");
+            const request_out = database.collection("request_out");
+            request_out.find().toArray(function(err, results) {
+                data.push(results)
+                data.push("fff31")
+
+            });
+
+        } finally {
+
+        }
+
+        res.send(data)
     }
     run().catch(console.dir);
 
