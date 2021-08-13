@@ -1,6 +1,6 @@
 <template>
     <div>
-        adaвыфвыssd
+        adaвыфвыs
     </div>
 </template>
 
