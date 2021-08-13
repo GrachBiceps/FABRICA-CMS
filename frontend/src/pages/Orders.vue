@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="flexmy">
+    <div class="flexmy ">
        <button class="mybtn d-block btn-user " v-on:click="showdivin">
           Заказы 
        </button>
