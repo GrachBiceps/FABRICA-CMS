@@ -2,7 +2,7 @@
   <div>
     <div class="mb-4">
     <!-- <AddItem></AddItem> -->
-    <StorageIn></StorageIn>
+    <StorageInPopup></StorageInPopup>
     </div>
     <button class="mybtn d-block btn-user w-100" v-on:click="show = !show">
     <div class="fas fa-angle-down">
@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import MyTable from "@/components/MyTable";
+import MyTable from "@/components/Storage/MyTable";
 import AddItem from "@/components/AddItem";
-import StorageIn from "@/components/StorageIn";
+import StorageInPopup from "@/components/Storage/StorageInPopup";
 
     export default {
     components: {
-      MyTable, AddItem, StorageIn
+      MyTable, AddItem, StorageInPopup
     },
     data(){
       return{
