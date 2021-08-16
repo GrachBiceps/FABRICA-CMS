@@ -65,38 +65,60 @@ app.get('/api/fetchitems', function(req, res) {
 })
 
 app.get('/api/fetchrequests', function(req, res) {
+
+
     var data = ["f"];
-    async function run() {
-        try {
+    let myFirstPromise = new Promise((resolve, reject) => {
+        // Мы вызываем resolve(...), когда асинхронная операция завершилась успешно, и reject(...), когда она не удалась.
+        // В этом примере мы используем setTimeout(...), чтобы симулировать асинхронный код.
+        // В реальности вы, скорее всего, будете использовать XHR, HTML5 API или что-то подобное.
+        async function run() {
+            try {
 
-            await mongoClient.connect();
-            const database = mongoClient.db("FABRICA-CMS");
-            const request_in = database.collection("request_in");
-            request_in.find().toArray(function(err, results) {
-                data.push(results)
-            });
+                await mongoClient.connect();
+                const database = mongoClient.db("FABRICA-CMS");
+                const request_in = database.collection("request_in");
+                request_in.find().toArray(function(err, results) {
+                    data.push(results)
+                    const request_out = database.collection("request_out");
+                    request_out.find().toArray(function(err, results) {
+                        data.push(results)
 
-        } finally {
+
+                    });
+                });
+
+            } finally {
+
+            }
+            try {
+
+                await mongoClient.connect();
+                const database = mongoClient.db("FABRICA-CMS");
+                const request_out = database.collection("request_out");
+                request_out.find().toArray(function(err, results) {
+                    data.push(results)
+
+
+                });
+
+            } finally {
+
+            }
+
 
         }
-        try {
+        run().catch(console.dir);
+    });
 
-            await mongoClient.connect();
-            const database = mongoClient.db("FABRICA-CMS");
-            const request_out = database.collection("request_out");
-            request_out.find().toArray(function(err, results) {
-                data.push(results)
-                data.push("fff31")
-
-            });
-
-        } finally {
-
-        }
-
+    myFirstPromise.then((successMessage) => {
+        // successMessage - это что угодно, что мы передали в функцию resolve(...) выше.
+        // Это необязательно строка, но если это всего лишь сообщение об успешном завершении, это наверняка будет она.
         res.send(data)
-    }
-    run().catch(console.dir);
+
+    });
+
+
 
 
 })
