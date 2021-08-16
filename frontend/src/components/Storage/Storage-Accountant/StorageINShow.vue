@@ -14,6 +14,7 @@
 
 <script>
     export default {
+        return:{
         data: {
             current:{mail: '',
             date: '',
@@ -21,6 +22,7 @@
             company:'',
             fliers:''},
             arr:[]
+        }
         },
         methods: {
             addCurrent() 
