@@ -42,7 +42,29 @@ app.post('/api/create', function(req, res) {
 
 
 })
+app.post('/api/addorderin', function(req, res) {
+    data = req.body
 
+})
+app.get('/api/test', function(req, res) {
+
+    async function run() {
+        try {
+            await mongoClient.connect();
+            const database = mongoClient.db("FABRICA-CMS");
+            const ingredients = database.collection("ingredients");
+            ingredients.find().toArray(function(err, results) {
+
+                res.send(results)
+            });
+
+        } finally {
+
+        }
+    }
+    run().catch(console.dir);
+
+})
 app.get('/api/fetchitems', function(req, res) {
 
     async function run() {
@@ -66,8 +88,7 @@ app.get('/api/fetchitems', function(req, res) {
 
 app.get('/api/fetchrequests', function(req, res) {
 
-
-    var data = ["f"];
+    data = []
     let myFirstPromise = new Promise((resolve, reject) => {
         // Мы вызываем resolve(...), когда асинхронная операция завершилась успешно, и reject(...), когда она не удалась.
         // В этом примере мы используем setTimeout(...), чтобы симулировать асинхронный код.
@@ -80,9 +101,12 @@ app.get('/api/fetchrequests', function(req, res) {
                 const request_in = database.collection("request_in");
                 request_in.find().toArray(function(err, results) {
                     data.push(results)
+
                     const request_out = database.collection("request_out");
                     request_out.find().toArray(function(err, results) {
                         data.push(results)
+
+                        resolve(dat)
 
 
                     });
@@ -91,27 +115,14 @@ app.get('/api/fetchrequests', function(req, res) {
             } finally {
 
             }
-            try {
 
-                await mongoClient.connect();
-                const database = mongoClient.db("FABRICA-CMS");
-                const request_out = database.collection("request_out");
-                request_out.find().toArray(function(err, results) {
-                    data.push(results)
-
-
-                });
-
-            } finally {
-
-            }
 
 
         }
         run().catch(console.dir);
     });
 
-    myFirstPromise.then((successMessage) => {
+    myFirstPromise.then((data) => {
         // successMessage - это что угодно, что мы передали в функцию resolve(...) выше.
         // Это необязательно строка, но если это всего лишь сообщение об успешном завершении, это наверняка будет она.
         res.send(data)
