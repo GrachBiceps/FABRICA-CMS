@@ -43,7 +43,26 @@ app.post('/api/create', function(req, res) {
 
 })
 app.post('/api/addorderin', function(req, res) {
+    schema = ''
     data = req.body
+    schema = { name: data.name, amount: data.amount }
+
+    async function run() {
+        try {
+            await mongoClient.connect();
+            const database = mongoClient.db("FABRICA-CMS");
+            const order_in = database.collection("order_in");
+            order_in.insertOne(schema)
+            res.sendStatus(200)
+
+        } finally {
+
+        }
+    }
+    run().catch(console.dir);
+
+
+
 
 })
 app.get('/api/test', function(req, res) {
