@@ -25,8 +25,8 @@
             Прочее
           </button>
       </TabList>
-      <div v-show="StorageINShow">dasdas</div>
-      <div v-show="Others">sssss</div>
+      <StorageIINShow v-show="StorageINShow"></StorageIINShow>
+      <Others v-show="Others"></Others>
     </TabGroup>
   </div>
 </template>
@@ -34,7 +34,8 @@
 <script>
 import { ref } from 'vue'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
-import StorageInVue from '../Storage/StorageInPopup.vue'
+import StorageIINShow from '/src/components/Storage/Storage-Accountant/StorageINShow.vue'
+import Others from '/src/components/Storage/Storage-Accountant/Others.vue'
 
 export default {
   data () {
@@ -49,6 +50,8 @@ export default {
     Tab,
     TabPanels,
     TabPanel,
+    StorageIINShow,
+    Others
   },
   methods:{
     showstoragein() {
