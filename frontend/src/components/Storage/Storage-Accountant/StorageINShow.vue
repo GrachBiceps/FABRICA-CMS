@@ -8,6 +8,7 @@
                 <td>{{ i.company }}</td>
                 <td>{{ i.fliers }}</td>
             </tr>
+            <button type="button" class="btn btn-primary" @click="addCurrent"></button>
         </div>
     </div>
 </template>
@@ -15,7 +16,7 @@
 <script>
     export default {
         return:{
-        data: {
+            data: {
             current:{mail: '',
             date: '',
             adress:'',
