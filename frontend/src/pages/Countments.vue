@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import OrderIn from '@/components/OrderIn';
-import OrderOut from '@/components/OrderOut';
+import OrderIn from '@/components/Countments/OrderIn';
+import OrderOut from '@/components/Countments/OrderOut';
 
 export default {
   components: {
