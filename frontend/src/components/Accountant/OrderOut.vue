@@ -25,7 +25,7 @@
             Прочее
           </button>
       </TabList>
-      <StorageIINShow v-show="StorageINShow"></StorageIINShow>
+      <StorageIINShow class="mt-4" v-show="StorageINShow"></StorageIINShow>
       <Others v-show="Others"></Others>
     </TabGroup>
   </div>
