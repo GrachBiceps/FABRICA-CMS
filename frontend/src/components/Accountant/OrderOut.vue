@@ -1,5 +1,5 @@
 <template>
-  <div class="m-3  py-1">
+  <div class="m-3 wrap py-1">
     <TabGroup>
       <TabList class="flex p-1 space-x-1 tab-tabmy ">
           <button v-on:click="showstoragein"
