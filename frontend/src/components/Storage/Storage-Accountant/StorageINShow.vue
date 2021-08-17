@@ -40,6 +40,7 @@
   export default {
     data() {
       return{
+        id:"",
         name:"",
         count:"",
         price:"",
@@ -60,7 +61,8 @@
         
       },
       del(number){
-        this.tbData.splice(this.tbData.indexOf(number)-1,1)
+        
+        this.tbData.splice(number-1,1)
         this.tbData.forEach(function(item, i, tbData) {
         item.id = i+1
       })
