@@ -12,15 +12,15 @@
             <th class="my-auto col-span-2">Опции</th>
           </tr>
         </thead>
-        <tr class="grid text-center grid-cols-12 p-2 " v-for="items in tbData" :key="items.id"> <!-- Отрисовка элементов таблицы -->
-          <td class="my-auto p-2">{{items.id}}</td>
+        <tr class="grid text-center grid-cols-12 p-2 " v-for="items in tbData" :key="items.formId"> <!-- Отрисовка элементов таблицы -->
+          <td class="my-auto p-2">{{items.formId}}</td>
           <td class="my-auto p-2 col-span-3">{{items.name}}</td>
           <td class="my-auto p-2 col-span-2">{{items.count}}</td>
           <td class="my-auto p-2 col-span-2">{{items.price}}</td>
           <td class="my-auto p-2 col-span-2">{{items.amount}}</td>
           <td class="grid grid-cols-3 col-span-2 gap-1 "> <!-- Кнопки -->
-            <button @click="editpos(items.id)" class="p-2 w-full col-span-2 my-auto shadow-sm rounded-lg bg-green-400 text-white">Редактировать</button>
-            <button @click="del(items.id)"  class="p-1 w-full  my-auto shadow-sm rounded-lg bg-red-500 text-white">Удалить</button>
+            <button @click="editpos(items.formId)" class="p-2 w-full col-span-2 my-auto shadow-sm rounded-lg bg-green-400 text-white">Редактировать</button>
+            <button @click="del(items.formId)"  class="p-1 w-full  my-auto shadow-sm rounded-lg bg-red-500 text-white">Удалить</button>
           </td>
         </tr> <!-- Пункт добавления -->
         <tr class="grid text-center grid-cols-12 " >
@@ -60,13 +60,13 @@
     
     data() {
       return{
-        id:"",
+        formId:"",
         name:"",
         count:"",
         price:"",
         amount:"",
 
-        idModal:"",
+        formIdModal:"",
         nameModal:"",
         countModal:"",
         priceModal:"",
@@ -78,7 +78,7 @@
     },
     methods:{
       add(){
-        this.tbData.push({id: this.tbData.length+1,name: this.name, count: this.count, price: this.price, amount: this.amount})
+        this.tbData.push({formId: this.tbData.length+1,name: this.name, count: this.count, price: this.price, amount: this.amount})
         this.name = ''
         this.count = ''
         this.price = ''
@@ -87,22 +87,22 @@
       del(number){       
         this.tbData.splice(number-1,1)
         this.tbData.forEach(function(item, i, tbData) {
-        item.id = i+1
+        item.formId = i+1
       })
       },
       editpos(string){
         this.editModal = string
-        this.idModal = this.tbData[string-1].id
+        this.formIdModal = this.tbData[string-1].formId
         this.nameModal = this.tbData[string-1].name
         this.countModal = this.tbData[string-1].count
         this.priceModal = this.tbData[string-1].price
         this.amountModal = this.tbData[string-1].amount
       },
       saveModal(){        
-        this.tbData[this.idModal-1].name = this.nameModal 
-        this.tbData[this.idModal-1].count = this.countModal 
-        this.tbData[this.idModal-1].price =  this.priceModal 
-        this.tbData[this.idModal-1].amount = this.amountModal 
+        this.tbData[this.formIdModal-1].name = this.nameModal 
+        this.tbData[this.formIdModal-1].count = this.countModal 
+        this.tbData[this.formIdModal-1].price =  this.priceModal 
+        this.tbData[this.formIdModal-1].amount = this.amountModal 
         this.nameModal = ""
         this.countModal  = ""
         this.priceModal = ""
