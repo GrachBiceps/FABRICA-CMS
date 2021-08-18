@@ -78,7 +78,7 @@
     },
     methods:{
       add(){
-        this.tbData.push({id: this.tbData.length+1,name: this.name, count: this.count, price: this.count, amount: this.amount})
+        this.tbData.push({id: this.tbData.length+1,name: this.name, count: this.count, price: this.price, amount: this.amount})
         this.name = ''
         this.count = ''
         this.price = ''
@@ -105,7 +105,12 @@
         this.tbData[this.idModal-1].count = this.countModal 
         this.tbData[this.idModal-1].price =  this.priceModal 
         this.tbData[this.idModal-1].amount = this.amountModal 
+        this.nameModal = ""
+        this.countModal  = ""
+        this.priceModal = ""
+        this.amountModal = ""
         this.editModal = false
+
       }
     }
     
