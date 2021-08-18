@@ -42,10 +42,10 @@ app.post('/api/create', function(req, res) {
 
 
 })
-app.get('/api/addorderin', function(req, res) {
+app.post('/api/addorderin', function(req, res) {
     schema = ''
     data = req.body
-    schema = { type: "in", name: data.name, amount: data.amount, date: new Date() }
+    schema = { name: data.name, count: data.count, price: data.price, amount: data.amount, date: new Date() }
 
     async function run() {
         try {

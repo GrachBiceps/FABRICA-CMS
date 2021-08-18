@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="grid justify-items-stretch ">
-      <button class="bg-green-600 m-3 justify-self-end rounded-xl p-3 text-white ">Отправить</button>
+      <button @click="sendForm()" class="bg-green-600 m-3 justify-self-end rounded-xl p-3 text-white ">Отправить</button>
     </div>
   </div>
 </template>
@@ -73,7 +73,7 @@
         amountModal:"",
 
         editModal: false, 
-         tbData: []
+        tbData: []
       }
     },
     methods:{
@@ -82,11 +82,9 @@
         this.name = ''
         this.count = ''
         this.price = ''
-        this.amount = ''
-        
+        this.amount = ''       
       },
-      del(number){
-        
+      del(number){       
         this.tbData.splice(number-1,1)
         this.tbData.forEach(function(item, i, tbData) {
         item.id = i+1
@@ -110,6 +108,26 @@
         this.priceModal = ""
         this.amountModal = ""
         this.editModal = false
+      },
+      sendForm(){
+        this.axios.post("/api/addorderin", this.tbData 
+            )
+            .then(response => {
+                  if(response.status == 200){
+                        
+                        this.$notify({
+                        title: "Успех!",
+                        text: "Данные добавлены на сервер",
+                    })
+                  }                              
+            })
+            .catch(error => {
+                 this.$notify({
+                        type: "alert",
+                        title: "Ошибка!",
+                        text: "Данные не добавлены на сервер: "+ error,
+                    })
+            });
 
       }
     }
