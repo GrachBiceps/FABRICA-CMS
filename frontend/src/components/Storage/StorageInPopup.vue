@@ -3,7 +3,7 @@
         <button @click="$router.push('/storage/innout')" v-for="item in data" v-bind:key="item.id" class="transform hover:scale-105 mywindow cursor-pointer shadow-lg flex flex-col h-56 w-64 ml-4 mr-4">
             <div class="w-full h-10 head_lenta"><div class="h-full p-2 text-white">ПРИХОД</div></div>
             <div class="w-full my-auto"><h1 class="w-full text-center">ОТКРЫТЬ</h1></div>
-            4
+            
         </button>
     </div>
 </template>
