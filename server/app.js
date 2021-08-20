@@ -43,19 +43,12 @@ app.post('/api/create', function(req, res) {
 
 })
 app.post('/api/addorderin', function(req, res) {
-    schema = ''
-    data = req.body
-    x = data[0]
-    for (i in data) {
-        x = (data[i + 1])
-
-    }
-    console.log(x)
-
-    schema = JSON.stringify(data) //{ name: data.name, count: data.count, price: data.price, amount: data.amount, date: new Date() }
-        //console.log(schema)
+    //{ name: data.name, count: data.count, price: data.price, amount: data.amount, date: new Date() }
+    //console.log(schema)
     async function run() {
         try {
+            schema = {}
+            schema.array = req.body
             await mongoClient.connect();
             const database = mongoClient.db("FABRICA-CMS");
             const order_in = database.collection("order_in");
