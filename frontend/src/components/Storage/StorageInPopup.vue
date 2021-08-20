@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex ml-2 mr-2 ">
-            <button @click="showinn(data._id)" v-for="item in data" :key="item.id" class="transform hover:scale-105 mywindow cursor-pointer shadow-lg flex flex-col h-56 w-64 ml-4 mr-4">
+            <button @click="showinn(item)" v-for="item in data" :key="item" class="transform hover:scale-105 mywindow cursor-pointer shadow-lg flex flex-col h-56 w-64 ml-4 mr-4">
                 <div class="w-full h-10 head_lenta"><div class="h-full p-2 text-white">ПРИХОД</div></div>
                 <div class="w-full my-auto"><h1 class="w-full text-center">ОТКРЫТЬ</h1></div> 
             </button>
@@ -28,14 +28,14 @@ import StorageIN from '@/pages/Storage/StorageIN-OUTpage.vue'
         mounted() {
     
         this.axios
-        .get('/api/fetchitems')
+        .get('/api/getorderin')
         .then(response => (this.data = response.data))
     
     },
     methods: {
-        showinn() {
+        showinn(item) {
             this.StorageShow = !this.StorageShow
-            this.dataid = data.id;
+            this.dataid = item;
         }
     }
     }
