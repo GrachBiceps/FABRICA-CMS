@@ -42,6 +42,27 @@ app.post('/api/create', function(req, res) {
 
 
 })
+app.get('/api/getorderin', function(req, res) {
+    async function run() {
+        try {
+
+            await mongoClient.connect();
+            const database = mongoClient.db("FABRICA-CMS");
+            const order_in = database.collection("order_in");
+            order_in.find().toArray(function(err, results) {
+
+                res.send(results)
+            });
+
+
+        } finally {
+
+        }
+    }
+    run().catch(console.dir);
+
+
+})
 app.post('/api/addorderin', function(req, res) {
     //{ name: data.name, count: data.count, price: data.price, amount: data.amount, date: new Date() }
     //console.log(schema)
