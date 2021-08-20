@@ -42,20 +42,34 @@ app.post('/api/create', function(req, res) {
 
 
 })
-app.post('/api/addorderin', function(req, res) {
-    schema = ''
-    data = req.body
-    x = data[0]
-    for (i in data) {
-        x = (data[i + 1])
-
-    }
-    console.log(x)
-
-    schema = JSON.stringify(data) //{ name: data.name, count: data.count, price: data.price, amount: data.amount, date: new Date() }
-        //console.log(schema)
+app.get('/api/getorderin', function(req, res) {
     async function run() {
         try {
+
+            await mongoClient.connect();
+            const database = mongoClient.db("FABRICA-CMS");
+            const order_in = database.collection("order_in");
+            order_in.find().toArray(function(err, results) {
+
+                res.send(results)
+            });
+
+
+        } finally {
+
+        }
+    }
+    run().catch(console.dir);
+
+
+})
+app.post('/api/addorderin', function(req, res) {
+    //{ name: data.name, count: data.count, price: data.price, amount: data.amount, date: new Date() }
+    //console.log(schema)
+    async function run() {
+        try {
+            schema = {}
+            schema.array = req.body
             await mongoClient.connect();
             const database = mongoClient.db("FABRICA-CMS");
             const order_in = database.collection("order_in");
