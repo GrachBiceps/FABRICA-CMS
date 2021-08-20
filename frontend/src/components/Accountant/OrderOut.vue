@@ -11,7 +11,7 @@
                 : 'text-gray-200 opacity-75 hover:bg-gray-400/[0.12] hover:text-gray-500',
             ]"
           >
-            Приход товара
+            Закупка товара
           </button>
           <button v-on:click="others"
             :class="[
