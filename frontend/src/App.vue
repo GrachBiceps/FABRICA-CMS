@@ -1,30 +1,21 @@
-<template>
-  <div class="app" style="display:flex">
-      <Navbar></Navbar>
-      <div style="width:100%">
-        <MyTopBar></MyTopBar>
-        <router-view></router-view>
-        <notifications position="bottom right"/>
-        
-      </div>
-  </div>
+<template lang="pug">
+div.app.flex
+  Navbar
+  div(style="width:100%")
+    MyTopBar
+    router-view
+    notifications(position="bottom right")
 </template>
 
 <script>
-import Navbar from "@/components/NavBar";
-import MyTopBar from "@/components/MyTopBar";
-
+import Navbar from "@/components/NavBar"
 export default {
     components: {
-      Navbar, MyTopBar
+      Navbar
     }
 }
 </script>
 
-<style>
-        @import "./assets/bootstrap/css/bootstrap.min.css";
-        @import "https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i";
-        @import "./assets/fonts/fontawesome-all.min.css";
-        @import "./assets/fonts/font-awesome.min.css";
-        @import "./assets/fonts/fontawesome5-overrides.min.css"; 
+<style lang="postcss" scoped>
+@import 'assets/styles/tailwind.postcss'
 </style>
