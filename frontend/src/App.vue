@@ -1,8 +1,7 @@
 <template lang="pug">
 div.app.flex
-  Navbar
-  div(style="width:100%")
-    MyTopBar
+  Navbar.fixed.z-10
+  div.ml-20.mt-24.z-0(style="width: 100%;")
     router-view
     notifications(position="bottom right")
 </template>
@@ -17,5 +16,8 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-@import 'assets/styles/tailwind.postcss'
+@import 'assets/styles/tailwind.postcss';
+.mybg{
+  background: rgb(133, 229, 233);
+}
 </style>

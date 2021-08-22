@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <div class="mb-4">
+  <div class="flex-none">
+    <div class="mb-4 ">
     <!-- <AddItem></AddItem> -->
-    <StorageInPopup></StorageInPopup>
+    <StorageInPopup class="flex"></StorageInPopup>
     </div>
     <button class="mybtn d-block btn-user w-100" v-on:click="show = !show">
     <div class="fas fa-angle-down">
