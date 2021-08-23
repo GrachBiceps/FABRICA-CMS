@@ -1,12 +1,18 @@
 <template lang="pug">
-div(class="rounded-xl navBG flex")
-  div.p-1.my-2.mx-auto.my-auto.text-white LOGO
-  div.p-1.mx-auto.my-2.flex.flex-wrap.flex.text-white(v-for="item in items" :key="item.id" :class="{active: item.active, grassmor: item.active }")
-    button.mx-auto.cursor-pointer.break-words( @click=" activeItem(item.id)" ) {{item.title}}
-  div.grassmor-li.my-2.mx-2.rounded-lg.flex.gap-1.opacity-75(v-if="authed")
-    div.rounded-full.p-2
+div(class=" bg-mode-colors roundedMY grid grid-cols-1 gap-1 size my-32 navBG")
+  div.p-2.mx-auto
+  div.p-2.mx-auto.text-white LOGO
+  div.p-2.mx-auto
+  div.p-2.m-1.flex.mode-text(v-for="item in items" :key="item.id" :class="{active: item.active}")
+    div.mx-auto.navicon.blur-xl
+      img(:src="require('../assets/icons/navbaricons/'+ item.icon +'.png')" width="36" height="36")
+    button.navName.mx-auto( @click=" activeItem(item.id)" ) {{item.title}}
+  div.p-2.mx-auto.navName
+  div.p-2.my-4.bg-white.mx-auto.rounded-lg.flex.gap-4.opacity-75(v-if="authed")
+    div.rounded-full.p-1.my-auto
       img(:src="require('../assets/avatars/'+ profile.profileAvatar +'.png')" width="32" height="32" )
-    button.p-2 ВЫХОД
+    div.my-auto.navName {{profile.profileName}}
+    button.my-auto.navName ВЫХОД
   div.p-2.mx-auto.text-gray-400(v-else)
     button.m-2(class="hover:text-white") Войти
 </template>
@@ -29,7 +35,7 @@ export default {
   },
   methods:{
     activeItem(Number){
-      var itid = null;
+      var itid = 0;
       var pathid = "";
       if(Number !== this.whoactive)
       {
@@ -46,19 +52,35 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
+.mode-text {
+  @apply text-white;
+}
+.roundedMY {
+  border-radius: 0px 20px 20px 0px;
+}
+.size {
+  width: 5rem;
+  transition-duration: 200ms;
+}
+.size:hover {
+  width: 13rem;
+  transition-duration: 200ms;
+}
 .navName {
   @apply hidden;
 }
-.navicon:hover .navName {
+.navBG:hover .navName {
   @apply block;
-  transition-duration: 300ms;
+  transition-duration: 200ms;
 }
 .navBG:hover .navicon {
   @apply hidden;
-  transition-duration: 300ms;
+  transition-duration: 200ms;
 }
 .active {
   @apply bg-white opacity-75 rounded-lg shadow-lg text-black;
 }
 </style>
+
+
