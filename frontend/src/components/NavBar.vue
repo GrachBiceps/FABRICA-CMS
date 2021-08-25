@@ -1,47 +1,49 @@
 <template lang="pug">
-div(class="rounded-xl navBG flex")
-  div.p-1.my-2.mx-auto.my-auto.text-white LOGO
-  div.p-1.mx-auto.my-2.flex.flex-wrap.flex.text-white(v-for="item in items" :key="item.id" :class="{active: item.active, grassmor: item.active }")
-    button.mx-auto.cursor-pointer.break-words( @click=" activeItem(item.id)" ) {{item.title}}
-  div.grassmor-li.my-2.mx-2.rounded-lg.flex.gap-1.opacity-75(v-if="authed")
+div(class="rounded-xl navBG flex justify-center")
+  div.p-2.mx-auto.my-2.my-auto.text-white.justify-self-start LOGO
+  div.justify-self-center.flex
+    div.text-black.font-semibold.m-2.my-2.p-4(v-for="item in items" :key="item.id" :class="{neoout: item.active}")
+      button.cursor-pointer( @click="activeItem(item.id)" ) {{item.title}}
+  div.neoout.my-auto.mx-auto.rounded-lg.flex.gap-1.opacity-75.justify-self-end(v-if="authed")
     div.rounded-full.p-2
       img(:src="require('../assets/avatars/'+ profile.profileAvatar +'.png')" width="32" height="32" )
+    h1.my-auto.mx-2 {{profile.profileName}}
     button.p-2 ВЫХОД
-  div.p-2.mx-auto.text-gray-400(v-else)
-    button.m-2(class="hover:text-white") Войти
+  div.p-2.mx-auto.my-auto.text-black(v-else)
+    button.m-2(class="hover:text-white text-lg") Войти
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
-      whoactive: 0,
-      authed: true,
-      profile: {id:0, profileName: "FAFA", profileAvatar: 0},
-      items: [
-        {id: 0, title: "Инфографики", icon: 0, path: "/myinfo" , active: true},
-        {id: 1, title: "Склад", icon: 1, path: "/storage", active: false},
-        {id: 2, title: "Бухгалтерия", icon: 2, path: "/", active: false},
-        {id: 3, title: "Производственный учет", icon: 3, path: "/orders", active: false},
-        {id: 4, title: "Доставка", icon: 4, path: "/", active: false}
-        ],
+        whoactive: 0,
     };
   },
   methods:{
-    activeItem(Number){
-      var itid = null;
-      var pathid = "";
-      if(Number !== this.whoactive)
-      {
-          itid = this.whoactive
-          this.items[itid].active = false
-          this.items[Number].active = true
-          this.whoactive = Number
-          pathid = this.items[Number].path
-          this.$router.push(pathid)
-      }
-        
-    }
+   activeItem(Number)
+        {
+            var itid = null;
+            var pathid = "";
+            
+            if(Number !== this.whoactive){
+                itid = this.whoactive
+                this.items[Number].active = true
+                this.items[itid].active = false
+                this.whoactive = Number
+                pathid = this.items[Number].path
+                this.$router.push(pathid)
+            }
+        }
+  },
+  computed:{
+   ...mapState({
+      authed: state => state.navbar.authed,
+      profile: state => state.navbar.profile,
+      items: state => state.navbar.items,
+
+   })
   }
 };
 </script>
@@ -60,5 +62,11 @@ export default {
 }
 .active {
   @apply bg-white opacity-75 rounded-lg shadow-lg text-black;
+}
+.neoout{
+border-radius: 10px;
+background: #e0e0e0;
+box-shadow: inset 5px 5px 15px #c1c1c1,
+            inset -5px -5px 15px #ffffff;
 }
 </style>

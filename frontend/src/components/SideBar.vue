@@ -1,9 +1,9 @@
 <template lang="pug">
-div(class=" bg-mode-colors roundedMY grid grid-cols-1 gap-1 size my-32 navBG")
+div(class=" bg-mode-colors roundedMY grid grid-cols-1 gap-1 size my-24 navBG")
   div.p-2.mx-auto
   div.p-2.mx-auto.text-white LOGO
   div.p-2.mx-auto
-  div.p-2.m-1.flex.mode-text(v-for="item in items" :key="item.id" :class="{active: item.active}")
+  div.p-2.m-1.flex.mode-text(v-for="item in items" :key="item.id" :class="{neoout: item.active}")
     div.mx-auto.navicon.blur-xl
       img(:src="require('../assets/icons/navbaricons/'+ item.icon +'.png')" width="36" height="36")
     button.navName.mx-auto( @click=" activeItem(item.id)" ) {{item.title}}
@@ -54,7 +54,7 @@ export default {
 
 <style lang="postcss">
 .mode-text {
-  @apply text-white;
+  @apply text-black;
 }
 .roundedMY {
   border-radius: 0px 20px 20px 0px;
@@ -80,6 +80,12 @@ export default {
 }
 .active {
   @apply bg-white opacity-75 rounded-lg shadow-lg text-black;
+}
+.neoout{
+border-radius: 10px;
+background: #e0e0e0;
+box-shadow: inset 5px 5px 15px #c1c1c1,
+            inset -5px -5px 15px #ffffff;
 }
 </style>
 
