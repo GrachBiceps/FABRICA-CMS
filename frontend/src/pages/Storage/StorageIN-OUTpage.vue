@@ -1,5 +1,5 @@
 <template>
-    <div class="m-4 wrap">
+    <div class="m-4 grid grid-cols-1 ">
         <div class="text-center p-3 bg-blue-500 text-lg text-white">Приход №212313</div>
             <div class="grid mt-4">
              <thead class="">
@@ -24,8 +24,6 @@
                         </td>
                     </tr> <!-- Пункт добавления -->
                 </div>
-        <div>
-            </div>
     </div>
 </template>
 

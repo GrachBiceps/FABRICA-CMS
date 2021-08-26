@@ -1,6 +1,8 @@
+import { ref } from 'vue'
 export const navbarModule = {
     state: () => ({
       authed: true,
+      allwhoactive: 0,
       profile: {id:0, profileName: "Grach", profileAvatar: 0},
       items: [
         {id: 0, title: "Инфографики", icon: 0, path: "/myinfo" , active: true, inactive: false},
@@ -10,18 +12,11 @@ export const navbarModule = {
         {id: 4, title: "Доставка", icon: 4, path: "/", active: false, inactive: true}
         ],
     }),
-    
-    getters: {
-        
-    },
-    
     mutations: {
+      setallwhoactive(state, Number){
+        state.allwhoactive = Number;
+      }
     },
-    
-    actions: {
-     
-    },
-
     namespaced: true
 
 }

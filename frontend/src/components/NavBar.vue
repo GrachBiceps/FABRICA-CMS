@@ -4,8 +4,8 @@ div(class="rounded-xl navBG flex justify-center")
   div.justify-self-center.flex
     div.text-black.font-semibold.m-2.my-2.p-4(v-for="item in items" :key="item.id" :class="{neoout: item.active}")
       button.cursor-pointer( @click="activeItem(item.id)" ) {{item.title}}
-  div.neoout.my-auto.mx-auto.rounded-lg.flex.gap-1.opacity-75.justify-self-end(v-if="authed")
-    div.rounded-full.p-2
+  div.neoout.my-auto.mx-auto.rounded-lg.flex.gap-1.justify-self-end(v-if="authed")
+    div.rounded-full.p-3
       img(:src="require('../assets/avatars/'+ profile.profileAvatar +'.png')" width="32" height="32" )
     h1.my-auto.mx-2 {{profile.profileName}}
     button.p-2 ВЫХОД
@@ -14,7 +14,7 @@ div(class="rounded-xl navBG flex justify-center")
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapMutations, mapState} from 'vuex'
 export default {
   data() {
     return {
@@ -22,6 +22,7 @@ export default {
     };
   },
   methods:{
+    
    activeItem(Number)
         {
             var itid = null;
@@ -32,6 +33,7 @@ export default {
                 this.items[Number].active = true
                 this.items[itid].active = false
                 this.whoactive = Number
+                this.$store.commit('navbar/setallwhoactive', Number)
                 pathid = this.items[Number].path
                 this.$router.push(pathid)
             }
@@ -42,8 +44,8 @@ export default {
       authed: state => state.navbar.authed,
       profile: state => state.navbar.profile,
       items: state => state.navbar.items,
-
-   })
+      allwhoactive: state => state.navbar.allwhoactive
+   }),
   }
 };
 </script>
@@ -59,9 +61,6 @@ export default {
 .navBG:hover .navicon {
   @apply hidden;
   transition-duration: 300ms;
-}
-.active {
-  @apply bg-white opacity-75 rounded-lg shadow-lg text-black;
 }
 .neoout{
 border-radius: 10px;

@@ -1,9 +1,9 @@
 <template lang="pug">
 div.flex-wrap
   div
-    Navbar.z-20.mx-12.mt-2.BG69BG
+    Navbar.z-20.mx-12.mt-10.BG69BG
     Sidebar.fixed.z-10.BG69BG
-  div.my-12.ml-24.mr-24.BG69BG.rounded-xl
+  div.my-16.ml-24.mr-24.BG69BG.rounded-xl
     router-view
   notifications(position="bottom right")
 </template>
@@ -28,18 +28,23 @@ export default {
 
 <style>
 html{
-background-image: url("./assets/fancy-pants.jpg");
-backdrop-filter: blur(10px);
+/* background-image: url("./assets/fancy-pants.jpg"); */
+background-color: #0093E9;
+background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+
+backdrop-filter: blur(20px);
 height: 100%;
-width: 100%;
+width: 100%; 
 }
 body{
   background: rgba(0, 0, 0, 0.123);
 /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
-backdrop-filter: blur( 2.0px );
--webkit-backdrop-filter: blur( 2.0px );
+backdrop-filter: blur( 10.0px );
+-webkit-backdrop-filter: blur( 10.0px );
 height: 100%;
 width: 100%;
+margin-top: -2rem;
 }
 .grassmor{
 background: rgba(255, 255, 255, 0.158);
@@ -50,16 +55,16 @@ backdrop-filter: blur( 20.0px );
 .grassmorli{
 background: rgb(223, 222, 222);
 box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-backdrop-filter: blur( 5.0px );
--webkit-backdrop-filter: blur( 5.0px );
+backdrop-filter: blur( 10.0px );
+-webkit-backdrop-filter: blur( 10.0px );
 border-radius: 10px;
 
 }.BG69BG{
   /* background: #e0e0e0; */
   background: rgba(255, 255, 255, 0.363);
 box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-backdrop-filter: blur( 5.0px );
--webkit-backdrop-filter: blur( 5.0px );
+backdrop-filter: blur( 10.0px );
+-webkit-backdrop-filter: blur( 10.0px );
 border-radius: 10px;
 }
 </style>
