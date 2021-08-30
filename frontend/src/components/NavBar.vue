@@ -14,7 +14,7 @@ div(class="rounded-xl navBG flex justify-center")
 </template>
 
 <script>
-import {mapMutations, mapState} from 'vuex'
+import { mapState} from 'vuex'
 export default {
   data() {
     return {
