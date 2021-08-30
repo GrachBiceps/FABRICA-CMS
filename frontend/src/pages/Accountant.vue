@@ -1,13 +1,5 @@
 <template>
   <div>
-    <div class="flexmy">
-      <button class="mybtn d-block btn-user" v-on:click="showdivin">
-        Заказы
-      </button>
-      <button class="mybtn d-block btn-user" v-on:click="showdivout">
-        Расходы
-      </button>
-    </div>
     <div v-show="OrderInShow">
       <transition name="fade">
         <OrderIn></OrderIn>
@@ -24,27 +16,20 @@
 <script>
 import OrderIn from '@/components/Accountant/OrderIn';
 import OrderOut from '@/components/Accountant/OrderOut';
+import {mapState} from 'vuex';
 
 export default {
   components: {
     OrderOut,
     OrderIn,
   },
-  data() {
-    return {
-      OrderInShow: false,
-      OrderOutShow: false,
-    };
-  },
-  methods: {
-    showdivin() {
-      (this.OrderInShow = true), (this.OrderOutShow = false);
-    },
-    showdivout() {
-      (this.OrderInShow = false), (this.OrderOutShow = true);
-    },
-  },
-};
+  computed:{
+   ...mapState({
+      OrderInShow: state => state.sidebar.OrderInShow,
+      OrderOutShow: state => state.sidebar.OrderOutShow
+   })
+   }
+}
 </script>
 
 <style>
