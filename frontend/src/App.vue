@@ -1,30 +1,70 @@
-<template>
-  <div class="app" style="display:flex">
-      <Navbar></Navbar>
-      <div style="width:100%">
-        <MyTopBar></MyTopBar>
-        <router-view></router-view>
-        <notifications position="bottom right"/>
-        
-      </div>
-  </div>
+<template lang="pug">
+div.flex-wrap
+  div
+    Navbar.z-20.mx-12.mt-10.BG69BG
+    Sidebar.fixed.z-10.BG69BG
+  div.my-16.ml-24.mr-24.BG69BG.rounded-xl
+    router-view
+  notifications(position="bottom right")
 </template>
 
 <script>
-import Navbar from "@/components/NavBar";
-import MyTopBar from "@/components/MyTopBar";
+import Navbar from "@/components/NavBar"
+import Sidebar from "@/components/SideBar"
 
 export default {
     components: {
-      Navbar, MyTopBar
+      Navbar, Sidebar
     }
 }
 </script>
 
+<style lang="postcss" scoped>
+@import 'assets/styles/tailwind.postcss';
+.full{
+ width: 90%;
+}
+</style>
+
 <style>
-        @import "./assets/bootstrap/css/bootstrap.min.css";
-        @import "https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i";
-        @import "./assets/fonts/fontawesome-all.min.css";
-        @import "./assets/fonts/font-awesome.min.css";
-        @import "./assets/fonts/fontawesome5-overrides.min.css"; 
+html{
+/* background-image: url("./assets/fancy-pants.jpg"); */
+background-color: #0093E9;
+background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+
+
+backdrop-filter: blur(20px);
+height: 100%;
+width: 100%; 
+}
+body{
+  background: rgba(0, 0, 0, 0.123);
+/* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
+backdrop-filter: blur( 10.0px );
+-webkit-backdrop-filter: blur( 10.0px );
+height: 100%;
+width: 100%;
+margin-top: -2rem;
+}
+.grassmor{
+background: rgba(255, 255, 255, 0.158);
+/* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
+backdrop-filter: blur( 20.0px );
+-webkit-backdrop-filter: blur( 20.0px );
+}
+.grassmorli{
+background: rgb(223, 222, 222);
+box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+backdrop-filter: blur( 10.0px );
+-webkit-backdrop-filter: blur( 10.0px );
+border-radius: 10px;
+
+}.BG69BG{
+  /* background: #e0e0e0; */
+  background: rgba(255, 255, 255, 0.363);
+box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+backdrop-filter: blur( 10.0px );
+-webkit-backdrop-filter: blur( 10.0px );
+border-radius: 10px;
+}
 </style>
