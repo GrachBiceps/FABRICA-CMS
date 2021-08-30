@@ -1,71 +1,56 @@
-<template lang="pug">
-div(class="rounded-xl navBG flex justify-center")
-  div.p-2.mx-auto.my-2.my-auto.text-white.justify-self-start LOGO
-  div.justify-self-center.flex
-    div.text-black.font-semibold.m-2.my-2.p-4(v-for="item in items" :key="item.id" :class="{neoout: item.active}")
-      button.cursor-pointer( @click="activeItem(item.id)" ) {{item.title}}
-  div.neoout.my-auto.mx-auto.rounded-lg.flex.gap-1.justify-self-end(v-if="authed")
-    div.rounded-full.p-3
-      img(:src="require('../assets/avatars/'+ profile.profileAvatar +'.png')" width="32" height="32" )
-    h1.my-auto.mx-2 {{profile.profileName}}
-    button.p-2 ВЫХОД
-  div.p-2.mx-auto.my-auto.text-black(v-else)
-    button.m-2(class="hover:text-white text-lg") Войти
+<template>
+<div style="display: flex">
+<div v-show="NavHide" class="mynavbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+  <nav class="navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary w100 p-0">
+     <div class="container-fluid d-flex flex-column p-0">
+       <button class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" @click="$router.push('/')">
+         <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+          <div class="sidebar-brand-text mx-3"><span>Фабрика</span></div>
+       </button>
+     <hr class="sidebar-divider my-0">
+        <ul class="navbar-nav text-light" id="accordionSidebar">
+            <li class="nav-item"><button class="nav-link" @click="$router.push('/myinfo')" ><i class="fas fa-tachometer-alt"></i><span>Инфо</span></button></li>
+            <li class="nav-item"><button class="nav-link" @click="$router.push('/storage')" ><i class="fas fa-user"></i><span>Склад</span></button></li>
+            <li class="nav-item"><button class="nav-link" @click="$router.push('/orders')" ><i class="fas fa-table"></i><span>Бугалтерия</span></button></li>
+        </ul>
+      
+      </div>
+  </nav>
+</div>
+  <!-- <div class="text-center d-none btn-grach d-md-inline"><button v-on:click="HideBar" class="btn btn-grach border-0" id="sidebarToggle" type="button"></button></div> -->
+</div>
 </template>
 
 <script>
-import { mapState} from 'vuex'
-export default {
-  data() {
-    return {
-        whoactive: 0,
-    };
-  },
-  methods:{
-    
-   activeItem(Number)
-        {
-            var itid = null;
-            var pathid = "";
-            
-            if(Number !== this.whoactive){
-                itid = this.whoactive
-                this.items[Number].active = true
-                this.items[itid].active = false
-                this.whoactive = Number
-                this.$store.commit('navbar/setallwhoactive', Number)
-                pathid = this.items[Number].path
-                this.$router.push(pathid)
-            }
+    export default {
+      data () {
+        return {
+          NavHide: true
         }
-  },
-  computed:{
-   ...mapState({
-      authed: state => state.navbar.authed,
-      profile: state => state.navbar.profile,
-      items: state => state.navbar.items,
-      allwhoactive: state => state.navbar.allwhoactive
-   }),
-  }
-};
+      },
+      methods:  {
+        HideBar () {
+          this.NavHide = !this.NavHide
+        }
+      }
+    }
 </script>
 
-<style lang="postcss" scoped>
-.navName {
-  @apply hidden;
+<style>
+.btn-grach{
+  width: 60px;
+  height: 70px;
+   background: #5779df;
 }
-.navicon:hover .navName {
-  @apply block;
-  transition-duration: 300ms;
+button{
+  background: none;
+    border: none;
 }
-.navBG:hover .navicon {
-  @apply hidden;
-  transition-duration: 300ms;
+.mynavbar{
+    padding-top: 0;
+    padding-bottom: 0;
 }
-.neoout{
-border-radius: 10px;
-background: #e0e0e0;
-box-shadow: inset 5px 5px 15px #c1c1c1,
-            inset -5px -5px 15px #ffffff;
+.w100{
+  height:100%;
 }
 </style>

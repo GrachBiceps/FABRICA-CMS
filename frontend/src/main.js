@@ -3,9 +3,11 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Notifications from '@kyvg/vue3-notification'
 // import components from '@/components/UI';
-import App from './App.vue'
-import router from "@/router"
-import store from '@/store'
+import App from './App.vue';
+import router from "@/router";
+import './assets/tailwind.css'
+
+
 
 const app = createApp(App)
 app.config.globalProperties.axios=axios
@@ -20,7 +22,6 @@ app.config.globalProperties.axios=axios
 app 
     .use(Notifications)
     .use(router)
-    .use(store)
     .use(VueAxios, axios)
     .mount('#app');
     
