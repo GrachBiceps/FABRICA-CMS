@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class=""></div>
-    <table class="w-full grassmor-li rounded-lg break-words ">
+    <div></div>
+    <table class="w-full break-words divide-y-2 shadow-sm">
         <thead class="">
-          <tr class="w-full h-10 grid p-2 rounded-lg grid-cols-12 text-center ">
+          <tr class="w-full h-10 grid p-2 grid-cols-12 text-center bg-gray-400 ">
             <th class="my-auto">№</th>
             <th class="my-auto col-span-3">Наименование</th>
             <th class="my-auto col-span-2">Количество</th>
@@ -19,18 +19,18 @@
           <td class="my-auto p-2 col-span-2">{{items.price}}</td>
           <td class="my-auto p-2 col-span-2">{{items.amount}}</td>
           <td class="grid grid-cols-3 col-span-2 gap-1 "> <!-- Кнопки -->
-            <button @click="editpos(items.formId)" class="p-2 w-full col-span-2 my-auto  rounded-lg grassmor-green text-white">Редактировать</button>
-            <button @click="del(items.formId)"  class="p-1 w-full  my-auto  rounded-lg bg-red-500 text-white">Удалить</button>
+            <button @click="editpos(items.formId)" class="p-2 w-full col-span-2 my-auto shadow-sm rounded-lg bg-green-400 text-white">Редактировать</button>
+            <button @click="del(items.formId)"  class="p-1 w-full  my-auto shadow-sm rounded-lg bg-red-500 text-white">Удалить</button>
           </td>
         </tr> <!-- Пункт добавления -->
         <tr class="grid text-center grid-cols-12 " >
           <td class="my-auto">№</td>
-          <td class="my-auto col-span-3 w-full h-4/5"><input v-model="name" @submit.prevent="checkform" type=text class="text-center bg-transparent placeholder-gray-700 w-full h-full" placeholder="Название"></td>
-          <td class="my-auto col-span-2 w-full h-4/5"><input v-model="count" type=number class="text-center  bg-transparent placeholder-gray-700 w-full h-full" placeholder="Колличество"></td>
-          <td class="my-auto col-span-2 w-full h-4/5"><input v-model="price" type=number class="text-center bg-transparent placeholder-gray-700 w-full h-full" placeholder="Цена"></td>
-          <td class="my-auto col-span-2 w-full h-4/5"><input v-model="amount" type=number class="text-center bg-transparent placeholder-gray-700 w-full h-full" placeholder="Сумма"></td>
+          <td class="my-auto col-span-3 w-full h-4/5"><input v-model="name" @submit.prevent="checkform" type=text class="text-center w-full h-full" placeholder="Название"></td>
+          <td class="my-auto col-span-2 w-full h-4/5"><input v-model="count" type=number class="text-center w-full h-full" placeholder="Колличество"></td>
+          <td class="my-auto col-span-2 w-full h-4/5"><input v-model="price" type=number class="text-center w-full h-full" placeholder="Цена"></td>
+          <td class="my-auto col-span-2 w-full h-4/5"><input v-model="amount" type=number class="text-center w-full h-full" placeholder="Сумма"></td>
           <td class="flex grid-cols-3 col-span-2">
-            <button @click="add" class="w-full text-center col-span-3 m-2 p-2 mt-2 mb-2 rounded-lg my-auto grassmor-green text-white" >Добавить</button>
+            <button @click="add" class="w-full text-center col-span-3 m-2 p-2 mt-2 mb-2 shadow-sm rounded-lg my-auto bg-green-400 text-white" >Добавить</button>
           </td>
         </tr>
       </table>
@@ -147,11 +147,5 @@
 .head_lenta {
     background: #4b70df;
     border-radius: 10px 10px 0px 0px;
-}
-.grassmor-green{
-  background: rgba(4, 190, 35, 0.616);
-backdrop-filter: blur( 20.0px );
--webkit-backdrop-filter: blur( 20.0px );
-border-radius: 10px;
 }
 </style>
