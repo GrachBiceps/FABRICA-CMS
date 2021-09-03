@@ -63,6 +63,50 @@ app.get('/api/getorderin', function(req, res) {
 
 
 })
+app.get('/api/users', function(req, res) {
+    async function run() {
+        try {
+
+            await mongoClient.connect();
+            const database = mongoClient.db("FABRICA-CMS");
+            const order_in = database.collection("users");
+            order_in.find().toArray(function(err, results) {
+
+                res.send(results)
+            });
+
+
+        } finally {
+
+        }
+    }
+    run().catch(console.dir);
+
+
+})
+app.post('/api/users', function(req, res) {
+    //{ name: data.name, count: data.count, price: data.price, amount: data.amount, date: new Date() }
+    //console.log(schema)
+    async function run() {
+        try {
+            schema = {}
+            schema.array = req.body
+            await mongoClient.connect();
+            const database = mongoClient.db("FABRICA-CMS");
+            const order_in = database.collection("users");
+            order_in.insertOne(schema)
+            res.sendStatus(200)
+
+        } finally {
+
+        }
+    }
+    run().catch(console.dir);
+
+
+
+
+})
 app.post('/api/addorderin', function(req, res) {
     //{ name: data.name, count: data.count, price: data.price, amount: data.amount, date: new Date() }
     //console.log(schema)

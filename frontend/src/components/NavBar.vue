@@ -2,15 +2,14 @@
 div(class="rounded-xl navBG flex justify-center")
   div.p-2.mx-auto.my-2.my-auto.text-white.justify-self-start LOGO
   div.justify-self-center.flex
-    div.text-black.font-semibold.m-2.my-2.p-4(v-for="item in items" :key="item.id" :class="{neoout: item.active}")
-      button.cursor-pointer( @click="activeItem(item.id)" ) {{item.title}}
+    div.text-black.font-semibold(v-for="item in items" :key="item.id")
+      button.cursor-pointer.m-2.my-2.p-4( @click="activeItem(item.id)" :class="{neoout: item.active}" ) {{item.title}}
   div.neoout.my-auto.mx-auto.rounded-lg.flex.gap-1.justify-self-end(v-if="authed")
     div.rounded-full.p-3
       img(:src="require('../assets/avatars/'+ profile.profileAvatar +'.png')" width="32" height="32" )
     h1.my-auto.mx-2 {{profile.profileName}}
-    button.p-2 ВЫХОД
-  div.p-2.mx-auto.my-auto.text-black(v-else)
-    button.m-2(class="hover:text-white text-lg") Войти
+    button(@click="exit(false)").p-2 ВЫХОД
+  div.my-auto.mx-auto.rounded-lg.flex.gap-1.justify-self-end(v-else)
 </template>
 
 <script>
@@ -22,7 +21,10 @@ export default {
     };
   },
   methods:{
-    
+    exit(Boolean){
+      var exit = Boolean
+      this.$store.commit('auth/authexit', exit)
+    },
    activeItem(Number)
         {
             var itid = null;
@@ -41,7 +43,7 @@ export default {
   },
   computed:{
    ...mapState({
-      authed: state => state.navbar.authed,
+      authed: state => state.auth.authed,
       profile: state => state.navbar.profile,
       items: state => state.navbar.items,
       allwhoactive: state => state.navbar.allwhoactive
