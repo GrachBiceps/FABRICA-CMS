@@ -1,7 +1,7 @@
-import { ref } from 'vue'
+
 export const navbarModule = {
     state: () => ({
-      authed: true,
+      
       allwhoactive: 0,
       profile: {id:0, profileName: "Grach", profileAvatar: 0},
       items: [

@@ -1,13 +1,18 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Main from "@/pages/Main";
 import MyInfo from '@/pages/MyInfo';
-import MyStorage from '@/pages/Storage/MyStorage';
-import Orders from '@/pages/Accountant';
-import StorageINOUTpage from '@/pages/Storage/StorageIN-OUTpage';
+import signup from '@/pages/signup';
+import MyStorage from '@/elements/Storage.section/MyStorage';
+import Orders from '@/elements/ProduAcc.section/Accountant';
+import StorageINOUTpage from '@/elements/Storage.section/StorageIN-OUTpage';
 
 const routes = [{
         path: '/',
         component: Main
+    },
+    {
+        path: '/signup',
+        component: signup
     },
     {
         path: '/myinfo',

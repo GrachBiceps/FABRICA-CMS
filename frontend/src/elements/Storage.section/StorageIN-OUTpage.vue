@@ -12,12 +12,12 @@
                         <th class="my-auto col-span-2">Опции</th>
                     </tr>
                 </thead>
-                    <tr class="grid text-center grid-cols-12 p-2 " v-for="item in data.array" :key="item"> <!-- Отрисовка элементов таблицы -->
-                        <td class="my-auto p-2">{{item.formId}}</td>
-                        <td class="my-auto p-2 col-span-3">{{item.name}}</td>
-                        <td class="my-auto p-2 col-span-2">{{item.count}}</td>
-                        <td class="my-auto p-2 col-span-2">{{item.price}}</td>
-                        <td class="my-auto p-2 col-span-2">{{item.amount}}</td>
+                    <tr class="grid text-center grid-cols-12 p-2 " v-for="item in data" :key="item._id"> <!-- Отрисовка элементов таблицы -->
+                        <td class="my-auto p-2">{{}}</td>
+                        <td class="my-auto p-2 col-span-3">{{data.name}}</td>
+                        <td class="my-auto p-2 col-span-2">{{data.count}}</td>
+                        <td class="my-auto p-2 col-span-2">{{data.price}}</td>
+                        <td class="my-auto p-2 col-span-2">{{data.amount}}</td>
                         <td class="grid grid-cols-3 col-span-2 gap-1 "> <!-- Кнопки -->
                             <button @click="editpos()" class="p-2 w-full col-span-2 my-auto shadow-sm rounded-lg bg-green-400 text-white">Редактировать</button>
                             <button   class="p-1 w-full  my-auto shadow-sm rounded-lg bg-red-500 text-white">Удалить</button>
@@ -40,13 +40,6 @@
     
 </script>
 
-<style >
-.dialog{
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  position: fixed;
-  display: flex;
-}
+<style lang="scss" scoped>
+
 </style>

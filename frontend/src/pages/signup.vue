@@ -1,5 +1,7 @@
-<template lang='pug'>
-
+<template>
+    <div>
+adsadasdasasda
+    </div>
 </template>
 
 <script>
