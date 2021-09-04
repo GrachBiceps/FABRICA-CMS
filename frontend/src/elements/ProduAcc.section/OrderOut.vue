@@ -9,8 +9,8 @@ div.m-3.wrap.py-1
 
 <script>
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
-import StorageIINShow from '/src/components/Storage/Storage-Accountant/StorageINShow.vue'
-import Others from '/src/components/Storage/Storage-Accountant/Others.vue'
+import StorageIINShow from '@/elements/ProduAcc.section/StorageINShow.vue'
+import Others from '@/elements/ProduAcc.section/Others.vue'
 
 export default {
   data () {

@@ -33,8 +33,8 @@ div
 </template>
 
 <script>
-import Navbar from "@/components/NavBar"
-import Sidebar from "@/components/SideBar"
+import Navbar from "@/elements/UI.section/NavBar"
+import Sidebar from "@/elements/UI.section/SideBar"
 import { mapState} from 'vuex'
 export default {
   data(){

@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import OrderIn from '@/components/Accountant/OrderIn';
-import OrderOut from '@/components/Accountant/OrderOut';
+import OrderIn from '@/elements/ProduAcc.section/OrderIn';
+import OrderOut from '@/elements/ProduAcc.section/OrderOut';
 import {mapState} from 'vuex';
 
 export default {

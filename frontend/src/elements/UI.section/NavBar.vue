@@ -6,7 +6,7 @@ div(class="rounded-xl navBG flex justify-center")
       button.cursor-pointer.m-2.my-2.p-4( @click="activeItem(item.id)" :class="{neoout: item.active}" ) {{item.title}}
   div.neoout.my-auto.mx-auto.rounded-lg.flex.gap-1.justify-self-end(v-if="authed")
     div.rounded-full.p-3
-      img(:src="require('../assets/avatars/'+ profile.profileAvatar +'.png')" width="32" height="32" )
+      img(:src="require('@/assets/avatars/'+ profile.profileAvatar +'.png')" width="32" height="32" )
     h1.my-auto.mx-2 {{profile.profileName}}
     button(@click="exit(false)").p-2 ВЫХОД
   div.my-auto.mx-auto.rounded-lg.flex.gap-1.justify-self-end(v-else)

@@ -14,7 +14,7 @@
 </template>
  
 <script>
-import StorageIN from '@/pages/Storage/StorageIN-OUTpage.vue'
+import StorageIN from '@/elements/Storage.section/StorageIN-OUTpage.vue'
     export default {
         components: {
             StorageIN,

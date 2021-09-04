@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import MyTable from "@/components/Storage/MyTable";
-import AddItem from "@/components/AddItem";
-import StorageInPopup from "@/components/Storage/StorageInPopup";
+import MyTable from "@/elements/Storage.section/MyTable";
+import AddItem from "@/elements/Storage.section/AddItem";
+import StorageInPopup from "@/elements/Storage.section/StorageInPopup";
 import {mapState} from 'vuex'
     export default {
       data(){
