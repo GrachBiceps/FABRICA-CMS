@@ -1,6 +1,7 @@
 export const authModule = {
     state: () => ({
-      authed: null
+      authed: null,
+      token: ""
     }),
     mutations: {
       authexit(state, exit){

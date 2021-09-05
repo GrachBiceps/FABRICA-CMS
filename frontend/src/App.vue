@@ -82,23 +82,24 @@ export default {
         regdata.regname = this.registration.regname
         regdata.reglog = this.registration.reglog
         regdata.regpass = this.registration.regpass
+        regdata.permission = 0
       if(regdata.reglog !== '' && regdata.regpass !== '' && regdata.regname !== ''){
-          this.axios.post("api/users", regdata)
+          this.axios.post("/api/users", regdata)
           .then(response => {
-            console.log("yes")
-                    if(response.status == 200){
+            console.log(response.status)
+                    if( response.status == 200){
                           this.clearForm()
                           this.$notify({
                           title: "Успех!",
                           text: "Данные добавлены на сервер",
                       })
-                    }                              
+                    }
               })
           .catch(error => {
                   this.$notify({
                           type: "alert",
                           title: "Ошибка!",
-                          text: "Данные не добавлены на сервер: "+ error,
+                          text: "Данные добавлены на сервер: "+ error,
                       })
               })
         }
@@ -125,6 +126,7 @@ export default {
     computed:{
    ...mapState({
       authed: state => state.auth.authed,
+      login
    }),
   },
   mounted () {
