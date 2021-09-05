@@ -2,6 +2,30 @@ const express = require('express')
 const app = express()
 const port = 3001
 
+const router = express.Router();
+
+const path = __dirname + '/dist/';
+const webport = 8080;
+
+
+router.use(function (req,res,next) {
+    console.log('/' + req.method);
+    next();
+  });
+  
+  router.get('/', function(req,res){
+    res.sendFile(path + 'index.html');
+  });
+  app.use(express.static(path));
+  app.use('/', router);
+  
+  app.listen(webport, function () {
+    console.log('Example app listening on port 8080!')
+  })
+
+
+
+
 const MongoClient = require("mongodb").MongoClient;
 // const url = "mongodb+srv://admin:nindzya.13@cluster0.fral0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/";
 // const mongoClient = new MongoClient(url, { useUnifiedTopology: true });

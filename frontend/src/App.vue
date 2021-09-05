@@ -126,7 +126,6 @@ export default {
     computed:{
    ...mapState({
       authed: state => state.auth.authed,
-      login
    }),
   },
   mounted () {
