@@ -7,21 +7,22 @@ const router = express.Router();
 const path = __dirname + '/dist/';
 const webport = 8080;
 
+//Подключение сайта к серверу
 
-router.use(function (req,res,next) {
-    console.log('/' + req.method);
-    next();
-  });
+// router.use(function (req,res,next) {
+//     console.log('/' + req.method);
+//     next();
+//   });
   
-  router.get('/', function(req,res){
-    res.sendFile(path + 'index.html');
-  });
-  app.use(express.static(path));
-  app.use('/', router);
+//   router.get('/', function(req,res){
+//     res.sendFile(path + 'index.html');
+//   });
+//   app.use(express.static(path));
+//   app.use('/', router);
   
-  app.listen(webport, function () {
-    console.log('Example app listening on port 8080!')
-  })
+//   app.listen(webport, function () {
+//     console.log('Example app listening on port 8080!')
+//   })
 
 
 

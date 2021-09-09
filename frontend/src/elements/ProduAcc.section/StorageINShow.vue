@@ -34,9 +34,9 @@
           </td>
         </tr>
       </table>
-    <div class="dialog bg-black bg-opacity-20 " v-show="editModal">
-        <div class="bg-white shadow-lg rounded-lg mx-auto my-auto" >
-          <div class="head_lenta flex text-white h-9"><div class="w-full my-auto text-center">Редактирование</div></div>
+    <div class="dialog backdrop-filter backdrop-blur-lg " v-show="editModal">
+        <div class="BG69BG shadow-lg rounded-lg mx-auto my-auto p-4" >
+          <div class="flex neoismflat bg-black text-black m-2 p-2 h-9"><div class="w-full my-auto text-center">Редактирование</div></div>
           <tr class="grid grid-cols-12 gap-1 m-4">
             <td class="my-auto col-span-3 w-full h-4/5"><input v-model="nameModal"  type=text class="text-center w-full h-full" placeholder="Название"></td>
             <td class="my-auto col-span-2 w-full h-4/5"><input v-model="countModal" type=number class="text-center w-full h-full" placeholder="Колличество"></td>
@@ -143,10 +143,6 @@
   right: 0;
   position: fixed;
   display: flex;
-}
-.head_lenta {
-    background: #4b70df;
-    border-radius: 10px 10px 0px 0px;
 }
 .grassmor-green{
   background: rgba(4, 190, 35, 0.616);
