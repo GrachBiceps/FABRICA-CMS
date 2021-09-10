@@ -24,14 +24,13 @@ div
         span.text-left.mr-2.self-center Nickname
         input.bg-current.inputlog.col-span-3.p-1(v-model='registration.regname')
         span.text-left.mr-2.self-center Login
-        input.bg-current.inputlog.col-span-3.p-1(v-model='registration.reglog')
+        input.bg-current.inputlog.col-span-3.p-1(v-model='registration.username')
         span.text-left.mr-2.self-center  Password
-        input.bg-current.inputlog.col-span-3.p-1(v-model='registration.regpass' type='password')
+        input.bg-current.inputlog.col-span-3.p-1(v-model='registration.password' type='password')
       button.py-4.mx-auto.neoism.m-2.px-8(@click='signupfg()') Зарегистрироваться
       button.text-gray-700(@click='this.data.logined = !this.data.logined') Назад
     notifications(position='bottom right')
 </template>
-
 <script>
 import Navbar from "@/elements/UI.section/NavBar"
 import Sidebar from "@/elements/UI.section/SideBar"
@@ -53,9 +52,8 @@ export default {
           valerror: false
         },
         registration:{
-          reglog:"",
-          regpass: "",
-          regname: "",
+          username:"",
+          password: "",
         }
      }
    },
@@ -64,63 +62,10 @@ export default {
     },
     methods: {
       signin(){
-        var exit = null;
-        if(this.data.login == this.data.usersdata[0].array.reglog && this.data.password == this.data.usersdata[0].array.regpass )
-        {
-          exit = true
-          this.$store.commit('auth/authexit', exit)
-          this.$router.push('/myinfo')
-          this.validation.autherror = false
-          this.validation.valerror = false
-        }else{
-          this.validation.autherror = true
-          this.validation.valerror = true
-        }
+        
       },
       signupfg(){
-        var regdata = {}
-        regdata.regname = this.registration.regname
-        regdata.reglog = this.registration.reglog
-        regdata.regpass = this.registration.regpass
-        regdata.permission = 0
-      if(regdata.reglog !== '' && regdata.regpass !== '' && regdata.regname !== ''){
-          this.axios.post("/api/users", regdata)
-          .then(response => {
-            console.log(response.status)
-                    if( response.status == 200){
-                          this.clearForm()
-                          this.$notify({
-                          title: "Успех!",
-                          text: "Данные добавлены на сервер",
-                      })
-                    }
-              })
-          .catch(error => {
-                  this.$notify({
-                          type: "alert",
-                          title: "Ошибка!",
-                          text: "Данные добавлены на сервер: "+ error,
-                      })
-              })
-        }
-        else if(regdata.regname == '' ){
-            this.$notify({
-                        title: "Ошибка!",
-                        text: "Имя не может быть пустым или меньше 5 символов",
-                    })
-        }
-        else if(regdata.reglog == ''){
-           this.$notify({
-                        title: "Ошибка!",
-                        text: "Логин не может быть пустым или меньше 6 символов",
-                    })
-        }
-        else if(regdata.regpass == '' ){
-            this.$notify({
-                        title: "Ошибка!",
-                        text: "Пароль не может быть пустым или меньше 8 символов",
-                    })
-        }
+       
       }
     },
     computed:{
