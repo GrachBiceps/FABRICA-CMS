@@ -1,8 +1,25 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
-const port = 3001
 
-const router = express.Router();
+const authRouter = require('./authRouter')
+
+app.use(express.json())
+app.use(express.urlencoded())
+app.use('/auth', authRouter)
+
+//Включение сервера
+const port = process.env.port || 3001
+
+const start = async () => {
+    try{
+        await mongoose.connect('mongodb://node:nindzya.13@cluster0-shard-00-00.fral0.mongodb.net:27017,cluster0-shard-00-01.fral0.mongodb.net:27017,cluster0-shard-00-02.fral0.mongodb.net:27017/FABRICA-CMS?ssl=true&replicaSet=atlas-1zb0kr-shard-0&authSource=admin&retryWrites=true&w=majority')
+        app.listen(port, () => console.log(`Приложение запустилось и слушает порт ${port}!`))
+    } catch(e){
+        console.log(e)
+    }
+}
+start()
 
 const path = __dirname + '/dist/';
 const webport = 8080;
@@ -39,10 +56,8 @@ const mongoClient = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopo
 // app.use(bodyParser.urlencoded({ extended: true }));
 
 
-app.use(express.urlencoded());
 
 // Parse JSON bodies (as sent by API clients)
-app.use(express.json());
 
 app.post('/api/create', function(req, res) {
     console.log(req.body)
@@ -244,8 +259,8 @@ app.get('/api/fetchrequests', function(req, res) {
 })
 
 
-app.use(express.json())
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+
 
 ///////SOME EXAMPLES/////
 
