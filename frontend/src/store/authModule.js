@@ -6,8 +6,10 @@ export const authModule = {
     mutations: {
       authexit(state, exit){
           state.authed = exit;
+      },
+      tokenin(state, token){
+          state.token = token;
       }
     },
     namespaced: true
-
 }

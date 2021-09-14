@@ -19,12 +19,12 @@ class authController{
     try {
         const errors = validationResult(req)
         if(!errors.isEmpty()){
-            return res.status(400).json({message: "Ошибка при регистрации", errors})
+            return res.status(492).json({message: "Пароль пустой и должен быть больше 6 и меньше 16", errors})
         }
         const {username, password} = req.body
         const canditate = await User.findOne( {username} )
         if(canditate){
-            return res.status(400).json({message: "Такой пользователь уже есть"})
+            return res.status(490).json({message: "Такой пользователь уже есть"})
         }
         const hashPassword = bcrypt.hashSync(password, 7);
         const userRole = await Role.findOne({value: "USER"})
@@ -33,7 +33,7 @@ class authController{
         return res.json({message:"Пользователь успешно зарегистрирован"})
     }
      catch (e) {
-        res.status(400).json( {message: 'Ошибка регистрации'})
+        res.status(491).json( {message: 'Ошибка регистрации'})
         }
     }
 

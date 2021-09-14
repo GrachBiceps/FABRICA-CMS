@@ -24,6 +24,7 @@ export default {
     exit(Boolean){
       var exit = Boolean
       this.$store.commit('auth/authexit', exit)
+      this.$router.push("/")
     },
    activeItem(Number)
         {
@@ -48,7 +49,7 @@ export default {
       items: state => state.navbar.items,
       allwhoactive: state => state.navbar.allwhoactive
    }),
-  }
+  },
 };
 </script>
 

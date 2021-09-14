@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  div(v-if='authed').flex-wrap
+  div(v-if="authed").flex-wrap
     div
       Navbar.z-20.mx-12.mt-10.BG69BG
       Sidebar.fixed.z-10.BG69BG
@@ -21,8 +21,6 @@ div
     div.mx-auto.my-auto.BG69BG.p-8.text-center.grid.grid-cols-1.gap-2(v-show='!data.logined')
       div.p-4.neoismflat.m-2 Регистрация
       div.p-4.gap-2.grid.grid-cols-4
-        span.text-left.mr-2.self-center Nickname
-        input.bg-current.inputlog.col-span-3.p-1(v-model='registration.regname')
         span.text-left.mr-2.self-center Login
         input.bg-current.inputlog.col-span-3.p-1(v-model='registration.username')
         span.text-left.mr-2.self-center  Password
@@ -32,7 +30,7 @@ div
     notifications(position='bottom right')
 </template>
 <script>
-import Navbar from "@/elements/UI.section/NavBar"
+import Navbar from "@/elements/UI.section/NavBar" 
 import Sidebar from "@/elements/UI.section/SideBar"
 import { mapState} from 'vuex'
 export default {
@@ -41,11 +39,7 @@ export default {
         data: {
             login: "",
             password: "",
-            logined: true,
-            usersdata: ''
-        },
-        auth: {
-
+            logined: true
         },
         validation:{
           autherror: false,
@@ -61,24 +55,73 @@ export default {
       Navbar, Sidebar
     },
     methods: {
-      signin(){
-        
+      async signin(){
+        var exit = null
+      const response = await fetch("auth/login", {
+         method: "POST",
+         headers: {"Content-Type": "application/json"},
+         body: JSON.stringify({
+           username: this.data.login,
+           password: this.data.password,
+         }),
+       });
+        if ( response.status == 400){  
+          this.validation.autherror = true
+          this.validation.valerror = true 
+        }else{
+         exit = true;
+         const token = await response.json();
+          this.$store.commit('auth/tokenin', token)
+          this.$store.commit('auth/authexit', exit)
+          this.$router.push('/myinfo')
+          this.validation.autherror = false
+          this.validation.valerror = false
+       }
       },
-      signupfg(){
-       
+      async signupfg(){
+      const response = await fetch("auth/registration", {
+         method: "POST",
+         headers: {"Content-Type": "application/json"},
+         body: JSON.stringify({
+           username: this.registration.username,
+           password: this.registration.password,
+         }),
+       });
+       if( response.status == 491){
+           this.$notify({
+           title: "Ошибка!",
+           text: "Ошибка при регистрации",})
+      
+      }if( response.status == 490){
+           this.$notify({
+           title: "Ошибка!",
+           text: "Такой пользователь уже есть",})
+      
+      }if( this.registration.username === "йцукенгшщзхъфывапролджэёячсмитьбюйцукенгшщзхъфывапролджэёячсмитьбю"){
+           this.$notify({
+         title: "Ошибка!",
+         text: "Пароль пустой",})
+      
+      }if( response.status == 492){
+           this.$notify({
+         title: "Ошибка!",
+         text: "Пароль не должен быть пустым, больше 6 и меньше 16",})
+      
+      }if( response.status == 200){
+           this.$notify({
+         title: "Успех!",
+         text: "Пользователь зарегистрирован",})
+      
       }
     },
-    computed:{
+},
+  computed: {
    ...mapState({
-      authed: state => state.auth.authed,
+      token: state => state.auth.token,
+      authed: state => state.auth.authed
    }),
-  },
-  mounted () {
-    this.axios
-        .get('api/users')
-        .then(response => (this.data.usersdata = response.data))
   }
-}
+};
 </script>
 
 <style lang="postcss">

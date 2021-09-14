@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const router = require("express")
 const app = express()
 
 const authRouter = require('./authRouter')
@@ -9,7 +10,9 @@ app.use(express.urlencoded())
 app.use('/auth', authRouter)
 
 //Включение сервера
-const port = process.env.port || 3001
+const port = process.env.port || 3002
+const path = __dirname + '/dist/'
+const webport = 3001
 
 const start = async () => {
     try{
@@ -19,27 +22,20 @@ const start = async () => {
         console.log(e)
     }
 }
+
 start()
 
-const path = __dirname + '/dist/';
-const webport = 8080;
+// Подключение сайта к серверу
 
-//Подключение сайта к серверу
-
-// router.use(function (req,res,next) {
-//     console.log('/' + req.method);
-//     next();
-//   });
-  
-//   router.get('/', function(req,res){
-//     res.sendFile(path + 'index.html');
-//   });
-//   app.use(express.static(path));
-//   app.use('/', router);
-  
-//   app.listen(webport, function () {
-//     console.log('Example app listening on port 8080!')
-//   })
+  app.use(function (req,res,next) {
+    console.log('/' + req.method);
+    next(); });
+  app.get('/', function(req,res){
+    res.sendFile(path + 'index.html');  });
+  app.use(express.static(path));
+  app.use('/', router);
+  app.listen(webport, function () {
+    console.log('Example app listening on port 8080!') })
 
 
 

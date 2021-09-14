@@ -4,8 +4,8 @@ import VueAxios from 'vue-axios'
 import Notifications from '@kyvg/vue3-notification'
 // import components from '@/components/UI';
 import App from './App.vue'
-import router from "@/router"
-import store from '@/store'
+import router from "./router"
+import store from './store'
 
 const app = createApp(App)
 app.config.globalProperties.axios=axios

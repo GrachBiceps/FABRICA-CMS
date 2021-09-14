@@ -114,19 +114,16 @@
             )
             .then(response => {
                   if(response.status == 200){
-                        
                         this.$notify({
                         title: "Успех!",
-                        text: "Данные добавлены на сервер",
-                    })
-                  }                              
+                        text: "Данные добавлены на сервер",})
+                  }
             })
             .catch(error => {
                  this.$notify({
-                        type: "alert",
-                        title: "Ошибка!",
-                        text: "Данные не добавлены на сервер: "+ error,
-                    })
+                 type: "alert",
+                 title: "Ошибка!",
+                 text: "Данные не добавлены на сервер: "+ error, })
             });
 
       }
