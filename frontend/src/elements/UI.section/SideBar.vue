@@ -34,7 +34,8 @@ export default {
   computed:{
    ...mapState({
       allwhoactive: state => state.navbar.allwhoactive,
-      items: state => state.sidebar.items
+      items: state => state.sidebar.items,
+      accessRole: state => state.navbar.accessRole
    }),
   }
   }

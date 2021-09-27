@@ -2,7 +2,7 @@
 div(class="rounded-xl navBG flex justify-center")
   div.p-2.mx-auto.my-2.my-auto.text-white.justify-self-start LOGO
   div.justify-self-center.flex
-    div.text-black.font-semibold(v-for="item in items" :key="item.id")
+    div.text-black.font-semibold(v-for="item in items[accessRole]" :key="item.id")
       button.cursor-pointer.m-2.my-2.p-4( @click="activeItem(item.id)" :class="{neoout: item.active}" ) {{item.title}}
   div.neoout.my-auto.mx-auto.rounded-lg.flex.gap-1.justify-self-end(v-if="authed")
     div.rounded-full.p-3
@@ -27,19 +27,61 @@ export default {
       this.$router.push("/")
     },
    activeItem(Number)
-        {
+        {   
             var itid = null;
             var pathid = "";
             
             if(Number !== this.whoactive){
                 itid = this.whoactive
-                this.items[Number].active = true
-                this.items[itid].active = false
-                this.whoactive = Number
-                this.$store.commit('navbar/setallwhoactive', Number)
-                pathid = this.items[Number].path
-                this.$router.push(pathid)
-            }
+                if(this.accessRole == "ADMIN"){
+                  this.items.ADMIN[Number].active = true
+                  this.items.ADMIN[itid].active = false
+                  this.whoactive = Number
+                  this.$store.commit('navbar/setallwhoactive', Number)
+                  pathid = this.items.ADMIN[Number].path
+                  this.$router.push(pathid)
+                }
+                if(this.accessRole == "USER"){
+                  this.items.USER[Number].active = true
+                  this.items.USER[itid].active = false
+                  this.whoactive = Number
+                  this.$store.commit('navbar/setallwhoactive', 0)
+                  pathid = this.items.USER[Number].path
+                  this.$router.push(pathid)
+                }
+                if(this.accessRole == "STORAGER"){
+                  this.items.USER[Number].active = true
+                  this.items.USER[itid].active = false
+                  this.whoactive = Number
+                  this.$store.commit('navbar/setallwhoactive', 1)
+                  pathid = this.items.USER[Number].path
+                  this.$router.push(pathid)
+                }
+                if(this.accessRole == "ACCOUNTANT"){
+                  this.items.USER[Number].active = true
+                  this.items.USER[itid].active = false
+                  this.whoactive = Number
+                  this.$store.commit('navbar/setallwhoactive', 2)
+                  pathid = this.items.USER[Number].path
+                  this.$router.push(pathid)
+                }
+                if(this.accessRole == "PRODACCOUNTANT"){
+                  this.items.USER[Number].active = true
+                  this.items.USER[itid].active = false
+                  this.whoactive = Number
+                  this.$store.commit('navbar/setallwhoactive', 3)
+                  pathid = this.items.USER[Number].path
+                  this.$router.push(pathid)
+                }
+                if(this.accessRole == "DELIVERY"){
+                  this.items.USER[Number].active = true
+                  this.items.USER[itid].active = false
+                  this.whoactive = Number
+                  this.$store.commit('navbar/setallwhoactive', 4)
+                  pathid = this.items.USER[Number].path
+                  this.$router.push(pathid)
+                }
+              }
         }
   },
   computed:{
@@ -47,7 +89,8 @@ export default {
       authed: state => state.auth.authed,
       profile: state => state.navbar.profile,
       items: state => state.navbar.items,
-      allwhoactive: state => state.navbar.allwhoactive
+      allwhoactive: state => state.navbar.allwhoactive,
+      accessRole: state => state.navbar.accessRole
    }),
   },
 };

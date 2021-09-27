@@ -7,24 +7,42 @@ div
     div.my-16.ml-24.mr-24.BG69BG.rounded-xl
       router-view
     notifications(position="bottom right")
-  div(v-else).w-full.h-screen.grid.mt-8
-    div.mx-auto.my-auto.BG69BG.p-8.text-center.grid.grid-cols-1.gap-2(v-show='data.logined')
+  div(v-else).w-full.h-screen.grid.grid-cols-1.mt-8
+    div.mx-auto.my-auto.BG69BG.p-12.text-center.grid.grid-cols-1.gap-4(v-show='data.logined')
       div.p-4.neoismflat.m-2 АВТОРИЗАЦИЯ
-      div.p-4.gap-2.grid.grid-cols-4
+      div.p-4.gap-4.grid.grid-cols-4
         span.text-left.mr-2.self-center Login
         input.bg-current.inputlog.col-span-3.p-1.border-red-500(v-model='data.login'  :class='{ border: validation.valerror }')
         span.text-left.mr-2.self-center  Password
         input.bg-current.inputlog.col-span-3.p-1.border-red-500(v-model='data.password' type='password'  :class='{ border: validation.valerror}' )
-      p.text-red-500(v-show='validation.autherror') Неверные данные
+      p.text-red-500(v-show='validation.valerror') Неверные данные
       button.py-4.mx-auto.neoism.m-2.px-8(@click='signin()') ВОЙТИ
       button.text-gray-700(@click='this.data.logined = !this.data.logined') Зарегистрироваться
-    div.mx-auto.my-auto.BG69BG.p-8.text-center.grid.grid-cols-1.gap-2(v-show='!data.logined')
+    div.mx-auto.my-auto.BG69BG.p-12.text-center.grid.grid-cols-1.gap-2(v-show='!data.logined')
       div.p-4.neoismflat.m-2 Регистрация
-      div.p-4.gap-2.grid.grid-cols-4
-        span.text-left.mr-2.self-center Login
-        input.bg-current.inputlog.col-span-3.p-1(v-model='registration.username')
-        span.text-left.mr-2.self-center  Password
-        input.bg-current.inputlog.col-span-3.p-1(v-model='registration.password' type='password')
+      div.p-6.gap-4.grid.grid-cols-4
+        div.col-span-4.gap-4
+          div.grid.grid-cols-4
+            span.text-left.m-3.self-center Имя
+            input.bg-current.inputlog.col-span-3.p-2.m-2(v-model="registration.regName")
+          div.grid.grid-cols-4
+            span.text-left.m-3.self-center Фамилия
+            input.bg-current.inputlog.col-span-3.p-2.m-2(v-model="registration.regSurname")
+        div.col-span-4.gap-4
+          div.m-2
+            span.text-left.m-3.self-center Мужчина
+            input.bg-current.inputlog.col-span-3.p-2.m-2(type="checkbox"  @click="regGenderMethod(0)" v-model='registration.switchRegGenderMale')
+            input.bg-current.inputlog.col-span-3.p-2.m-2(type="checkbox"  @click="regGenderMethod(1)" v-model='registration.switchRegGenderFeMale')
+            span.text-left.m-3.self-center Женщина
+          span.text-left.m-2.self-center Дата рождения
+          input.bg-current.inputlog.col-span-3.p-1.m-2(type="date" v-model='registration.regBirthday')
+        div.col-span-4
+          div.grid.grid-cols-4.m-3.gap-4
+            span.text-left.mr-2.self-center Логин
+            input.bg-current.inputlog.col-span-3.p-2(v-model='registration.regUsername' :class='{ border: validation.autherror }')
+          div.grid.grid-cols-4.m-3.gap-4
+            span.text-left.mr-2.self-center  Пароль
+            input.bg-current.inputlog.col-span-3.p-2(v-model='registration.regPassword' type='password'  :class='{ border: validation.autherror }')
       button.py-4.mx-auto.neoism.m-2.px-8(@click='signupfg()') Зарегистрироваться
       button.text-gray-700(@click='this.data.logined = !this.data.logined') Назад
     notifications(position='bottom right')
@@ -46,8 +64,14 @@ export default {
           valerror: false
         },
         registration:{
-          username:"",
-          password: "",
+          regUsername:"",
+          regPassword: "",
+          regName: "",
+          regSurname: "",
+          switchRegGenderMale: false,
+          switchRegGenderFeMale: false,
+          regGender: "",
+          regBirthday: ""
         }
      }
    },
@@ -55,6 +79,15 @@ export default {
       Navbar, Sidebar
     },
     methods: {
+      regGenderMethod(id){
+        if(id == 0){
+          this.registration.switchRegGenderFeMale = false
+          this.registration.regGender = "MALE"
+        }else{
+          this.registration.switchRegGenderMale = false
+          this.registration.regGender = "FEMALE"
+        }
+      },
       async signin(){
         var exit = null
       const response = await fetch("auth/login", {
@@ -66,27 +99,65 @@ export default {
          }),
        });
         if ( response.status == 400){  
-          this.validation.autherror = true
           this.validation.valerror = true 
         }else{
          exit = true;
-         const token = await response.json();
+         const responsein = await response.json();
+          const token = responsein.token
+          const profileIn = responsein.profile
+          const accessRoleIn = responsein.userRoleOut[0]
+          this.$store.commit('navbar/setAccessRoleIn', accessRoleIn)
+          this.$store.commit('navbar/setProfileIn', profileIn)
           this.$store.commit('auth/tokenin', token)
           this.$store.commit('auth/authexit', exit)
-          this.$router.push('/myinfo')
-          this.validation.autherror = false
+          this.data.login = null
+          this.data.password = null
           this.validation.valerror = false
+          if(accessRoleIn == "ADMIN"){
+            this.$router.push('/myinfo')
+          }
+          if(accessRoleIn == "USER"){
+            this.$store.commit('navbar/setallwhoactive', 0)
+            this.$router.push('/myinfo')
+          }
+          if(accessRoleIn == "STORAGER"){
+            this.$store.commit('navbar/setallwhoactive', 1)
+            this.$router.push('/storage')
+          }
+          if(accessRoleIn == "ACCOUNTANT"){
+            this.$store.commit('navbar/setallwhoactive', 2)
+            this.$router.push('/')
+          }
+          if(accessRoleIn == "PRODACCOUNTANT"){
+            this.$store.commit('navbar/setallwhoactive', 3)
+            this.$router.push('/orders')
+          }
+          if(accessRoleIn == "DELIVERY"){
+            this.$store.commit('navbar/setallwhoactive', 4)
+            this.$router.push('/')
+          }
+          
        }
       },
       async signupfg(){
-      const response = await fetch("auth/registration", {
+      if(this.registration.regGender != "" && this.registration.regName != "" && this.registration.regSurname != "" && this.registration.regBirthday != "")  { const response = await fetch("auth/registration", {
          method: "POST",
          headers: {"Content-Type": "application/json"},
          body: JSON.stringify({
-           username: this.registration.username,
-           password: this.registration.password,
+           username: this.registration.regUsername,
+           password: this.registration.regPassword,
+           name: this.registration.regName,
+           surname: this.registration.regSurname,
+           gender: this.registration.regGender,
+           birthday: this.registration.regBirthday
          }),
-       });
+       })
+       this.registration.regName = null
+       this.registration.regSurname = null
+       this.registration.regGender = null
+       this.registration.regUsername = null
+       this.registration.regPassword = null
+       this.registration.regBirthday = null
        if( response.status == 491){
            this.$notify({
            title: "Ошибка!",
@@ -97,7 +168,7 @@ export default {
            title: "Ошибка!",
            text: "Такой пользователь уже есть",})
       
-      }if( this.registration.username === "йцукенгшщзхъфывапролджэёячсмитьбюйцукенгшщзхъфывапролджэёячсмитьбю"){
+      }if( this.registration.regUsername === "йцукенгшщзхъфывапролджэёячсмитьбюйцукенгшщзхъфывапролджэёячсмитьбю"){
            this.$notify({
          title: "Ошибка!",
          text: "Пароль пустой",})
@@ -108,10 +179,17 @@ export default {
          text: "Пароль не должен быть пустым, больше 6 и меньше 16",})
       
       }if( response.status == 200){
+        this.registration.regUsername = null
+        this.registration.regPassword = null
            this.$notify({
          title: "Успех!",
          text: "Пользователь зарегистрирован",})
       
+        }
+      }else{
+        this.$notify({
+           title: "Ошибка!",
+           text: "Заполните все поля",})
       }
     },
 },

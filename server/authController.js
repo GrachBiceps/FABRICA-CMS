@@ -21,14 +21,14 @@ class authController{
         if(!errors.isEmpty()){
             return res.status(492).json({message: "Пароль пустой и должен быть больше 6 и меньше 16", errors})
         }
-        const {username, password} = req.body
+        const {name, surname, gender, birthday, username, password,} = req.body
         const canditate = await User.findOne( {username} )
         if(canditate){
             return res.status(490).json({message: "Такой пользователь уже есть"})
         }
         const hashPassword = bcrypt.hashSync(password, 7);
         const userRole = await Role.findOne({value: "USER"})
-        const user = new User({username, password: hashPassword, role: [userRole.value]})
+        const user = new User({name, surname, gender, birthday, username, password: hashPassword, role: [userRole.value]})
         await user.save()
         return res.json({message:"Пользователь успешно зарегистрирован"})
     }
@@ -49,7 +49,9 @@ class authController{
             return res.status(400).json( {message: 'Неверный пароль'})
         }
         const token = generateAccessToken(user._id, user.role)
-        return res.json({token})
+        const profile = {id:0, profileName: user.name, profileAvatar: user.avatar}
+        const userRoleOut = user.role
+        return res.json({token, profile , userRoleOut})
     }
      catch (e) {
         res.status(400).json( {message: 'Ошибка авторизации'})

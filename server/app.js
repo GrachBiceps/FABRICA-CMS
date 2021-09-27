@@ -10,9 +10,9 @@ app.use(express.urlencoded())
 app.use('/auth', authRouter)
 
 //Включение сервера
-const port = process.env.port || 3002
+const port = process.env.port || 3001
 const path = __dirname + '/dist/'
-const webport = 3001
+const webport = 3002
 
 const start = async () => {
     try{
@@ -27,15 +27,15 @@ start()
 
 // Подключение сайта к серверу
 
-  app.use(function (req,res,next) {
-    console.log('/' + req.method);
-    next(); });
-  app.get('/', function(req,res){
-    res.sendFile(path + 'index.html');  });
-  app.use(express.static(path));
-  app.use('/', router);
-  app.listen(webport, function () {
-    console.log('Example app listening on port 8080!') })
+//   app.use(function (req,res,next) {
+//     console.log('/' + req.method);
+//     next(); });
+//   app.get('/', function(req,res){
+//     res.sendFile(path + 'index.html');  });
+//   app.use(express.static(path));
+//   app.use('/', router);
+//   app.listen(webport, function () {
+//     console.log('Example app listening on port 8080!') })
 
 
 
