@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Main from "@/pages/Main";
 import MyInfo from '@/pages/MyInfo';
 import signup from '@/pages/signup';
-import MyStorage from '@/elements/Storage.section/MyStorage';
+import MyStorage from '@/elements/Storage.section/Pages/MyStorage';
 import Orders from '@/elements/ProduAcc.section/Accountant';
 import StorageINOUTpage from '@/elements/Storage.section/StorageIN-OUTpage';
 
