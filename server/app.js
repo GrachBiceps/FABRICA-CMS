@@ -10,7 +10,10 @@ app.use(express.urlencoded())
 app.use('/auth', authRouter)
 
 //Включение сервера
+
 const port = process.env.port || 3001
+
+//Для сервера
 const path = __dirname + '/dist/'
 const webport = 3002
 
