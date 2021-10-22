@@ -25,7 +25,7 @@ export const sidebarModule = {
             { 
                 id: [
                     {id: 0, title: "Заказы", icon: 30, path: 'OrderInShow', active: true},
-                    {id: 1, title: "Разсходы", icon: 31, path: 'OrderOutShow', active: false},
+                    {id: 1, title: "Расходы", icon: 31, path: 'OrderOutShow', active: false},
                 ]
             },
             { 

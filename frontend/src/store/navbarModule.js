@@ -1,7 +1,6 @@
 
 export const navbarModule = {
     state: () => ({
-      
       allwhoactive: 0,
       profile: {},
       accessRole: "",

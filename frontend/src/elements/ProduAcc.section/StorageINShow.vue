@@ -28,7 +28,7 @@
           <td class="my-auto col-span-3 w-full h-4/5"><input v-model="name" @submit.prevent="checkform" type=text class="text-center bg-transparent placeholder-gray-700 w-full h-full" placeholder="Название"></td>
           <td class="my-auto col-span-2 w-full h-4/5"><input v-model="count" type=number class="text-center  bg-transparent placeholder-gray-700 w-full h-full" placeholder="Колличество"></td>
           <td class="my-auto col-span-2 w-full h-4/5"><input v-model="price" type=number class="text-center bg-transparent placeholder-gray-700 w-full h-full" placeholder="Цена"></td>
-          <td class="my-auto col-span-2 w-full h-4/5"><input v-model="amount" type=number class="text-center bg-transparent placeholder-gray-700 w-full h-full" placeholder="Сумма"></td>
+          <td class="my-auto col-span-2 w-full h-4/5"><p>{{count*price}}</p></td>
           <td class="flex grid-cols-3 col-span-2">
             <button @click="add" class="w-full text-center col-span-3 m-2 p-2 mt-2 mb-2 rounded-lg my-auto grassmor-green text-white" >Добавить</button>
           </td>
@@ -64,7 +64,7 @@
         name:"",
         count:"",
         price:"",
-        amount:"",
+        amount: "",
 
         formIdModal:"",
         nameModal:"",
@@ -78,7 +78,8 @@
     },
     methods:{
       add(){
-        this.tbData.push({formId: this.tbData.length+1,name: this.name, count: this.count, price: this.price, amount: this.amount})
+        let amount = this.price * this.count
+        this.tbData.push({formId: this.tbData.length+1,name: this.name, count: this.count, price: this.price, amount: amount})
         this.name = ''
         this.count = ''
         this.price = ''

@@ -1,6 +1,6 @@
 <template lang="pug">
 div(class="rounded-xl navBG flex justify-center")
-  div.p-2.mx-auto.my-2.my-auto.text-white.justify-self-start Складской учёт
+  div.p-2.mx-auto.my-2.my-auto.text-white.justify-self-start LOGO
   div.justify-self-center.flex
     div.text-black.font-semibold(v-for="item in items[accessRole]" :key="item.id")
       button.cursor-pointer.m-2.my-2.p-4( @click="activeItem(item.id)" :class="{neoout: item.active}" ) {{item.title}}

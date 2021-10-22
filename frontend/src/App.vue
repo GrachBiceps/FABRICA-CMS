@@ -55,6 +55,7 @@ export default {
   data(){
        return {
         data: {
+            autheddd: true,
             login: "",
             password: "",
             logined: true

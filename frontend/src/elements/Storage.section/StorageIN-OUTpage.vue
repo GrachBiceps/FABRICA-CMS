@@ -1,6 +1,6 @@
 <template>
     <div class="m-4 grid grid-cols-1 ">
-        <div class="text-center p-3 bg-blue-500 text-lg text-white">Приход №212313</div>
+        <div class="text-center p-3 neoismflat text-lg text-black">Приход №212313</div>
             <div class="grid mt-4">
              <thead class="">
                     <tr class="w-full h-10 grid p-2 grid-cols-12 text-center bg-gray-400 ">
@@ -28,12 +28,24 @@
 </template>
 
 <script>
+import {mapState} from "vuex"
     export default {
-        props:{
-            data:{
+        // mounted: {
+        //     async getIngridients(){
+        //         const response = await fetch("auth/login", {
+        //         method: "GET",
+        //         headers: {"Content-Type": "application/json"},
+        //         body: JSON.stringify({
+        //             token: token
+        //                 }),
+        //             });
                 
-                required: true
-            }
+        //     }
+        // },
+        computed: {
+            ...mapState({
+                token: state => state.auth.token
+            }),
         }
     }
         
