@@ -208,19 +208,17 @@ export default {
 html{
 /* background-image: url("./assets/fancy-pants.jpg"); */
 background-color: #0093E9;
-background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
-backdrop-filter: blur(20px);
+background: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+background-repeat: no-repeat;
+background-size: cover;
 height: 100%;
-width: 100%; 
+
 }
 .inputerror{
  color: red;
 }
 body{
-  background: rgba(0, 0, 0, 0.123);
-/* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ); */
-backdrop-filter: blur( 10.0px );
--webkit-backdrop-filter: blur( 10.0px );
+ 
 height: 100%;
 width: 100%;
 margin-top: -2rem;

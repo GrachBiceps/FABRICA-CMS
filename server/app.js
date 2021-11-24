@@ -4,12 +4,14 @@ const router = require("express")
 const app = express()
 
 const authRouter = require('./authRouter')
-const storageRouter = require('./storageController')
+const storageRouter = require('./storageRouter')
+const prodAccRouter = require('./prodAccRouter')
 
 app.use(express.json())
 app.use(express.urlencoded())
 app.use('/auth', authRouter)
-// app.use('/storage', storageRouter)
+app.use('/storage', storageRouter)
+app.use('/prodacc', prodAccRouter)
 
 //Включение сервера
 
@@ -105,50 +107,8 @@ app.get('/api/getorderin', function(req, res) {
 
 
 })
-app.get('/api/users', function(req, res) {
-    async function run() {
-        try {
-
-            await mongoClient.connect();
-            const database = mongoClient.db("FABRICA-CMS");
-            const order_in = database.collection("users");
-            order_in.find().toArray(function(err, results) {
-
-                res.send(results)
-            });
 
 
-        } finally {
-
-        }
-    }
-    run().catch(console.dir);
-
-
-})
-app.post('/api/users', function(req, res) {
-    //{ name: data.name, count: data.count, price: data.price, amount: data.amount, date: new Date() }
-    //console.log(schema)
-    async function run() {
-        try {
-            schema = {}
-            schema.array = req.body
-            await mongoClient.connect();
-            const database = mongoClient.db("FABRICA-CMS");
-            const order_in = database.collection("users");
-            order_in.insertOne(schema)
-            res.sendStatus(200)
-
-        } finally {
-
-        }
-    }
-    run().catch(console.dir);
-
-
-
-
-})
 app.post('/api/addorderin', function(req, res) {
     //{ name: data.name, count: data.count, price: data.price, amount: data.amount, date: new Date() }
     //console.log(schema)
@@ -172,25 +132,7 @@ app.post('/api/addorderin', function(req, res) {
 
 
 })
-app.get('/api/test', function(req, res) {
 
-    async function run() {
-        try {
-            await mongoClient.connect();
-            const database = mongoClient.db("FABRICA-CMS");
-            const ingredients = database.collection("ingredients");
-            ingredients.find().toArray(function(err, results) {
-
-                res.send(results)
-            });
-
-        } finally {
-
-        }
-    }
-    run().catch(console.dir);
-
-})
 app.get('/api/fetchitems', function(req, res) {
 
     async function run() {
@@ -259,196 +201,3 @@ app.get('/api/fetchrequests', function(req, res) {
 
 
 })
-
-
-
-
-
-///////SOME EXAMPLES/////
-
-/* 
-app.get('/computer/:id', function(req, res) {
-    async function run() {
-        try {
-
-            await mongoClient.connect();
-            const database = mongoClient.db("ic");
-            const computers = database.collection("computers");
-            console.log(req.params)
-                // Query for a movie that has the title 'The Room'
-            console.log(req.params)
-
-            const q = await computers.findOne(req.params);
-            // since this method returns the matched document, not a cursor, print it directly
-
-            res.send(q)
-
-
-        } finally {
-            await mongoClient.close();
-        }
-    }
-    run().catch(console.dir);
-
-
-})
-
-
-app.get('/search', function(req, res) {
-    async function run() {
-        try {
-            await mongoClient.connect();
-            const database = mongoClient.db("ic");
-            const computers = database.collection("computers");
-            const query = { CPU: "AMD" };
-            const q = await computers.findOne(query);
-            res.send(q)
-
-        } finally {
-            await mongoClient.close();
-        }
-    }
-    run().catch(console.dir);
-});
-
-app.get('/products', (req, res) => {
-
-      
-        mongoClient.connect(function(err, client) {
-            const db = client.db("IC-COMPUTERS");
-            const collection = db.collection("computers");
-            collection.find({ color: '*' }).toArray(function(err, results) {
-                if (err) {
-                    return console.log(err);
-                }
-
-
-                client.close();
-            });
-        });
-    
-
-    let parse = new Promise((resolve, reject) => {
-        let computer = {
-            Computer: "",
-            CPU: "",
-            CPUclock: "",
-            Motherboard: "",
-            BIOS: "",
-            Chipset: "",
-            Memory: "",
-            RamSlots: [],
-            GpuSlots: [],
-            Drives: [],
-            SoundCards: [],
-            NetworkCards: [],
-        }
-        let buff
-        const rl = readline.createInterface({ input: fs.createReadStream("../giga.txt"), crlfDelay: Infinity });
-        rl.on('line', (line) => {
-                var line = line.replace(/\s{2,}/g, ' ');
-                line = line.replace(" - ", '');
-                line = line.trim();
-                line = line.split(": ")
-                switch (line[0]) {
-                    case "Computer":
-                        computer.Computer = line[1]
-                        break;
-
-                    case "CPU":
-                        computer.CPU = line[1]
-                        buff = "CPU"
-                        break;
-
-                    case "Motherboard":
-                        computer.Motherboard = line[1]
-                        break;
-
-                    case "BIOS":
-                        computer.BIOS = line[1]
-                        break;
-
-                    case "Chipset":
-                        computer.Chipset = line[1]
-                        break;
-
-                    case "Network":
-                        computer.NetworkCards.push(line[1])
-                        break;
-
-                    case "OS":
-                        computer.OS = line[1]
-                        break;
-
-                    case "Memory":
-                        computer.Memory = line[1]
-                        buff = "Memory"
-                        break;
-
-                    case "Graphics":
-                        buff = "Graphics"
-                        break;
-                    case "Drive":
-
-                        computer.Drives.push([line[1]])
-                        break;
-
-                    case "Sound":
-                        computer.SoundCards.push([line[1]])
-                        break;
-
-                    default:
-                        if (buff == "Memory") {
-                            computer.RamSlots.push(line[0])
-
-                        }
-                        if (buff == "Graphics") {
-                            computer.GpuSlots.push(line[0])
-                        }
-                        if (buff == "CPU") {
-                            computer.CPUclock = line[0]
-                        }
-                        break;
-                }
-
-            },
-
-            rl.on('close', function() {
-                buff = "";
-                ramSlotCount = 0;
-                gpu = 0;
-                drive = 0;
-                sound = 0;
-                network = 0;
-
-                resolve(computer)
-            })
-
-        );
-
-    });
-
-    parse.then((successMessage) => {
-        mongoClient.connect(function(err, client) {
-            const db = client.db("ic");
-            const collection = db.collection("computers");
-            //collection.insertOne(successMessage)
-            collection.findOne({ "CPU": "AMD" })
-
-        });
-
-
-    });
-
-
-})
-
-//app.use(express.static(path.resolve(__dirname, '../client')))
-
-
-// app.get('*', (req, res) => {
-//     res.sendFile(path.resolve('../client/index.html'))
-//     console.log(req.params)
-// })
-
-*/

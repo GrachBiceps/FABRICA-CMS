@@ -15,15 +15,4 @@ router.post('/login', controller.login)
 router.get('/users', roleMiddleware(["ADMIN"]), controller.users)
 
 
-
-//Storage
-const storageController = require('./storageController')
-
-router.get('/ingridients',roleMiddleware(["ADMIN"]), storageController.ingrigients)
-
-
-
-
-
-
 module.exports = router
