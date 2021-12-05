@@ -6,6 +6,8 @@ import App from './App.vue'
 import router from "./router"
 import store from './store'
 
+
+
 const app = createApp(App)
 app.config.globalProperties.axios=axios
 // components.forEach(component => {

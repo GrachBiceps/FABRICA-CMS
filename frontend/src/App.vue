@@ -79,6 +79,9 @@ export default {
     components: {
       Navbar, Sidebar
     },
+    mounted () {
+    
+    },
     methods: {
       regGenderMethod(id){
         if(id == 0){
@@ -89,6 +92,7 @@ export default {
           this.registration.regGender = "FEMALE"
         }
       },
+    
       async signin(){
         var exit = null
       const response = await fetch("auth/login", {
@@ -211,8 +215,8 @@ background-color: #0093E9;
 background: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
 background-repeat: no-repeat;
 background-size: cover;
-height: 100%;
-
+min-height: 100vh;
+width: 100%;
 }
 .inputerror{
  color: red;

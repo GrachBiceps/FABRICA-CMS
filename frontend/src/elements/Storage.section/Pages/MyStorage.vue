@@ -1,6 +1,5 @@
 <template>
   <div class="flex-none">
-    <!-- <AddItem></AddItem> -->
     <StorageInPopup v-show="ShowStoragePopup" ></StorageInPopup>
     <MyTable v-show="ShowStorageTable"></MyTable>
   </div>
@@ -8,40 +7,27 @@
 
 <script>
 import MyTable from "@/elements/Storage.section/MyTable";
-import AddItem from "@/elements/Storage.section/AddItem";
+
 import StorageInPopup from "@/elements/Storage.section/StorageInPopup";
 import {mapState} from 'vuex'
+
     export default {
       data(){
         return{
-        data: "",
-        dataid: Number,
-        popupshow: true
+        
         }
       },
     components: {
-      MyTable, AddItem, StorageInPopup
+      MyTable,  StorageInPopup
     },
-    mounted() {
     
-        this.axios
-        .get('/api/getorderin')
-        .then(response => (this.data = response.data))
-    
-    },
     computed:{
       ...mapState({
          ShowStorageTable: state => state.sidebar.ShowStorageTable,
-         ShowStoragePopup: state => state.sidebar.ShowStoragePopup
+         ShowStoragePopup: state => state.sidebar.ShowStoragePopup,
+         token: state => state.auth.token
       })
     },
-    methods:{
-       back(dataid){
-            this.StorageShow = !this.StorageShow
-            this.popupshow = true
-        }
-    }
-    
     }
 </script>
 

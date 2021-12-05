@@ -11,5 +11,10 @@ export const authModule = {
           state.token = token;
       }
     },
+    getters: {
+      gettoken(state){
+        return state.token
+      }
+    },
     namespaced: true
 }

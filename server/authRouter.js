@@ -15,4 +15,21 @@ router.post('/login', controller.login)
 router.get('/users', roleMiddleware(["ADMIN"]), controller.users)
 
 
+
+//Storage
+const storageController = require('./storageController')
+
+router.post('/storage/acceptOrderInList',roleMiddleware(["ADMIN","STORAGER"]), storageController.acceptOrderInList)
+router.post('/storage/postIngridientAdd',roleMiddleware(["ADMIN","STORAGER"]), storageController.postIngridientsAdd)
+router.get('/storage/getAllOrderInList',roleMiddleware(["ADMIN","STORAGER"]), storageController.getAllOrderInList)
+router.get('/storage/getIngredientList', roleMiddleware(["ADMIN","STORAGER"]), storageController.getIngredientList)
+
+
+//Product Accurate
+
+const prodAccController = require('./prodAccController')
+
+router.post('/prodacc/createOrderInList',roleMiddleware(["ADMIN","PRODACCOUNTANT"]), prodAccController.createOrderInList)
+
+
 module.exports = router
