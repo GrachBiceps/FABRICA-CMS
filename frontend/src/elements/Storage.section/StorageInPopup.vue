@@ -74,7 +74,7 @@ export default {
                 },
                 body: JSON.stringify({
                     whatAcceptId: this.responsedata.arrayLi[itemid]._id,
-                    acceptDate: new Date(1,2,3,4,5).toLocaleString(),
+                    acceptDate: new Date().toLocaleString(),
                     acceptAction: this.responsedata.arrayLi[itemid].orderMethod
                 })
             });

@@ -38,7 +38,7 @@
           <td class="my-auto col-span-1 w-full h-4/5"><input v-model="countUnit" type=text class="text-center bg-transparent placeholder-gray-700 w-full h-full" placeholder="Ед.изм"></td>
           <td class="my-auto col-span-1 w-full h-4/5"><input v-model="price" type=number class="text-center bg-transparent placeholder-gray-700 w-full h-full" placeholder="Цена"></td>
           <td class="my-auto col-span-1 w-full h-4/5"><p>{{count*price}}</p></td>
-          <td class="my-auto col-span-2 w-full h-4/5"><input v-model="storageLife" type=date class="text-center bg-transparent placeholder-gray-700 w-full h-full" placeholder="Срок годности"></td>
+          <td class="my-auto col-span-2 w-full h-4/5"><input v-model="storageLife" type=date class="mx-auto bg-transparent placeholder-gray-700 w-full h-full" placeholder="Срок годности"></td>
           <td class="flex grid-cols-3 col-span-2">
             <button @click="add" class="w-full text-center col-span-3 m-2 p-2 mt-2 mb-2 rounded-lg my-auto grassmor-green text-white" >Добавить</button>
           </td>

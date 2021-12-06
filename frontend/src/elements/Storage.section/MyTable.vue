@@ -49,6 +49,7 @@ export default {
                 alert(e)
             }
         }
+        
     },
     mounted() {
         this.getIngredientList()

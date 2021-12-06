@@ -32,16 +32,17 @@ start()
 const path = __dirname + '/dist/'
 const webport = process.env.port || 3002
 
-// Подключение сайта к серверу
+//Подключение сайта к серверу
 
-//   app.use(function (req,res,next) {
-//     console.log('/' + req.method);
-//     next(); });
-//   app.get('/', function(req,res){
-//     res.sendFile(path + 'index.html');  });
-//   app.use(express.static(path));
-//   app.use('/', router);
-//   app.listen(webport, function () {
-//     console.log(`Сайт работает и слушает порт ${webport}!`) })
+  app.use(function (req,res,next) {
+      const dateebae = new Date(1,2,3,4,5).toLocaleString()
+    console.log('/' + req.method + ' ' + dateebae);
+    next(); });
+  app.get('/', function(req,res){
+    res.sendFile(path + 'index.html');  });
+  app.use(express.static(path));
+  app.use('/', router);
+  app.listen(webport, function () {
+    console.log(`Сайт работает и слушает порт ${webport}!`) })
 
 
