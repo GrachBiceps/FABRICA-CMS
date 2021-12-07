@@ -1,0 +1,21 @@
+{
+  "name": "refactored",
+  "version": "1.0.0",
+  "description": "Новые тестовый рефакторинг системы",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GrachBiceps/FABRICA-CMS.git"
+  },
+  "keywords": [
+    "refactory"
+  ],
+  "author": "Grach Akobyan",
+  "license": "CC-BY-NC-SA-4.0",
+  "bugs": {
+    "url": "https://github.com/GrachBiceps/FABRICA-CMS/issues"
+  },
+  "homepage": "https://github.com/GrachBiceps/FABRICA-CMS#readme"
+}
