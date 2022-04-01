@@ -25,9 +25,7 @@ $bgGradient: linear-gradient(to right bottom, #74A7F4 3.31%, #BD5DAE 94.52%);
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  position: relative;
-  min-width: 100vw;
-  justify-items: center;
+  
 }
 @font-face{
     font-family: 'Cera Pro Italic';
@@ -144,5 +142,9 @@ html {
   min-height: 100vh;
   background: $bgGradient;
   background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 </style>
