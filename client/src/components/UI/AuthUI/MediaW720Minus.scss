@@ -1,0 +1,127 @@
+$bgGradient: linear-gradient(to right bottom, #948cd9 3.31%, #BD5DAE 94.52%);
+@media (max-width: 720px){
+    .Auth{
+        width: 100vw;
+        height: 100vh;
+    }
+    .AuthGrid{
+        background: white;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 0vw;
+        display: grid;
+        grid-template-columns: 100%;
+        justify-items: center;
+        align-items: center;
+       
+        height: 100%;
+        
+    }
+    .GridGradient{
+        background: $bgGradient;
+        background-repeat: no-repeat;
+        /* position: relative; */
+        border-radius: 4vh;
+        height: 95%;
+        width: 93%; 
+        display: none;
+        visibility: hidden;
+        align-items: center;
+        flex-direction: column;
+        
+    }
+    .GradientText{
+        display: grid;
+        align-items: center;
+        justify-items: center;
+    }
+    .AuthGridInputs{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+        justify-content: space-evenly;
+        width: 85%;
+        height: 89%;  
+        gap: 0.5vw;
+    }
+    .AuthButton{
+        grid-column: 1/ span 2;
+        grid-row: 4;
+        color: white;
+        background: rgb(20, 20, 20) 76%;
+        border: none;
+        border-radius: 2vw;
+        width: 40vw;
+        aspect-ratio: 16/6;
+        font-family: "Cera Pro Bold";
+        font-size: clamp(10px, 5vw, 40px);
+        text-align: center;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+    .AuthButton:focus{
+        transform: scale(0.9, 0.9);
+        -o-transform: scale(0.9, 0.9);
+        -webkit-transform: scale(0.9, 0.9);
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+    .spnStyleH2{
+        font-family: "Cera Pro Medium";
+        font-size: 4.4vw;
+        text-align: end;
+        margin: 0.1vw;
+    }
+    .spnStyleH1{
+        font-family: "Cera Pro Bold";
+        font-size: 7.7vw;
+        text-align: end;
+        margin-bottom: 1vw;
+    }
+    .spnStyleH3{
+        font-family: "Cera Pro";
+        font-size: 4.2vw;
+        text-align: end;
+        margin: 1vw;
+    }
+    .inpStyle{
+        width: clamp(160px, 56vw, 500px);
+        height: clamp(45px, 8.7vw, 200px);
+        font-family: "Cera Pro";
+        font-size: 5.5vw;
+        border-radius: 2vw;
+        background: rgba(196, 191, 191, 0.28);
+        box-shadow: inset 0px 0px 0.08vw 0.08vw rgba(0, 0, 0, 0.25);
+        border: white;
+        color: black;
+        justify-self: center;
+        padding-left: 0.9vw;
+    }
+    .inpPswdStyle{
+        font-family: sans-serif;
+    }
+    .imgStyle{
+        width: 19vw;
+        aspect-ratio: 1/1;
+    }
+    .imgStyleGradient{
+        aspect-ratio: 1/1;
+        width: 14vw;
+    }
+    .spanFrame{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 20% 78%;
+        align-items: center;
+        margin-top: 0%;
+        margin-bottom: 0%;
+    }
+    .spanFrameH3{
+        display: flex;
+        align-items: center;
+        margin: 1vw;
+        gap: 6vw;
+    }
+}
