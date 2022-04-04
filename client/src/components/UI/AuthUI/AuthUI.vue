@@ -42,7 +42,7 @@ import MediaW720Minus from "@/components/UI/AuthUI/MediaW720Minus.scss"
         },
         methods: {
            async authUp(){
-
+               
            }
         }
     }

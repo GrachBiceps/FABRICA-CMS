@@ -1,8 +1,8 @@
-<template lang="pug">
+<template lang="pug" >
 AuthPage(v-show="auth == false")
 div(v-show="auth == true")
   MainNavbarUI
-  router-view 
+  router-view
 </template>
 <script>
 import AuthPage from "@/views/AuthPage.vue";
