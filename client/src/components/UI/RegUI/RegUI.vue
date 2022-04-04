@@ -29,10 +29,6 @@ div.Auth
             span.spnStyleH3 Lo
 </template>
 <script>
-import SwitchCSS from "@/components/UI/AuthUI/SwitchRound.scss"
-import MediaW1024Plus from "@/components/UI/AuthUI/MediaW1024Plus.scss"
-import MediaW1024_720 from "@/components/UI/AuthUI/MediaW1024_720.scss"
-import MediaW720Minus from "@/components/UI/AuthUI/MediaW720Minus.scss"
 export default {
     data(){
             return{
@@ -51,27 +47,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.helpButtons{
-    margin: 0vw;
-}
-input:checked + .slider {
-    background-color: #21f372;
-    }
-    
-input:focus + .slider {
-    box-shadow: 0 0 1px #21f372;
-}
-.slider {
-    background-color: red;
-}
-
-.AuthButton:focus{
-    transform: scale(0.9, 0.9);
-    -o-transform: scale(0.9, 0.9);
-    -webkit-transform: scale(0.9, 0.9);
-    -webkit-transition: .4s;
-    transition: .4s;
-}
 @media (max-width: 720px){
     .AuthButton{
     cursor: pointer;

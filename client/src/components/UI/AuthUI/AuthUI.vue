@@ -26,42 +26,58 @@ div.Auth
 </template>
 
 <script>
-import SwitchCSS from "@/components/UI/AuthUI/SwitchRound.scss"
-import MediaW1024Plus from "@/components/UI/AuthUI/MediaW1024Plus.scss"
-import MediaW1024_720 from "@/components/UI/AuthUI/MediaW1024_720.scss"
-import MediaW720Minus from "@/components/UI/AuthUI/MediaW720Minus.scss"
-    export default {
-        data(){
-            return{
-                auth: {
-                    login: "",
-                    password: "",
-                    saveMeBox: false,
-                }
-            }
-        },
-        methods: {
-           async authUp(){
-               
-           }
+import SwitchCSS from "@/components/UI/AuthUI/SwitchRound.scss";
+import MediaW1024Plus from "@/components/UI/AuthUI/MediaW1024Plus.scss";
+import MediaW1024_720 from "@/components/UI/AuthUI/MediaW1024_720.scss";
+import MediaW720Minus from "@/components/UI/AuthUI/MediaW720Minus.scss";
+export default {
+  data() {
+    return {
+      auth: {
+        login: "",
+        password: "",
+        saveMeBox: false,
+      },
+    };
+  },
+  methods: {
+    async authUp() {
+        const authData = {
+            login: this.auth.login,
+            password: this.auth.password
         }
-    }
+      this.axios
+        .post(`http://localhost:3001/auth/login`, authData, {
+          headers: {
+            Authorization: "Bearer" + "Your Bearer Pssword",
+            "Content-Type": "application/json",
+          },
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.helpButtons{
-    margin-top: 1vw;
-    margin-left: 0vw;
-    margin-right: 0vw;
+.helpButtons {
+  margin-top: 1vw;
+  margin-left: 0vw;
+  margin-right: 0vw;
 }
-.AuthButton{
-    cursor: pointer;
+.AuthButton {
+  cursor: pointer;
 }
-.AuthButton:focus{
-    transform: scale(0.9, 0.9);
-    -o-transform: scale(0.9, 0.9);
-    -webkit-transform: scale(0.9, 0.9);
-    -webkit-transition: .4s;
-    transition: .4s;
+.AuthButton:focus {
+  transform: scale(0.9, 0.9);
+  -o-transform: scale(0.9, 0.9);
+  -webkit-transform: scale(0.9, 0.9);
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 </style>
