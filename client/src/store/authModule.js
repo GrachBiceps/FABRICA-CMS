@@ -1,8 +1,12 @@
 export const authModule = {
     state: () => ({
-      authed: null,
+      authed: false,
       token: ""
     }),
+    actions:{
+      SIGN_UP_API(authData){      
+      }      
+    },
     mutations: {
       authExit(state, exit){
           state.authed = exit;

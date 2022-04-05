@@ -1,11 +1,13 @@
 <template lang="pug" >
-AuthPage(v-show="auth == false")
-div(v-show="auth == true")
-  MainNavbarUI
+div(v-show="authed == false")
+  AuthPage()
+div(v-show="authed == true") 
+  MainNavbarUI adsds
   router-view
 </template>
 <script>
 import AuthPage from "@/views/AuthPage.vue";
+import {mapState} from "vuex"
 import Fonts from "@/assets/fonts/fonts.scss"
 export default {
   data() {
@@ -13,6 +15,12 @@ export default {
       auth: false,
     };
   },
+  computed: {
+        ...mapState({
+            token: state => state.auth.token,
+            authed: state => state.auth.authed
+        }),
+        },
   components: {
     AuthPage,
   },
@@ -25,6 +33,9 @@ $bgGradient: linear-gradient(to right bottom, #74A7F4 3.31%, #BD5DAE 94.52%);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+.noActive{
+  display: none;
 }
 button{
     border: none;

@@ -6,10 +6,11 @@ div.Auth
             span.spnStyleH1 АВТОРИЗАЦИЯ
             div.spanFrame
                 span.spnStyleH2 Логин:
-                input.inpStyle(v-model="auth.login")
+                input.inpStyle(v-model="auth.login" :class="{inpStyleERR: validation.dataErr}")
             div.spanFrame
                 span.spnStyleH2 Пароль:
-                input(type="password" v-model="auth.password").inpStyle.inpPswdStyle
+                input(type="password" v-model="auth.password" :class="{inpStyleERR: validation.dataErr}").inpStyle.inpPswdStyle
+            span.spanERR(v-show="validation.dataErr == true") Неправильный пароль или логин
             div.spanFrameH3
                 span.spnStyleH3 Запомнить меня
                 label(class="switch")
@@ -30,9 +31,14 @@ import SwitchCSS from "@/components/UI/AuthUI/SwitchRound.scss";
 import MediaW1024Plus from "@/components/UI/AuthUI/MediaW1024Plus.scss";
 import MediaW1024_720 from "@/components/UI/AuthUI/MediaW1024_720.scss";
 import MediaW720Minus from "@/components/UI/AuthUI/MediaW720Minus.scss";
+import { mapActions, mapState} from 'vuex'
+import {store} from "@/store"
 export default {
   data() {
     return {
+      validation: {
+        dataErr: false,
+      },
       auth: {
         login: "",
         password: "",
@@ -40,25 +46,31 @@ export default {
       },
     };
   },
+  computed: {
+   ...mapState({
+      token: state => state.auth.token,
+      authed: state => state.auth.authed
+   }),
+  },
   methods: {
     async authUp() {
-        const authData = {
-            login: this.auth.login,
+      const response = await fetch("auth/login", {
+         method: "POST",
+         headers: {"Content-Type": "application/json"},
+         body: JSON.stringify({
+            username: this.auth.login,
             password: this.auth.password
-        }
-      this.axios
-        .post(`http://localhost:3001/auth/login`, authData, {
-          headers: {
-            Authorization: "Bearer" + "Your Bearer Pssword",
-            "Content-Type": "application/json",
-          },
-        })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+         }),
+       })
+       if(response.status == 400){
+         this.validation.dataErr = true
+       }
+       else{
+       const resJson = await response.json();
+          const token = resJson.token
+          this.$store.commit('auth/newToken', token)
+          this.$store.commit('auth/authExit', true)
+       }
     },
   },
 };
@@ -72,6 +84,16 @@ export default {
 }
 .AuthButton {
   cursor: pointer;
+}
+.inpStyleERR{
+  border: 3vw;
+  border: red;
+  background: rgba(232, 115, 115, 0.28);
+  box-shadow:  0px 0px 0.08vw 0.08vw #f46a6a;
+}
+.spanERR{
+  color: red;
+  font-size: clamp(15px, 1vw, 20px);
 }
 .AuthButton:focus {
   transform: scale(0.9, 0.9);

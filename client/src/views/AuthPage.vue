@@ -5,6 +5,7 @@ RegUI(v-show="authORreg == true")
 <script>
 import AuthUI from "@/components/UI/AuthUI/AuthUI.vue"
 import RegUI from "@/components/UI/RegUI/RegUI.vue"
+
 export default {
     data(){
             return{
@@ -12,11 +13,10 @@ export default {
             }
         },
         methods: {
-           async authUp(){
-               
-           }
+        
         },
-         components: {
+        
+        components: {
             AuthUI,RegUI
         },
 }
