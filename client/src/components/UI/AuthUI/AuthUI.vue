@@ -31,7 +31,7 @@ import SwitchCSS from "@/components/UI/AuthUI/SwitchRound.scss";
 import MediaW1024Plus from "@/components/UI/AuthUI/MediaW1024Plus.scss";
 import MediaW1024_720 from "@/components/UI/AuthUI/MediaW1024_720.scss";
 import MediaW720Minus from "@/components/UI/AuthUI/MediaW720Minus.scss";
-import { mapActions, mapState} from 'vuex'
+import { mapState} from 'vuex'
 import {store} from "@/store"
 export default {
   data() {
