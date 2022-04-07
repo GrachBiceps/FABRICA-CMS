@@ -1,5 +1,5 @@
 <template lang="pug">
-AuthUI(v-show="authORreg == false")
+AuthUI(v-show="authORreg == false" @regComp="regTran()")
 RegUI(v-show="authORreg == true")
 </template>
 <script>
@@ -13,7 +13,9 @@ export default {
             }
         },
         methods: {
-        
+            regTran(){
+                this.authORreg = !this.authORreg
+            }
         },
         
         components: {

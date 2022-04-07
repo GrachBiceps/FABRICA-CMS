@@ -8,12 +8,3 @@ import VueAxios from 'vue-axios'
 
 createApp(App).use(store).use(router).use(VueAxios, axios).mount('#app')
 
-
-const baseURL = process.env.APP_URL
-
-export default axios.create({
-  baseURL: `https://${baseURL}/`,
-  httpsAgent: new https.Agent({
-    rejectUnauthorized: false
-  })
-})

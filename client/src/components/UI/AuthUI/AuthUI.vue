@@ -19,7 +19,7 @@ div.Auth
             button.AuthButton(@click="authUp") ВОЙТИ
             div.spanFrameH3
                 button.spnStyleH3.helpButtons() Забыл пароль?
-                button.spnStyleH3.helpButtons(style="font-weight: bold;" ) Регистрация
+                button.spnStyleH3.helpButtons(style="font-weight: bold;" @click="regComp()") Регистрация
         div.GridGradient
             img(src="@/assets/svg/local-fire-department-round-24px.svg").imgStyleGradient
             span.spnStyleH1 Добро пожаловать
@@ -32,7 +32,6 @@ import MediaW1024Plus from "@/components/UI/AuthUI/MediaW1024Plus.scss";
 import MediaW1024_720 from "@/components/UI/AuthUI/MediaW1024_720.scss";
 import MediaW720Minus from "@/components/UI/AuthUI/MediaW720Minus.scss";
 import { mapState} from 'vuex'
-import {store} from "@/store"
 export default {
   data() {
     return {
@@ -53,6 +52,9 @@ export default {
    }),
   },
   methods: {
+    regComp(){
+      this.$emit('regComp', true)
+    },
     async authUp() {
       const response = await fetch("auth/login", {
          method: "POST",

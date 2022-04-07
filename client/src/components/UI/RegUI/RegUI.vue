@@ -2,27 +2,35 @@
 div.Auth
     div.AuthGrid
         div.AuthGridInputs
-            span.spnStyleH1 Регистрация
-            div.spanFrame
-                span.spnStyleH2 Имя:
-                input.inpStyle(v-model="reg.login")
-                span.spnStyleH2 Фамилия:
-                input.inpStyle(v-model="reg.login")
-                span.spnStyleH2 E-mail:
-                input.inpStyle(v-model="reg.login")
-                span.spnStyleH2 Телефон:
-                input.inpStyle(v-model="reg.login")
-                span.spnStyleH2 Пароль:
-                input(type="password" v-model="reg.password").inpStyle.inpPswdStyle
+            div.titleReg
+                div.titleRegUIbtn
+                    img(src="@/assets/svg/left_alignment.svg").backSvg
+                    span Назад
+                div.titleRegUI
+                    img(src="@/assets/svg/add_account.svg").regSvg
+                    span.spnStyleH1 Регистрация
+            div.regSpanFrame
+                div.spanGrid
+                    div.spanGridItem
+                        span.spnStyleH2.regSpan Имя:
+                        input.inpStyle(v-model="reg.login")
+                    div.spanGridItem
+                        span.spnStyleH2.regSpan Фамилия:
+                        input.inpStyle(v-model="reg.login")
+                div.spanGrid
+                    div.
+                    span.spnStyleH2.regSpan Дата рождения:
+                    input.inpStyle(v-model="reg.login" type="date")
+                div.spanGrid
+                    span.spnStyleH2.regSpan E-mail:
+                    input.inpStyle(v-model="reg.login" type="email")
+                div.spanGrid
+                    span.spnStyleH2.regSpan Пароль:
+                    input(type="password" v-model="reg.password" default="").inpStyle.inpPswdStyle
                 div.switchRegUI
                     span.spnStyleH3 Мужчина
-                    label(class="switch")
-                        input(type="checkbox" v-model="reg.saveMeBox")
-                        span(class="slider round")
                     span.spnStyleH3 Женщина
             button.AuthButton(@click="authUp") Зарегистрироватся 
-            div.spanFrameH3
-                button.spnStyleH3.helpButtons() Назад
         div.GridGradient
             img(src="@/assets/svg/local-fire-department-round-24px.svg").imgStyleGradient
             span.spnStyleH1 Добро пожаловать
@@ -47,79 +55,57 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@media (max-width: 720px){
-    .AuthButton{
-    cursor: pointer;
-    font-size: 4vw;
-    width: 50vw;
-    }
-    .AuthGridInputs{
-        width: 95%;
-        height: 89%;  
-    }
+.spanGridItem{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
-@media (min-width: 720px){
-    .AuthButton{
-    cursor: pointer;
-    font-size: 1vw;
-    width: 12vw;
-    }
+.regSpan{
+    margin-left: 0.8vw ;
 }
-@media (min-width: 1024px){
-    .Auth{
-        width: 55vw;
-        
-    }
-    .AuthButton{
-    cursor: pointer;
-    font-size: 1vw;
-    width: 12vw;
-    }
-    .AuthGrid{
-        grid-template-columns: 100%;
-        aspect-ratio: 14/10;
-    }
-    .AuthGridInputs{
-        width: 85%;
-        height: 99%;  
-        justify-content: space-evenly;
-    }
-    .GridGradient{
-        background-repeat: no-repeat;
-        border-radius: 4vh;
-        height: 98%;
-        width: 93%; 
-        display: none;
-        visibility: hidden;
-        align-items: center;
-        flex-direction: column;
-    }
-    .GradientText{
-        display: grid;
-        align-items: center;
-        justify-items: center;
-    }
-    .spanFrame{
-        display: grid;
-        grid-template-columns: 12% 35% 14% 35%;
-        justify-content: center;
-        gap: 1vw;
-        margin-top: 2vw;
-        margin-bottom: 2vw;
-    }
-    .regFrame{
-        display: flex;
-        gap: 1vw;
-        align-items: center;
-        justify-content: center;
-    }
-    .switchRegUI{
-        display: grid;
-        grid-column: span 2;
-        grid-template-columns: 25% 20% 26%;
-        justify-items: center;
-        align-items: center;
-        justify-content: center;
-    }
+.spanGrid{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 100%;
+    gap: 1vw;
+}
+.regSpanFrame{
+    display: grid;
+    grid-template-columns: 100%;
+    gap: 1vw;
+}
+.AuthGridInputs{
+    width: 87%;
+    height: 91%;
+}
+.titleRegUI{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.titleRegUIbtn{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 25% 25% 25% 25%;
+    gap: 0.5vw;
+    align-items: center;
+    font-family: "Cera Pro Light";
+    font-size: 1.5vw;
+}
+.titleReg{
+    display: grid;
+    grid-template-columns: 10% 70% 10%;
+    width: 100%;
+    height: 23%;
+    
+    justify-content: space-between;
+}
+.regSvg{
+    width: 6.7vw ;
+    aspect-ratio: 1/1;
+}
+.backSvg{
+    width: 1.8vw;
+    aspect-ratio: 1/1;
 }
 </style>

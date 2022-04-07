@@ -2,7 +2,6 @@
 div(v-show="authed == false")
   AuthPage()
 div(v-show="authed == true") 
-  MainNavbarUI adsds
   router-view
 </template>
 <script>
