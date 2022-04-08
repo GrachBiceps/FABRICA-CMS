@@ -1,6 +1,6 @@
 <template lang="pug">
 AuthUI(v-show="authORreg == false" @regComp="regTran()")
-RegUI(v-show="authORreg == true")
+RegUI(v-show="authORreg == true" @authComp="regTran()")
 </template>
 <script>
 import AuthUI from "@/components/UI/AuthUI/AuthUI.vue"
