@@ -1,4 +1,4 @@
-<template lang="pug" >
+<template lang="pug">
 div(v-show="authed == false")
   AuthPage()
 div(v-show="authed == true") 
@@ -6,8 +6,8 @@ div(v-show="authed == true")
 </template>
 <script>
 import AuthPage from "@/views/AuthPage.vue";
-import {mapState} from "vuex"
-import Fonts from "@/assets/fonts/fonts.scss"
+import { mapState } from "vuex";
+import Fonts from "@/assets/fonts/fonts.scss";
 export default {
   data() {
     return {
@@ -15,31 +15,31 @@ export default {
     };
   },
   computed: {
-        ...mapState({
-            token: state => state.auth.token,
-            authed: state => state.auth.authed
-        }),
-        },
+    ...mapState({
+      token: (state) => state.auth.token,
+      authed: (state) => state.auth.authed,
+    }),
+  },
   components: {
     AuthPage,
   },
 };
 </script>
 <style lang="scss">
-$bgGradient: linear-gradient(to right bottom, #74A7F4 3.31%, #BD5DAE 94.52%);
-#app{
-  font-family: 'Cera Pro';
+$bgGradient: linear-gradient(to right bottom, #74a7f4 3.31%, #bd5dae 94.52%);
+#app {
+  font-family: "Cera Pro";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
-.noActive{
+.noActive {
   display: none;
 }
-button{
-    border: none;
-    background: white;
-    cursor: pointer;
+button {
+  border: none;
+  background: white;
+  cursor: pointer;
 }
 html {
   width: 100vw;

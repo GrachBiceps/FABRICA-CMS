@@ -31,7 +31,7 @@ import SwitchCSS from "@/components/UI/AuthUI/SwitchRound.scss";
 import MediaW1024Plus from "@/components/UI/AuthUI/MediaW1024Plus.scss";
 import MediaW1024_720 from "@/components/UI/AuthUI/MediaW1024_720.scss";
 import MediaW720Minus from "@/components/UI/AuthUI/MediaW720Minus.scss";
-import { mapState} from 'vuex'
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -46,33 +46,32 @@ export default {
     };
   },
   computed: {
-   ...mapState({
-      token: state => state.auth.token,
-      authed: state => state.auth.authed
-   }),
+    ...mapState({
+      token: (state) => state.auth.token,
+      authed: (state) => state.auth.authed,
+    }),
   },
   methods: {
-    regComp(){
-      this.$emit('regComp', true)
+    regComp() {
+      this.$emit("regComp", true);
     },
     async authUp() {
       const response = await fetch("auth/login", {
-         method: "POST",
-         headers: {"Content-Type": "application/json"},
-         body: JSON.stringify({
-            username: this.auth.login,
-            password: this.auth.password
-         }),
-       })
-       if(response.status == 400){
-         this.validation.dataErr = true
-       }
-       else{
-       const resJson = await response.json();
-          const token = resJson.token
-          this.$store.commit('auth/newToken', token)
-          this.$store.commit('auth/authExit', true)
-       }
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: this.auth.login,
+          password: this.auth.password,
+        }),
+      });
+      if (response.status == 400) {
+        this.validation.dataErr = true;
+      } else {
+        const resJson = await response.json();
+        const token = resJson.token;
+        this.$store.commit("auth/newToken", token);
+        this.$store.commit("auth/authExit", true);
+      }
     },
   },
 };
@@ -87,13 +86,13 @@ export default {
 .AuthButton {
   cursor: pointer;
 }
-.inpStyleERR{
+.inpStyleERR {
   border: 3vw;
   border: red;
   background: rgba(232, 115, 115, 0.28);
-  box-shadow:  0px 0px 0.08vw 0.08vw #f46a6a;
+  box-shadow: 0px 0px 0.08vw 0.08vw #f46a6a;
 }
-.spanERR{
+.spanERR {
   color: red;
   font-size: clamp(15px, 1vw, 20px);
 }
