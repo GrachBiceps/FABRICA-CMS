@@ -1,7 +1,8 @@
 export const authModule = {
     state: () => ({
       authed: false,
-      token: ""
+      token: "",
+      profile: {type: Object}
     }),
     actions:{
       SIGN_UP_API(authData){      
