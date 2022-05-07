@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
+    "moment": "^2.29.3",
     "register-service-worker": "^1.7.2",
     "vue": "^3.2.13",
     "vue-axios": "^3.4.1",
@@ -28,8 +29,8 @@
     "@vue/test-utils": "^2.0.0-0",
     "@vue/vue3-jest": "^27.0.0-alpha.1",
     "babel-jest": "^27.0.6",
-    "dotenv": "^16.0.0",
     "cypress": "^8.3.0",
+    "dotenv": "^16.0.0",
     "jest": "^27.0.5",
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",

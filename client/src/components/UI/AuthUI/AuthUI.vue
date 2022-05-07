@@ -71,6 +71,8 @@ export default {
         const token = resJson.token;
         this.$store.commit("auth/newToken", token);
         this.$store.commit("auth/authExit", true);
+        this.$store.commit("auth/editProfile", resJson.profile);
+        this.$store.commit("auth/editRoles", resJson.userRoleOut);
       }
     },
   },

@@ -13,23 +13,23 @@ div.Auth
                 div.spanGrid
                     div.spanGridItem
                         span.spnStyleH2.regSpan Имя:
-                        input.inpStyle.regInput(v-model="reg.name")
+                        input.inpStyle.regInput(required v-model="reg.name")
                     div.spanGridItem
                         span.spnStyleH2.regSpan Фамилия:
-                        input.inpStyle.regInput(v-model="reg.surname")
+                        input.inpStyle.regInput( required v-model="reg.surname")
                 div.regItem
                     div.spanGridItem
                         span.spnStyleH2.regSpan Дата рождения:
                         input.inpStyle.regInput(v-model="reg.birthday" type="date" style="")
                     div.spanGridItemCheckbox
                         span.spnStyleH3.regH3 Мужчина
-                        input.regCheckbox(@click="gender('MALE')" type="checkbox")
+                        input.regCheckbox(@click="gender('Мужчина')" type="checkbox")
                         span.spnStyleH3.regH3 Женщина
-                        input.regCheckbox(@click="gender('FEMALE')" type="checkbox")
+                        input.regCheckbox(@click="gender('Женщина')" type="checkbox")
                 div.spanGrid(style="grid-template-columns: 100%;")
                     div.spanGridItem
                         span.spnStyleH2.regSpan E-mail:
-                        input.inpStyle(v-model="reg.login" type="email" style="width: 100%;")
+                        input.inpStyle(v-model="reg.login" type='email' id='email' name='email' style="width: 100%;" required)
                 div.spanGrid(style="grid-template-columns: 100%;")
                     div.spanGridItem
                         span.spnStyleH2.regSpan Пароль:
@@ -85,6 +85,7 @@ export default {
           name: this.reg.name,
           surname: this.reg.surname,
           gender: this.reg.gender,
+          birthday: this.reg.birthday,
           username: this.reg.login,
           password: this.reg.password,
         }),
@@ -93,9 +94,6 @@ export default {
         this.validation.dataErr = true;
       } else {
         const resJson = await response.json();
-        const token = resJson.token;
-        this.$store.commit("auth/newToken", token);
-        this.$store.commit("auth/authExit", true);
       }
     },
   },

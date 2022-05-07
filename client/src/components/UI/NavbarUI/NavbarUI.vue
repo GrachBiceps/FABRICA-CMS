@@ -15,12 +15,15 @@ div.MainDiv
     div.scnd-btn.div-flex
         div(v-for="(item,index) in navbarBtn.Array")
             div.flex-column
-                button.font-style(@click="clickSection(index+2)") {{item.name}}
-                transition.line(v-show="activeBtn == index+2" name="fade")
+                button.font-style(@click="clickSection(index+3)") {{item.name}}
+                transition.line(v-show="activeBtn == index+3" name="fade")
                     div
     div.div-flex.lk-btn
         div.div-flex
-            button.font-style Задачи
+            div.flex-column
+                button.font-style(@click="clickSection(2)") Задачи
+                transition.line(v-show="activeBtn == 2" name="fade")
+                        div
             span.notif(v-show="notification > 0") {{notification}}
         div.div-lk    
             div.lk-style(@click="dropMenu=!dropMenu")

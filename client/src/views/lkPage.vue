@@ -12,20 +12,16 @@ div.flex-centre
                     transition.line(v-show="activeBtn == 1" name="fade")
                         div
             div.first-div-items2.flex-column
-                img.setting-img(src="@/assets/svg/Setting.svg" @click="clickSection(99)")
+                img.setting-img(src="@/assets/svg/Setting.svg" @click="clickSection(99,editProfile())")
         div.scnd-div
             div.logo-div
                 div.img-frame
                     img.img(src="@/assets/8063-1.jpg")
             div.info-div
-                span.fio Akobyan Grach Kamoevich
+                span.fio {{profile.surname}} {{profile.name}}
                 div.roles-div
-                    div.role-div ADMINsdsad
-                    div.role-div ADMINsdsad
-                    div.role-div ADMINsdsad
-                    div.role-div ADMINsdsad
-                    div.role-div ADMINsdsad
-                    div.role-div ADMINsdsad
+                    div(v-for="(item, index) in roles")
+                        div.role-div {{item}}
             div.personal-data
                 div.flex-column.firs-data.flex-end
                     span Дата рождения:
@@ -33,16 +29,16 @@ div.flex-centre
                     span Email:
                     span Телефон:
                 div.flex-column.scnd-data
-                    span.flex-row Дата рождения
-                    span.flex-row Дата рождения
+                    span.flex-row {{dateTime()}}
+                    span.flex-row {{profile.gender}}
                     div.flex-row
-                        span Дата рождения
+                        span {{profile.email}}
                         div.flex-row.indiv-width
                             div.vert-line-red
                                 div
                             span Подтвердите почту
                     div.flex-row
-                        span Дата рождения
+                        span {{profile.mobileNumber}}
                         div.flex-row.indiv-yellow
                             div.vert-line-yellow
                                 div
@@ -50,6 +46,8 @@ div.flex-centre
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import moment from 'moment';
 export default {
     data(){
         return{
@@ -61,8 +59,21 @@ export default {
     methods: {
         clickSection(index){
             this.activeBtn = index
+        },
+        editProfile(){
+            console.log("adsadsads")
+        },
+        dateTime() {
+            return moment(this.profile.birthday).format('DD.MM.YYYY');
         }
-    }
+    },
+    computed: {
+    ...mapState({
+        token: (state) => state.auth.token,
+        profile: (state) => state.auth.profile,
+        roles: (state) => state.auth.rolesArray
+    }),
+  },
 }
 </script>
 

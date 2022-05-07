@@ -2,18 +2,21 @@ export const authModule = {
     state: () => ({
       authed: false,
       token: "",
-      profile: {type: Object}
+      profile: {type: Object},
+      rolesArray: []
     }),
-    actions:{
-      SIGN_UP_API(authData){      
-      }      
-    },
     mutations: {
       authExit(state, exit){
           state.authed = exit;
       },
       newToken(state, token){
           state.token = token;
+      },
+      editProfile(state, profile){
+        state.profile = profile;
+      },
+      editRoles(state, roles){
+        state.rolesArray = roles
       }
     },
     getters: {
