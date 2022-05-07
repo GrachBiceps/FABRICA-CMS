@@ -12,11 +12,12 @@ div.flex-centre
                     transition.line(v-show="activeBtn == 1" name="fade")
                         div
             div.first-div-items2.flex-column
-                img.setting-img(src="@/assets/svg/Setting.svg" @click="clickSection(99,editProfile())")
-        div.scnd-div
+                img.setting-img(src="@/assets/svg/Setting.svg" @click="clickSection(0,editProfile())")
+        div.scnd-div(v-show="activeBtn == 0")
             div.logo-div
                 div.img-frame
-                    img.img(src="@/assets/8063-1.jpg")
+                    img.img(v-show="editMode == false" loading="lazy" v-if="token != '' " :src="`http://localhost:49001/uploads/${profile.profileAvatar.filename}`")
+                    input.editInputFile(v-show="editMode == true" type="file" ref="file" accept="image/*")
             div.info-div
                 span.fio {{profile.surname}} {{profile.name}}
                 div.roles-div
@@ -26,228 +27,340 @@ div.flex-centre
                 div.flex-column.firs-data.flex-end
                     span Дата рождения:
                     span Пол:
-                    span Email:
                     span Телефон:
                 div.flex-column.scnd-data
-                    span.flex-row {{dateTime()}}
-                    span.flex-row {{profile.gender}}
+                    span.flex-row(v-show="editMode == false") {{dateTime()}}
+                    input.editInput(v-show="editMode == true" v-model="editData.birthday" v-maska="{mask: '#### ## ##'}")
+                    span.flex-row(v-show="editMode == false") {{profile.gender}}
+                    div.flex-row(v-if="editMode == true")
+                        span Мужчина
+                        input.editInputBox( type="checkbox" id="0" @click="genderSet('Мужчина')")
+                        span Женщина
+                        input.editInputBox( type="checkbox" id="1" @click="genderSet('Женщина')")
+                    div.flex-row
+                        span(v-show="editMode == false") +{{profile.mobileNumber}}
+                        input.editInput(v-show="editMode == true" placeholder="+7 XXX XXX XXXX" v-maska="{mask: '+7##########'}" maxlength="15" v-model="editData.mobileNumber")
+                        div.flex-row.indiv-yellow(v-if="editMode == false")
+                            div.vert-line-yellow(v-show="profile.mobileNumber == ''")
+                                div
+                            span(v-show="profile.mobileNumber == ''") Рекомендуем привязать номер телефона
+            button(v-show="editMode == true" @click="saveEditData()").saveBtn Сохранить
+        div.scnd-div(v-show="activeBtn == 1")
+            div.info-div
+                span.fio {{profile.surname}} {{profile.name}}
+                div.roles-div
+                    div(v-for="(item, index) in roles")
+                        div.role-div {{item}}
+            div.personal-data
+                div.flex-column.firs-data.flex-end
+                    span Email:
+                div.flex-column.scnd-data
                     div.flex-row
                         span {{profile.email}}
                         div.flex-row.indiv-width
                             div.vert-line-red
                                 div
                             span Подтвердите почту
-                    div.flex-row
-                        span {{profile.mobileNumber}}
-                        div.flex-row.indiv-yellow
-                            div.vert-line-yellow
-                                div
-                            span Рекомендуем привязать номер телефона
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import moment from 'moment';
+import { mapState } from "vuex";
+import moment from "moment";
+import { ref} from "vue"
+
 export default {
-    data(){
-        return{
-            activeBtn: 0,
-            emailAprove: true,
-            mobileReco: true,
+    setup(){
+        {
+        const file = ref(null)
+
+        const handleFileUpload = async() => {
+           // debugger;
+            console.log("selected file",file.value.files)
+        }
+
+        return {
+          handleFileUpload,
+          file
+       }
         }
     },
-    methods: {
-        clickSection(index){
-            this.activeBtn = index
+  data() {
+    return {
+      activeBtn: 0,
+      emailAprove: true,
+      mobileReco: true,
+      editMode: true,
+      editData: {
+        name: "",
+        surname: "",
+        gender: "",
+        birthday: "",
+        mobileNumber: "",
+      },
+      avatar: null,
+    };
+  },
+  methods: {
+    async saveEditData() {
+      this.$store.commit("navbar/goLoading", true);
+      const formData = new FormData()
+      console.log('boundary:', formData._boundary)
+      formData.append('name', this.editData.name)
+      formData.append('surname',this.editData.surname)
+      formData.append('gender',this.editData.gender)
+      formData.append('birthday',this.editData.birthday)
+      formData.append('mobileNumber',this.editData.mobileNumber)
+      formData.append('avatar', this.$refs.file.files[0])
+      const response = await fetch("auth/edituserdata", {
+        method: "POST",
+        headers: { 
+            //'Content-Type': 'multipart/form-data',
+            "Authorization": `Bearer ${this.token}`
+            
         },
-        editProfile(){
-            console.log("adsadsads")
-        },
-        dateTime() {
-            return moment(this.profile.birthday).format('DD.MM.YYYY');
-        }
+        body: formData,
+      })
+      this.$store.commit("navbar/goLoading", true);
     },
-    computed: {
+    genderSet(genderValue) {
+      this.editData.gender = genderValue;
+    },
+    clickSection(index) {
+      this.activeBtn = index;
+    },
+    editProfile() {
+        this.editMode = !this.editMode
+    },
+    dateTime() {
+      return moment(this.profile.birthday).format("DD.MM.YYYY");
+    },
+    defaultDate(){
+        this.editData.name = this.profile.name
+        this.editData.surname =  this.profile.surname
+        this.editData.gender =  this.profile.gender
+        this.editData.birthday =  this.profile.birthday
+        this.editData.mobileNumber = this.profile.mobileNumber
+    }
+  },
+  computed: {
     ...mapState({
-        token: (state) => state.auth.token,
-        profile: (state) => state.auth.profile,
-        roles: (state) => state.auth.rolesArray
+      token: (state) => state.auth.token,
+      profile: (state) => state.auth.profile,
+      roles: (state) => state.auth.rolesArray,
     }),
   },
-}
+  mounted(){
+      this.defaultDate()
+  }
+};
 </script>
 
-<style lang="scss" scoped>
-.vert-line-red{
-    height: 90%;
-    width: 2%;
-    background: red;
+<style lang="postcss" scoped>
+.editInputFile{
+    width: 10vw;
 }
-.vert-line-yellow{
-    height: 90%;
-    width: 1%;
-    background: rgb(223, 223, 72);
+.saveBtn {
+  height: 2vw;
+  width: 23%;
+  background: #57e754;
+  color: white;
+  border-radius: 0.5vw;
+  -webkit-box-shadow: 0px 0px 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 0.4vw 0.1vw rgba(0, 0, 0, 0.2);
+  font-family: "Cera Pro Medium";
+  font-size: 1vw;
 }
-.indiv-yellow{
-    width: 67%;
-    color: rgb(203, 203, 61);
-    font-family: "Cera Pro";
-    font-size: 0.8vw;
+.saveBtn:focus {
+  transform: scale(98%);
 }
-.fio{
-    font-family: "Cera Pro Black";
-    font-size: 1.8vw;
+.editInputBox {
+  width: 10%;
+  height: 1.34vw;
+  border-radius: 0.3vw;
+  font-family: "Cera Pro";
+  font-size: 1vw;
 }
-.indiv-width{
-    width: 35%;
-    color: red;
-    font-family: "Cera Pro";
-    font-size: 0.8vw;
+.editInput {
+  width: 60%;
+  height: 1.34vw;
+  border-radius: 0.3vw;
+  font-family: "Cera Pro";
+  font-size: 1vw;
+  border: none;
 }
-.flex-end{
-    align-items: flex-end;
+.vert-line-red {
+  height: 90%;
+  width: 2%;
+  background: red;
 }
-.flex-row{
-    display: flex;
-    gap: 1vw;
-    align-items: stretch;
-    user-select:text;
+.vert-line-yellow {
+  height: 90%;
+  width: 1%;
+  background: rgb(223, 223, 72);
 }
-.firs-data{
-    width: 20%;
+.indiv-yellow {
+  width: 67%;
+  color: rgb(203, 203, 61);
+  font-family: "Cera Pro";
+  font-size: 0.8vw;
 }
-.scnd-data{
-    width: 80%;
+.fio {
+  font-family: "Cera Pro Black";
+  font-size: 1.8vw;
 }
-.roles-div{
-    display: flex;
-    flex-wrap: wrap;
-    width: 55%;
-    gap: 0.4vw;
-    justify-content: center;
+.indiv-width {
+  width: 35%;
+  color: red;
+  font-family: "Cera Pro";
+  font-size: 0.8vw;
 }
-.role-div{
-    font-family: "Cera Pro Black";
-    font-size: 0.8vw;
-    color: white;
-    padding: 0.5vw;
-    padding-top: 0.3vw;
-    padding-bottom: 0.3vw;
-    background: black;
+.flex-end {
+  align-items: flex-end;
 }
-.scnd-div{
-    display: flex;
-    flex-direction: column;
-    width: 94%;
-    height: 88%;
-    margin: 3%;
-    align-items: center;
-    gap: 0.4vw;
+.flex-row {
+  display: flex;
+  gap: 1vw;
+  align-items: stretch;
+  user-select: text;
 }
-.logo-div{
-    display: flex;
-    width: 100%;
-    height: 55%;
-    align-items: center;
-    justify-content: center;
+.firs-data {
+  width: 20%;
 }
-.btn{
-    cursor: pointer;
+.scnd-data {
+  width: 80%;
 }
-.personal-data{
-    display: flex;
-    width: 100%;
-    font-family: "Cera Pro";
-    font-size: 1.1vw;
-    height: 27%;
-    gap: 0.8vw;
-    align-items: center;
+.roles-div {
+  display: flex;
+  flex-wrap: wrap;
+  width: 55%;
+  gap: 0.4vw;
+  justify-content: center;
 }
-.setting-img{
-    width: 1.5vw;
+.role-div {
+  font-family: "Cera Pro Black";
+  font-size: 0.8vw;
+  color: white;
+  padding: 0.5vw;
+  padding-top: 0.3vw;
+  padding-bottom: 0.3vw;
+  background: black;
 }
-.img-frame{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100%;
-    outline-style: solid;
-    outline-width: 0.2vw;
-    overflow: hidden;
-    z-index: 1;
-    width: 19vw;
-    aspect-ratio: 1/1;
-    background: gray;
+.scnd-div {
+  display: flex;
+  flex-direction: column;
+  width: 94%;
+  height: 88%;
+  margin: 3%;
+  align-items: center;
+  gap: 0.4vw;
 }
-.img{
-    width: 101%;
-    z-index: 0;
-    position: relative;
-    object-fit: cover;
-    background: gray;
+.logo-div {
+  display: flex;
+  width: 100%;
+  height: 55%;
+  align-items: center;
+  justify-content: center;
 }
-.info-div{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4vw;
+.btn {
+  cursor: pointer;
 }
-.main-lk-div{
-    margin-top: 2%;
-    width: 55%;
-    height: 50vw;
-    border-radius: 2vw;
-    background: white;
+.personal-data {
+  display: flex;
+  width: 100%;
+  font-family: "Cera Pro";
+  font-size: 1.1vw;
+  height: 27%;
+  gap: 0.8vw;
+  align-items: center;
 }
-.flex-centre{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2%;
-    margin-bottom: 4%;
+.setting-img {
+  width: 1.5vw;
 }
-.first-div{
-    display: flex;
-    width: 94%;
-    height: 4%;
-    margin: 3%;
-    align-items: center;
+.img-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100vw;
+  outline-style: solid;
+  outline-width: 0.2vw;
+  overflow: hidden;
+  z-index: 1;
+  width: 19vw;
+  aspect-ratio: 1/1;
+  background: gray;
 }
-.first-div-items1{
-    display: flex;
-    width: 95%;
-    gap: 1vw;
-    font-family: "Cera Pro Medium";
-    font-size: 1.1vw;
-    align-items: center;
+.img {
+  width: 101%;
+  z-index: 0;
+  position: relative;
+  object-fit: cover;
+  background: gray;
 }
-.first-div-items2{
-    display: flex;
-    width: 5%;
-    justify-content: flex-end;
+.info-div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4vw;
 }
-.line{
-    width: 100%;
-    height: 0.15vw;
-    border-radius: 2vw;
-    background: black;
+.main-lk-div {
+  margin-top: 2%;
+  width: 55%;
+  height: 50vw;
+  border-radius: 2vw;
+  background: white;
 }
-.flex-column{
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    gap: 0.1vw;
-    user-select: none;
-    justify-content: space-evenly;
+.flex-centre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  margin-bottom: 4%;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s ease;
+.first-div {
+  display: flex;
+  width: 94%;
+  height: 4%;
+  margin: 3%;
+  align-items: center;
+}
+.first-div-items1 {
+  display: flex;
+  width: 95%;
+  gap: 1vw;
+  font-family: "Cera Pro Medium";
+  font-size: 1.1vw;
+  align-items: center;
+}
+.first-div-items2 {
+  display: flex;
+  width: 5%;
+  justify-content: flex-end;
+}
+.line {
+  width: 100%;
+  height: 0.15vw;
+  border-radius: 2vw;
+  background: black;
+}
+.flex-column {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 0.1vw;
+  user-select: none;
+  justify-content: space-evenly;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
 }
 </style>

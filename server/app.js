@@ -1,7 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const router = require("express")
+const moment = require('moment')
 const app = express()
+
+
 const authRouter = require('./authRouter')
 const storageRouter = require('./storageRouter')
 const prodAccRouter = require('./prodAccRouter')
@@ -10,6 +13,7 @@ require('dotenv').config()
 
 app.use(express.json())
 app.use(express.urlencoded())
+app.use('/uploads', express.static('uploads'))
 app.use('/auth', authRouter)
 // app.use('/storage', storageRouter)
 // app.use('/prodacc', prodAccRouter)
@@ -34,15 +38,15 @@ const webport = process.env.WEBPORT || 3002
 
 //Подключение сайта к серверу
 
-  app.use(function (req,res,next) {
-      const dateebae = new Date().toLocaleString()
-    console.log('/' + req.method + ' ' + dateebae);
-    next(); });
-  app.get('/', function(req,res){
-    res.sendFile(path + 'index.html');  });
-  app.use(express.static(path));
-  app.use('/', router);
-  app.listen(webport, function () {
-    console.log(`Сайт работает и слушает порт ${webport}!`) })
+  // app.use(function (req,res,next) {
+  //     const dateebae = new Date().toLocaleString()
+  //   console.log('/' + req.method + ' ' + dateebae );
+  //   next(); });
+  // app.get('/', function(req,res){
+  //   res.sendFile(path + 'index.html');  });
+  // app.use(express.static(path));
+  // app.use('/', router);
+  // app.listen(webport, function () {
+  //   console.log(`Сайт работает и слушает порт ${webport}!`) })
 
 

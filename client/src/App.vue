@@ -1,5 +1,6 @@
 <template lang="pug">
-div.center(:class="{notcentr: authed}")
+Loader(v-if="loader == true && authed == true")
+div.center(:class="{notcentr: authed, disableScroll: loader}")
   div(v-show="authed == false")
     AuthPage()
   div(v-show="authed == true")
@@ -9,6 +10,7 @@ div.center(:class="{notcentr: authed}")
 <script>
 import AuthPage from "@/views/AuthPage.vue";
 import Navbar from "@/components/UI/NavbarUI/NavbarUI.vue"
+import Loader from "@/components/UI/Loader.vue"
 import { mapState } from "vuex";
 import Fonts from "@/assets/fonts/fonts.scss";
 export default {
@@ -36,10 +38,11 @@ export default {
     ...mapState({
       token: (state) => state.auth.token,
       authed: (state) => state.auth.authed,
+      loader: (state) => state.navbar.loader,
     }),
   },
   components: {
-    AuthPage, Navbar
+    AuthPage, Navbar, Loader
   },
 };
 </script>
@@ -52,6 +55,9 @@ $allfadeTransition: 1s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+.disableScroll{
+  overflow: hidden;
 }
 .noActive {
   display: none;
@@ -78,11 +84,12 @@ body{
 html {
   background: $bgGradient;
   background-repeat: no-repeat;
-  width: 98vw;
+  width: 100vw;
   height: 100vh;
   background-attachment: fixed;
   display: flex;
   justify-content: center;
+  overflow-x: hidden;
 
 }
 </style>

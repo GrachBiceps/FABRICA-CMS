@@ -1,6 +1,7 @@
 export const navbarModule = {
     state: () => ({
       notificatinNavbar: 1,
+      loader: false,
       navbarBtn: {
           Array: [
               {name: "Склад"},
@@ -15,6 +16,9 @@ export const navbarModule = {
       },
       navbarBtnEdit(state, res){
           state.navbarBtn.Array = res
+      },
+      goLoading(state, res){
+          state.loader =  !state.loader
       }
     },
     getters: {

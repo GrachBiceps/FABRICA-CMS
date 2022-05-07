@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const {validationResult} = require('express-validator')
 const {secret} = require("./config")
-
+const { unlink } = require('node:fs/promises')
+const moment = require('moment')
 const generateAccessToken = (id, roles) => {
     const payload = {
         id,
@@ -33,7 +34,7 @@ class authController{
         return res.json({message:"Пользователь успешно зарегистрирован"})
     }
      catch (e) {
-        res.status(491).json( {message: 'Ошибка регистрации'})
+        return res.status(491).json( {message: 'Ошибка регистрации'})
         }
     }
 
@@ -54,10 +55,36 @@ class authController{
         return res.json({token, profile , userRoleOut})
     }
      catch (e) {
-        res.status(400).json( {message: 'Ошибка авторизации'})
+        return res.status(400).json( {message: 'Ошибка авторизации'})
         }
     }
+    async editUserData(req,res){
+        try {
+            const token = req.headers.authorization.split(' ')[1]
+            const {id: heID} = jwt.verify(token, secret)
+            const update = req.body
+            if(req.file != null){
+                const oldIMG = await User.findById({_id: heID})
+                console.log(oldIMG.avatar)
+                unlink(`${oldIMG.avatar.path}`)
+            }
+            const birthData = moment.utc(update.birthday, 'YYYY-MM-DD')
+            const updateIMG = req.file
+            const editUser = await User.findByIdAndUpdate({_id: heID},
+                {
+                    name: update.name, 
+                    surname: update.surname,
+                    gender: update.gender,
+                    birthday: birthData, 
+                    mobileNumber: update.mobileNumber,
+                    avatar: updateIMG,
 
+                })
+            return res.status(200).json( {message: 'Успешно'})
+        } catch (error) {
+            return res.status(400).json( {message: 'Ошибка авторизации'})
+        }
+    }
     async users(req, res) {
     try {
         const users = await User.find()

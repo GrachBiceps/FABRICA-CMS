@@ -28,13 +28,13 @@ div.MainDiv
         div.div-lk    
             div.lk-style(@click="dropMenu=!dropMenu")
                 span.font-style Акобян.Г.К
-                div.lk-avatar
+                img.lk-avatar(v-if="authed == true" loading="lazy" :src="`http://localhost:49001/uploads/${profile.profileAvatar.filename}`")
             div.drop-menu(v-show="dropMenu == true")
-                span.btn-mergin.lk-drop-font(@click="this.$router.push('/lk')") Личный кабинет
-                span.lk-drop-font Сообщения
-                span.lk-drop-font Работа
-                span.lk-drop-font Настройки
-                span.lk-drop-font.exit-btn Выход
+                span.btn-mergin.lk-drop-font(@click="goToPage('lk')") Личный кабинет
+                span.lk-drop-font(@click="goToPage('message')") Сообщения
+                span.lk-drop-font(@click="goToPage('jobs')") Работа
+                span.lk-drop-font(@click="goToPage('settings')") Настройки
+                span.lk-drop-font.exit-btn(@click="exit()") Выход
 </template>
 
 <script>
@@ -47,6 +47,17 @@ export default {
         }
     },
     methods:{
+        exit(){
+            this.$store.commit("auth/newToken", '');
+            this.$store.commit("auth/editProfile", '');
+            this.$store.commit("auth/editRoles", '');
+            this.$store.commit("auth/authExit", false);
+            this.$router.push(`/`)
+        },
+        goToPage(Page){
+            this.$router.push(`/${Page}`)
+            this.dropMenu = !this.dropMenu
+        },
         clickSection(index){
             this.activeBtn = index
         }
@@ -55,6 +66,8 @@ export default {
         ...mapState({
             notification: (state) => state.navbar.notificatinNavbar,
             navbarBtn: (state) => state.navbar.navbarBtn,
+            profile: (state) => state.auth.profile,
+            authed: (state) => state.auth.authed,
         }),
     },
 }
