@@ -6,6 +6,8 @@ const authRouter = require('./authRouter')
 const storageRouter = require('./storageRouter')
 const prodAccRouter = require('./prodAccRouter')
 
+require('dotenv').config()
+
 app.use(express.json())
 app.use(express.urlencoded())
 app.use('/auth', authRouter)
@@ -13,8 +15,7 @@ app.use('/auth', authRouter)
 // app.use('/prodacc', prodAccRouter)
 
 //Порт сервера
-const port = process.env.PORT || 3001
-
+const port = process.env.PORT || 3002
 //Запуск сервера
 const start = async () => {
     try{
@@ -29,7 +30,7 @@ start()
 
 //Все для сайта
 const path = __dirname + '/dist/'
-const webport = process.env.webport || 3002
+const webport = process.env.WEBPORT || 3002
 
 //Подключение сайта к серверу
 
@@ -37,11 +38,11 @@ const webport = process.env.webport || 3002
       const dateebae = new Date().toLocaleString()
     console.log('/' + req.method + ' ' + dateebae);
     next(); });
-  // app.get('/', function(req,res){
-  //   res.sendFile(path + 'index.html');  });
-  // app.use(express.static(path));
-  // app.use('/', router);
-  // app.listen(webport, function () {
-  //   console.log(`Сайт работает и слушает порт ${webport}!`) })
+  app.get('/', function(req,res){
+    res.sendFile(path + 'index.html');  });
+  app.use(express.static(path));
+  app.use('/', router);
+  app.listen(webport, function () {
+    console.log(`Сайт работает и слушает порт ${webport}!`) })
 
 
