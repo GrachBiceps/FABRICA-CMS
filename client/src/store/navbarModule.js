@@ -7,8 +7,6 @@ export const navbarModule = {
       navbarBtn: {
           Array: [
               {name: "Склад", path:"storage"},
-              {name: "G", path:"storage"},
-              {name: "AA", path:"storage"},
           ]
       }
     }),

@@ -72,7 +72,6 @@ export default {
            // debugger;
             console.log("selected file",file.value.files)
         }
-
         return {
           handleFileUpload,
           file
