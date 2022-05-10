@@ -6,6 +6,7 @@ const {validationResult} = require('express-validator')
 const {secret} = require("./config")
 const { unlink } = require('node:fs/promises')
 const moment = require('moment')
+const { nextTick } = require('node:process')
 const generateAccessToken = (id, roles) => {
     const payload = {
         id,
@@ -65,8 +66,10 @@ class authController{
             const update = req.body
             if(req.file != null){
                 const oldIMG = await User.findById({_id: heID})
-                console.log(oldIMG.avatar)
-                unlink(`${oldIMG.avatar.path}`)
+                try{
+                    await fs.unlink(`${oldIMG.avatar.path}`)}
+                catch(err){
+                }
             }
             const birthData = moment.utc(update.birthday, 'YYYY-MM-DD')
             const updateIMG = req.file
@@ -78,7 +81,6 @@ class authController{
                     birthday: birthData, 
                     mobileNumber: update.mobileNumber,
                     avatar: updateIMG,
-
                 })
             return res.status(200).json( {message: 'Успешно'})
         } catch (error) {

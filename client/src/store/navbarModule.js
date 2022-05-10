@@ -2,11 +2,13 @@ export const navbarModule = {
     state: () => ({
       notificatinNavbar: 1,
       loader: false,
+      sucsess: false,
+      error: false,
       navbarBtn: {
           Array: [
-              {name: "Склад"},
-              {name: "G"},
-              {name: "AA"},
+              {name: "Склад", path:"storage"},
+              {name: "G", path:"storage"},
+              {name: "AA", path:"storage"},
           ]
       }
     }),
@@ -18,8 +20,21 @@ export const navbarModule = {
           state.navbarBtn.Array = res
       },
       goLoading(state, res){
-          state.loader =  !state.loader
-      }
+          switch(res){
+            case 0: {
+                state.loader =  !state.loader
+                break;
+            }
+            case 1: {
+                state.sucsess = !state.sucsess
+                break;
+            }
+            case 2: {
+                state.error = !state.error
+                break;
+            }
+          }
+      },
     },
     getters: {
       

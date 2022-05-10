@@ -5,23 +5,23 @@ div.MainDiv
             img(src="@/assets/svg/FK.svg" style="width: 60%" @click="this.$router.push('/')")
         div.div-flex.font-style.main-btn
             div.flex-column
-                button.font-style(@click="clickSection(0)") Инфографика
+                button.font-style(@click="clickSection(0, 'info')") Инфографика
                 transition.line(v-show="activeBtn == 0" name="fade")
                     div
             div.flex-column
-                button.font-style(@click="clickSection(1)") Контакты
+                button.font-style(@click="clickSection(1, 'contacts')") Контакты
                 transition.line(v-show="activeBtn == 1" name="fade")
                     div
     div.scnd-btn.div-flex
         div(v-for="(item,index) in navbarBtn.Array")
             div.flex-column
-                button.font-style(@click="clickSection(index+3)") {{item.name}}
+                button.font-style(@click="clickSection(index+3, item.path)") {{item.name}}
                 transition.line(v-show="activeBtn == index+3" name="fade")
                     div
     div.div-flex.lk-btn
         div.div-flex
             div.flex-column
-                button.font-style(@click="clickSection(2)") Задачи
+                button.font-style(@click="clickSection(2, 'todos')") Задачи
                 transition.line(v-show="activeBtn == 2" name="fade")
                         div
             span.notif(v-show="notification > 0") {{notification}}
@@ -57,8 +57,10 @@ export default {
         goToPage(Page){
             this.$router.push(`/${Page}`)
             this.dropMenu = !this.dropMenu
+            this.activeBtn = null
         },
-        clickSection(index){
+        clickSection(index, Page){
+            this.$router.push(`/${Page}`)
             this.activeBtn = index
         }
     },
@@ -154,6 +156,9 @@ export default {
     border-radius: 1.5vw;
     justify-content: space-between;
     align-items: center;
+    -webkit-box-shadow: 0px 0px 1.4vw 0.4vw rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 1vw 0.4vw rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 1vw 0.2vw rgba(0, 0, 0, 0.2);
 }
 .font-style{
     font-family: "Cera Pro Medium";

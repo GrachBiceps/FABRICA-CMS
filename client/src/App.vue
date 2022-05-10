@@ -1,6 +1,6 @@
 <template lang="pug">
-Loader(v-if="loader == true && authed == true")
-div.center(:class="{notcentr: authed, disableScroll: loader}")
+Loader(v-if="(loader == true || sucsess == true || error == true) && authed == true")
+div.center(:class="{notcentr: authed, disableScroll: loader || sucsess || error}")
   div(v-show="authed == false")
     AuthPage()
   div(v-show="authed == true")
@@ -39,6 +39,8 @@ export default {
       token: (state) => state.auth.token,
       authed: (state) => state.auth.authed,
       loader: (state) => state.navbar.loader,
+      sucsess: (state) => state.navbar.sucsess,
+      error: (state) => state.navbar.error
     }),
   },
   components: {
@@ -56,6 +58,16 @@ $allfadeTransition: 1s;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .disableScroll{
   overflow: hidden;
 }

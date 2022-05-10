@@ -1,17 +1,55 @@
 <template lang="pug">
-div.loader-main-frame
+transition(name="fade")
+  div(v-if="loadind == true && sucsess == false").loader-main-frame
     div.lds-ring
         div
     span.text Загрузка...
+transition(name="fade")
+  div(v-if="sucsess == true && loadind == false").loader-main-frame
+    span.text Успешно
+transition(name="fade")
+  div(v-if="error == true && loadind == false").loader-main-frame
+    span.text Ошибка
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
-
+    computed: {
+        ...mapState({
+            loadind: (state) => state.navbar.loader,
+            sucsess: (state) => state.navbar.sucsess,
+            error: (state) => state.navbar.error
+        }),
+      }
 }
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-from {
+    opacity: 0;
+    transition-duration: 1s;
+  }
+  .fade-enter-to {
+    opacity: 1;
+    transition-duration: 1s;
+  }
+  .fade-enter-active {
+    transition: all 2s ease;
+    transition-duration: 1s;
+  }
+  .fade-leave-from {
+    opacity: 1;
+    transition-duration: 1s;
+  }
+  .fade-leave-to {
+    opacity: 0;
+    transition-duration: 1s;
+  }
+  .fade-leave-active {
+    transition: all 2s ease;
+    transition-duration: 1s;
+  }
 .text{
     color: white;
     opacity: 100%;

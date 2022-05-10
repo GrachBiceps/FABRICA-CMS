@@ -38,7 +38,7 @@ div.flex-centre
                         span Женщина
                         input.editInputBox( type="checkbox" id="1" @click="genderSet('Женщина')")
                     div.flex-row
-                        span(v-show="editMode == false") +{{profile.mobileNumber}}
+                        span(v-show="editMode == false") {{profile.mobileNumber}}
                         input.editInput(v-show="editMode == true" placeholder="+7 XXX XXX XXXX" v-maska="{mask: '+7##########'}" maxlength="15" v-model="editData.mobileNumber")
                         div.flex-row.indiv-yellow(v-if="editMode == false")
                             div.vert-line-yellow(v-show="profile.mobileNumber == ''")
@@ -46,11 +46,6 @@ div.flex-centre
                             span(v-show="profile.mobileNumber == ''") Рекомендуем привязать номер телефона
             button(v-show="editMode == true" @click="saveEditData()").saveBtn Сохранить
         div.scnd-div(v-show="activeBtn == 1")
-            div.info-div
-                span.fio {{profile.surname}} {{profile.name}}
-                div.roles-div
-                    div(v-for="(item, index) in roles")
-                        div.role-div {{item}}
             div.personal-data
                 div.flex-column.firs-data.flex-end
                     span Email:
@@ -89,7 +84,7 @@ export default {
       activeBtn: 0,
       emailAprove: true,
       mobileReco: true,
-      editMode: true,
+      editMode: false,
       editData: {
         name: "",
         surname: "",
@@ -102,9 +97,8 @@ export default {
   },
   methods: {
     async saveEditData() {
-      this.$store.commit("navbar/goLoading", true);
+      this.$store.commit("navbar/goLoading", 0);
       const formData = new FormData()
-      console.log('boundary:', formData._boundary)
       formData.append('name', this.editData.name)
       formData.append('surname',this.editData.surname)
       formData.append('gender',this.editData.gender)
@@ -120,7 +114,15 @@ export default {
         },
         body: formData,
       })
-      this.$store.commit("navbar/goLoading", true);
+      if(response.status === 200){
+         this.$store.commit("navbar/goLoading", 0)
+         this.$store.commit("navbar/goLoading", 1)
+         this.$store.commit("navbar/goLoading", 1)
+      }if(response.status === 400){
+        this.$store.commit("navbar/goLoading", 0)
+        this.$store.commit("navbar/goLoading", 2)
+        this.$store.commit("navbar/goLoading", 2)
+      }
     },
     genderSet(genderValue) {
       this.editData.gender = genderValue;
@@ -155,7 +157,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
 .editInputFile{
     width: 10vw;
 }
@@ -282,8 +284,8 @@ export default {
   justify-content: center;
   align-items: center;
   border-radius: 100vw;
-  outline-style: solid;
-  outline-width: 0.2vw;
+  // outline-style: solid;
+  // outline-width: 0.2vw;
   overflow: hidden;
   z-index: 1;
   width: 19vw;
@@ -311,6 +313,9 @@ export default {
   height: 50vw;
   border-radius: 2vw;
   background: white;
+  -webkit-box-shadow: 0px 0px 1.4vw 0.4vw rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 1.4vw 0.4vw rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 1.4vw 0.4vw rgba(0, 0, 0, 0.2);
 }
 .flex-centre {
   display: flex;
