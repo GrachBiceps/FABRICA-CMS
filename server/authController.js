@@ -51,7 +51,16 @@ class authController{
             return res.status(400).json( {message: 'Неверный пароль или логин'})
         }
         const token = generateAccessToken(user._id, user.role)
-        const profile = {id:user._id, name: user.name, email: user.username, gender: user.gender, surname: user.surname, birthday: user.birthday, mobileNumber: user.mobileNumber, profileAvatar: user.avatar}
+        const profile = {
+            id:user._id, 
+            name: user.name, 
+            email: user.username, 
+            gender: user.gender, 
+            surname: user.surname, 
+            birthday: user.birthday, 
+            mobileNumber: user.mobileNumber, 
+            profileAvatar: user.avatar
+        }
         const userRoleOut = user.role
         return res.json({token, profile , userRoleOut})
     }
